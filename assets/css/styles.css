@@ -315,5 +315,17 @@ html[dir="rtl"] .footer-grid h4{letter-spacing:0}
 .avail-row{display:flex;gap:14px 20px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;box-shadow:var(--shadow-sm)}
 .avail-label{font-weight:800;color:var(--ink)}
 
+/* ---------------- standalone privacy document ---------------- */
+body.doc{background:#f8fbff}
+.doc-wrap{width:100%;max-width:840px;margin-inline:auto;padding:48px 22px 64px}
+.doc-head{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:6px;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.doc-icon{width:72px;height:72px;border-radius:18px;box-shadow:var(--shadow-md);margin-bottom:10px}
+.doc-app{font-weight:700;color:var(--muted);font-size:.95rem}
+.doc-title{font-size:clamp(23px,3.4vw,32px);margin:0;line-height:1.2}
+.doc-date{color:var(--muted);font-size:.95rem;margin:2px 0 0}
+.doc .policy.prose{max-width:none;margin:0}
+.doc .policy.prose h2{font-size:22px;margin-top:1.6em}
+.doc-foot{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+
 /* 404 */
 .center-screen{flex:1;display:grid;place-items:center;text-align:center;padding:70px 20px}

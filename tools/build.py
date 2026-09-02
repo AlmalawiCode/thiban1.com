@@ -837,105 +837,94 @@ def load_privacy(slug, lang):
         return json.load(f)
 
 
-def privacy_selector(slug, langs, current):
-    """Language selector rendered as real links — one direct, shareable URL per
-    language. Works with no JavaScript (important for store review crawlers)."""
-    pills = []
-    for L in langs:
-        name = LANG_META[L][0]
-        cls = "lang-pill active" if L == current else "lang-pill"
-        cur = ' aria-current="true"' if L == current else ""
-        pills.append(f'<a class="{cls}" href="/privacy/{slug}/{L}/" hreflang="{L}" lang="{L}"{cur}>{name}</a>')
-    return ('<div class="lang-select">'
-            '<span class="lang-select-label" data-en>Language:</span>'
-            '<span class="lang-select-label" data-ar>اللغة:</span>'
-            f'<div class="lang-pills">{"".join(pills)}</div></div>')
-
-
 def privacy_hreflang(slug, langs):
     tags = [f'<link rel="alternate" hreflang="{L}" href="{SITE_URL}/privacy/{slug}/{L}/">' for L in langs]
     tags.append(f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}/privacy/{slug}/en/">')
     return "\n".join(tags)
 
 
-def privacy_body(app, lang, data, is_entry=False):
+def privacy_doc(app, lang, data, canonical):
+    """A fully self-contained, single-language privacy document.
+
+    No global site header, footer, or language switcher — opening the Japanese
+    URL shows only the Japanese policy. Language discovery lives on the app page
+    and the /privacy/ overview; hreflang tags below keep the set linked for SEO
+    and store crawlers. Works with zero JavaScript."""
     slug = app["slug"]
     d = data["dir"]
-    toc, parts, sidx = [], [], 0
+    app_name = app["name_ar"] if lang == "ar" else app["name_en"]
+    parts = []
     for b in data["blocks"]:
         if b["t"] == "h2":
-            sidx += 1
-            sid = f"s{sidx}"
-            toc.append(f'<li><a href="#{sid}">{b["html"]}</a></li>')
-            parts.append(f'<h2 id="{sid}">{b["html"]}</h2>')
+            parts.append(f'<h2>{b["html"]}</h2>')
         elif b["t"] == "p":
             parts.append(f'<p>{b["html"]}</p>')
         else:
             parts.append(b["html"])
-    toc_title = "المحتويات" if lang == "ar" else "Contents"
-    toc_html = ""
-    if toc:
-        toc_html = (f'<nav class="toc" aria-label="{esc(toc_title)}" dir="{d}" lang="{lang}">'
-                    f'<strong>{toc_title}</strong><ul>{"".join(toc)}</ul></nav>')
-
-    stores = []
-    if app.get("appstore"):
-        stores.append(store_button("apple", app["appstore"]))
-    if app.get("playstore"):
-        stores.append(store_button("play", app["playstore"]))
-    stores_html = f'<div class="stores">{"".join(stores)}</div>' if stores else ""
-
-    back = "← العودة إلى التطبيق" if lang == "ar" else "← Back to app"
-    support = "الدعم" if lang == "ar" else "Support"
-
-    crumb = crumbs([("Home", "الرئيسية", "/"),
-                    ("Privacy", "الخصوصية", "/privacy/"),
-                    (app["name_en"], app["name_ar"], f"/apps/{slug}/")])
-    return f'''{crumb}
-<section class="section"><div class="container">
-  <div class="policy-card">
-    <div class="policy-head">
-      <img class="policy-icon" src="{app['icon']}" alt="{esc(app['name_en'])} icon" width="76" height="76">
-      <div class="policy-heading">
-        <span class="eyebrow" data-en>Privacy Policy</span><span class="eyebrow" data-ar>سياسة الخصوصية</span>
-        <h1 class="policy-title" dir="{d}" lang="{lang}">{data['title']}</h1>
-        <p class="updated" dir="{d}" lang="{lang}">{data['effective']}</p>
-      </div>
-    </div>
-    {privacy_selector(slug, app['privacy_langs'], lang)}
-    <div class="policy-actions">
-      <a class="btn btn-secondary" href="/apps/{slug}/">{back}</a>
-      <a class="text-link" href="/support/{slug}/">{support}</a>
-      {stores_html}
-    </div>
-  </div>
-  <article class="policy prose" dir="{d}" lang="{lang}">
-    {toc_html}
+    hreflang = privacy_hreflang(slug, app["privacy_langs"])
+    if lang == "ar":
+        foot = f'© {YEAR} ذيبان للحلول التقنية · <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>'
+    else:
+        foot = f'© {YEAR} Thiban Tech Solutions · <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>'
+    title = f"{data['title']} — {app['name_en']}"
+    return f'''<!DOCTYPE html>
+<html lang="{lang}" dir="{d}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(data['title'])}">
+<link rel="canonical" href="{canonical}">
+{hreflang}
+<meta name="theme-color" content="#165dff">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="doc">
+<main class="doc-wrap">
+  <header class="doc-head">
+    <img class="doc-icon" src="{app['icon']}" alt="{esc(app['name_en'])} icon" width="72" height="72">
+    <div class="doc-app">{esc(app_name)}</div>
+    <h1 class="doc-title">{data['title']}</h1>
+    <p class="doc-date">{data['effective']}</p>
+  </header>
+  <article class="policy prose">
     {"".join(parts)}
   </article>
-</div></section>'''
+  <footer class="doc-foot">{foot}</footer>
+</main>
+</body>
+</html>'''
+
+
+def _write(path, html):
+    rel = path.strip("/")
+    out_dir = os.path.join(ROOT, rel)
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(html)
+    return SITE_URL + (path if path.endswith("/") else path + "/")
 
 
 def gen_privacy(slug):
-    """Generate one direct, canonical page per privacy language plus a canonical
-    entry point at /privacy/<slug>/. Returns the localized URLs for the sitemap."""
+    """Write one standalone page per privacy language + a canonical entry point
+    at /privacy/<slug>/ (English, canonicalised to /en/). Returns localized URLs
+    for the sitemap."""
     app = APPS[slug]
     langs = app["privacy_langs"]
-    hreflang = privacy_hreflang(slug, langs)
     sitemap_urls = []
     for L in langs:
         data = load_privacy(slug, L)
-        title = f"{data['title']} — Thiban Tech Solutions"
-        desc = data['title']
-        u = render(f"/privacy/{slug}/{L}/", title, title, desc, desc,
-                   privacy_body(app, L, data), active="privacy", head_extra=hreflang)
+        canonical = f"{SITE_URL}/privacy/{slug}/{L}/"
+        u = _write(f"/privacy/{slug}/{L}/", privacy_doc(app, L, data, canonical))
         sitemap_urls.append(u)
+    # entry point = English document, canonical -> /en/
     data = load_privacy(slug, "en")
-    title = f"{app['name_en']} Privacy Policy — Thiban Tech Solutions"
-    desc = f"Privacy Policy for {app['name_en']}. Available in {len(langs)} languages."
-    render(f"/privacy/{slug}/", title, title, desc, desc,
-           privacy_body(app, "en", data, is_entry=True), active="privacy",
-           canonical_override=f"{SITE_URL}/privacy/{slug}/en/", head_extra=hreflang)
+    _write(f"/privacy/{slug}/", privacy_doc(app, "en", data, f"{SITE_URL}/privacy/{slug}/en/"))
     return sitemap_urls
 
 
