@@ -22,7 +22,7 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SITE_URL = "https://thiban1.com"
-SUPPORT_EMAIL = "externalmumber12@gmail.com"
+SUPPORT_EMAIL = "thibantechsolutions@gmail.com"
 YEAR = "2026"
 
 # ---------------------------------------------------------------------------
