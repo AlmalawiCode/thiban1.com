@@ -173,7 +173,7 @@ def header(active):
     return f'''<a class="skip" href="#main"><span data-en>Skip to content</span><span data-ar>تخطَّ إلى المحتوى</span></a>
 <header class="site-header"><div class="container"><nav class="nav" aria-label="Main">
   <a class="brand" href="/"><img src="/assets/img/brand/icon-192.png" alt="" width="34" height="34">
-    <span data-en>Thiban Tech Solutions</span><span data-ar>ثيبان للحلول التقنية</span></a>
+    <span data-en>Thiban Tech Solutions</span><span data-ar>ذيبان للحلول التقنية</span></a>
   <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
   <div class="nav-links" id="nav-links">{links_html}
     <button class="lang-btn" data-lang-toggle type="button" aria-label="التبديل إلى العربية">العربية</button>
@@ -207,7 +207,7 @@ def footer():
   <div class="footer-grid">
     <div>
       <div class="footer-brand"><img src="/assets/img/brand/icon-192.png" alt="" width="32" height="32">
-        <span data-en>Thiban Tech Solutions</span><span data-ar>ثيبان للحلول التقنية</span></div>
+        <span data-en>Thiban Tech Solutions</span><span data-ar>ذيبان للحلول التقنية</span></div>
       <p style="color:rgba(255,255,255,.7);max-width:34ch" data-en>Web &amp; mobile application development — plus our own privacy-first apps.</p>
       <p style="color:rgba(255,255,255,.7);max-width:34ch" data-ar>تطوير تطبيقات الويب والجوال — إضافةً إلى تطبيقاتنا الخاصة التي تحترم الخصوصية.</p>
       <p style="color:#94a3b8;margin-top:8px"><a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a></p>
@@ -392,7 +392,7 @@ def page_home():
     <span class="eyebrow" data-en>Web &amp; Mobile Application Development</span><span class="eyebrow" data-ar>تطوير تطبيقات الويب والجوال</span>
     {h(1, "Modern web and mobile applications, built with purpose.", "تطبيقات ويب وجوال حديثة، تُبنى لهدف واضح.")}
     {p("Thiban Tech Solutions designs and develops reliable web and mobile applications — and publishes its own privacy-first apps for everyday life.",
-       "تصمّم ثيبان للحلول التقنية وتطوّر تطبيقات ويب وجوال موثوقة — وتنشر تطبيقاتها الخاصة التي تضع الخصوصية أولًا لحياتك اليومية.", "lead")}
+       "تصمّم ذيبان للحلول التقنية وتطوّر تطبيقات ويب وجوال موثوقة — وتنشر تطبيقاتها الخاصة التي تضع الخصوصية أولًا لحياتك اليومية.", "lead")}
     <div class="btn-row">
       <a class="btn btn-primary" href="/#services"><span data-en>Our Services</span><span data-ar>خدماتنا</span></a>
       <a class="btn btn-secondary" href="/apps/"><span data-en>View Apps</span><span data-ar>عرض التطبيقات</span></a>
@@ -452,7 +452,7 @@ def page_home():
 </div></section>'''
 
     why = f'''<section id="about"><div class="container">
-  <div class="section-head center">{h(2, "Why Thiban Tech Solutions?", "لماذا ثيبان للحلول التقنية؟")}</div>
+  <div class="section-head center">{h(2, "Why Thiban Tech Solutions?", "لماذا ذيبان للحلول التقنية؟")}</div>
   <div class="why-grid">
     <article class="why-card"><div class="service-icon" aria-hidden="true">◎</div>
       <strong data-en>Focused</strong><strong data-ar>تركيز واضح</strong>
@@ -485,7 +485,7 @@ def page_apps():
 <section class="section"><div class="container">
   {h(1, "Our Apps", "تطبيقاتنا")}
   {p("Every Thiban app is private by design and available in Arabic and English. Choose an app to learn more, read a tutorial, or view its privacy policy.",
-     "كل تطبيق من ثيبان خاصٌّ بطبيعته ومتوفّر بالعربية والإنجليزية. اختر تطبيقًا لتعرف المزيد، أو لقراءة شرحه، أو لمطالعة سياسة خصوصيته.", "lead")}
+     "كل تطبيق من ذيبان خاصٌّ بطبيعته ومتوفّر بالعربية والإنجليزية. اختر تطبيقًا لتعرف المزيد، أو لقراءة شرحه، أو لمطالعة سياسة خصوصيته.", "lead")}
   <div class="grid grid-2" style="margin-top:36px">
     {app_card(APPS['countdown-keeper'])}
     {app_card(APPS['vault'])}
@@ -493,9 +493,9 @@ def page_apps():
 </div></section>'''
     return render("/apps/",
                   "Our Apps — Thiban Tech Solutions",
-                  "تطبيقاتنا — ثيبان للحلول التقنية",
+                  "تطبيقاتنا — ذيبان للحلول التقنية",
                   "Explore mobile apps by Thiban Tech Solutions: Countdown Keeper and Vault — Warranty Manager. Private, offline-first, in Arabic and English.",
-                  "استعرض تطبيقات ثيبان للحلول التقنية: العدّاد وخزنة الضمانات. تطبيقات خاصة تعمل دون اتصال، بالعربية والإنجليزية.",
+                  "استعرض تطبيقات ذيبان للحلول التقنية: العدّاد وخزنة الضمانات. تطبيقات خاصة تعمل دون اتصال، بالعربية والإنجليزية.",
                   body, active="apps")
 
 
@@ -569,7 +569,7 @@ def page_app_countdown():
     body = app_overview_body(app, features_list, intro_en, intro_ar, extra)
     return render("/apps/countdown-keeper/",
                   "Countdown Keeper — Event & Date Countdown App | Thiban Tech Solutions",
-                  "العدّاد — تطبيق العدّ التنازلي للمناسبات والتواريخ | ثيبان",
+                  "العدّاد — تطبيق العدّ التنازلي للمناسبات والتواريخ | ذيبان",
                   "Countdown Keeper counts down to future events and up from past ones, with recurring Hijri/Gregorian dates, reminders, and date tools. Private and offline.",
                   "تطبيق العدّاد يعدّ تنازليًا للمناسبات القادمة وتصاعديًا للماضية، مع تواريخ متكرّرة هجرية/ميلادية وتذكيرات وأدوات للتاريخ. خاصّ ويعمل دون اتصال.",
                   body, active="apps")
@@ -606,7 +606,7 @@ def page_app_vault():
     body = app_overview_body(app, features_list, intro_en, intro_ar, extra)
     return render("/apps/vault/",
                   "Vault — Warranty Manager | Thiban Tech Solutions",
-                  "خزنة الضمانات — إدارة الفواتير والضمانات | ثيبان",
+                  "خزنة الضمانات — إدارة الفواتير والضمانات | ذيبان",
                   "Vault — Warranty Manager stores invoices, organizes products, scans receipts and ZATCA QR codes, and reminds you before warranties expire. Private and local-first.",
                   "خزنة الضمانات تحفظ الفواتير وتنظّم المنتجات وتمسح الإيصالات ورموز QR الضريبية وتذكّرك قبل انتهاء الضمان. خاصّة وتعمل محليًا.",
                   body, active="apps")
@@ -629,14 +629,14 @@ def page_tutorials():
 <section class="section"><div class="container">
   {h(1, "Tutorials", "الشروحات")}
   {p("Learn how to get the most out of each Thiban app. Guides grow over time — pick an app to begin.",
-     "تعلّم كيف تستفيد من كل تطبيق من ثيبان استفادةً كاملة. تنمو الأدلة مع الوقت — اختر تطبيقًا لتبدأ.", "lead")}
+     "تعلّم كيف تستفيد من كل تطبيق من ذيبان استفادةً كاملة. تنمو الأدلة مع الوقت — اختر تطبيقًا لتبدأ.", "lead")}
   <div class="grid grid-2" style="margin-top:32px">{"".join(cards)}</div>
 </div></section>'''
     return render("/tutorials/",
                   "Tutorials — Thiban Tech Solutions",
-                  "الشروحات — ثيبان للحلول التقنية",
+                  "الشروحات — ذيبان للحلول التقنية",
                   "Step-by-step tutorials and guides for Thiban apps: Countdown Keeper and Vault — Warranty Manager.",
-                  "شروحات وأدلة خطوة بخطوة لتطبيقات ثيبان: العدّاد وخزنة الضمانات.",
+                  "شروحات وأدلة خطوة بخطوة لتطبيقات ذيبان: العدّاد وخزنة الضمانات.",
                   body, active="tutorials")
 
 
@@ -770,9 +770,9 @@ def page_privacy_index():
 </section>'''
     return render("/privacy/",
                   "Privacy — Thiban Tech Solutions",
-                  "الخصوصية — ثيبان للحلول التقنية",
+                  "الخصوصية — ذيبان للحلول التقنية",
                   "Privacy at Thiban Tech Solutions: local-first apps with no ads, analytics, or third-party tracking. Read each app's privacy policy.",
-                  "الخصوصية في ثيبان للحلول التقنية: تطبيقات تعمل محليًا بلا إعلانات أو تحليلات أو تتبّع من طرف ثالث. اقرأ سياسة خصوصية كل تطبيق.",
+                  "الخصوصية في ذيبان للحلول التقنية: تطبيقات تعمل محليًا بلا إعلانات أو تحليلات أو تتبّع من طرف ثالث. اقرأ سياسة خصوصية كل تطبيق.",
                   body, active="privacy")
 
 
@@ -800,7 +800,7 @@ def page_privacy_countdown():
     sections = [
         ("intro", "Introduction", "مقدّمة",
          "<p>Countdown Keeper (\"the app\") is a mobile app published by Thiban Tech Solutions. This policy explains how the app handles your information. We respect your privacy: the app does not require sign-in, and we do not collect, sell, or share your personal information.</p>",
-         "<p>تطبيق العدّاد (\"التطبيق\") تطبيقُ جوّالٍ تصدره ثيبان للحلول التقنية. توضّح هذه السياسة كيف يتعامل التطبيق مع معلوماتك. نحن نحترم خصوصيتك: لا يتطلّب التطبيق تسجيل الدخول، ولا نجمع معلوماتك الشخصية أو نبيعها أو نشاركها.</p>"),
+         "<p>تطبيق العدّاد (\"التطبيق\") تطبيقُ جوّالٍ تصدره ذيبان للحلول التقنية. توضّح هذه السياسة كيف يتعامل التطبيق مع معلوماتك. نحن نحترم خصوصيتك: لا يتطلّب التطبيق تسجيل الدخول، ولا نجمع معلوماتك الشخصية أو نبيعها أو نشاركها.</p>"),
         ("handles", "Information the app handles", "المعلومات التي يتعامل معها التطبيق",
          "<p>The app stores the content you create: event titles, dates and times, notes, colours, an emoji or an optional photo you attach, and your app settings. This information is stored on your device and is used only to show your counters and reminders.</p>",
          "<p>يحفظ التطبيق المحتوى الذي تُنشئه: عناوين المناسبات وتواريخها وأوقاتها، والملاحظات، والألوان، ورمزًا تعبيريًا أو صورةً اختياريةً تُرفقها، وإعداداتك. تُخزَّن هذه المعلومات على جهازك وتُستخدم فقط لعرض عدّاداتك وتذكيراتك.</p>"),
@@ -847,7 +847,7 @@ def page_privacy_countdown():
     ]
     return privacy_page("countdown-keeper",
                         "Countdown Keeper Privacy Policy — Thiban Tech Solutions",
-                        "سياسة خصوصية تطبيق العدّاد — ثيبان",
+                        "سياسة خصوصية تطبيق العدّاد — ذيبان",
                         "Privacy policy for Countdown Keeper: local-first, no accounts, no analytics, and no third-party tracking. Your events stay on your device.",
                         "سياسة خصوصية تطبيق العدّاد: يعمل محليًا، بلا حسابات ولا تحليلات ولا تتبّع من طرف ثالث. مناسباتك تبقى على جهازك.",
                         "September 2026", "سبتمبر 2026", sections)
@@ -857,7 +857,7 @@ def page_privacy_vault():
     sections = [
         ("intro", "Introduction", "مقدّمة",
          "<p>Vault — Warranty Manager (\"the app\") is a mobile app published by Thiban Tech Solutions that helps you save invoices and track product warranties. We respect your privacy. The app does not require sign-in, and we do not collect, sell, or share your personal information.</p>",
-         "<p>خزنة الضمانات (\"التطبيق\") تطبيقُ جوّالٍ تصدره ثيبان للحلول التقنية، يساعدك على حفظ الفواتير وتتبّع ضمانات المنتجات. نحن نحترم خصوصيتك. لا يتطلّب التطبيق تسجيل الدخول، ولا نجمع معلوماتك الشخصية أو نبيعها أو نشاركها.</p>"),
+         "<p>خزنة الضمانات (\"التطبيق\") تطبيقُ جوّالٍ تصدره ذيبان للحلول التقنية، يساعدك على حفظ الفواتير وتتبّع ضمانات المنتجات. نحن نحترم خصوصيتك. لا يتطلّب التطبيق تسجيل الدخول، ولا نجمع معلوماتك الشخصية أو نبيعها أو نشاركها.</p>"),
         ("handles", "Information the app handles", "المعلومات التي يتعامل معها التطبيق",
          "<p>The app lets you save invoices, receipts, product details, warranty dates, store information, and related documents and photos. This information is stored on your device and is used only to help you manage your invoices and warranties. Any invoice or document you add belongs to you; the app does not publish or distribute it.</p>",
          "<p>يتيح لك التطبيق حفظ الفواتير والإيصالات وتفاصيل المنتجات وتواريخ الضمان ومعلومات المتاجر والمستندات والصور ذات الصلة. تُخزَّن هذه المعلومات على جهازك وتُستخدم فقط لمساعدتك في إدارة فواتيرك وضماناتك. وأي فاتورة أو مستند تضيفه فهو مِلكك؛ ولا ينشره التطبيق أو يوزّعه.</p>"),
@@ -909,7 +909,7 @@ def page_privacy_vault():
     ]
     return privacy_page("vault",
                         "Vault — Warranty Manager Privacy Policy — Thiban Tech Solutions",
-                        "سياسة خصوصية خزنة الضمانات — ثيبان",
+                        "سياسة خصوصية خزنة الضمانات — ذيبان",
                         "Privacy policy for Vault — Warranty Manager: local-first, no accounts, no analytics or ads. Invoices and warranties stay on your device; backups are encrypted.",
                         "سياسة خصوصية خزنة الضمانات: تعمل محليًا، بلا حسابات ولا تحليلات ولا إعلانات. الفواتير والضمانات تبقى على جهازك، والنسخ الاحتياطية مشفّرة.",
                         "September 2026", "سبتمبر 2026", sections)
@@ -938,9 +938,9 @@ def page_support_index():
 </section>'''
     return render("/support/",
                   "Support — Thiban Tech Solutions",
-                  "الدعم — ثيبان للحلول التقنية",
+                  "الدعم — ذيبان للحلول التقنية",
                   "Get help with Thiban apps. Common questions, troubleshooting, and how to contact support for Countdown Keeper and Vault.",
-                  "احصل على المساعدة لتطبيقات ثيبان. أسئلة شائعة وحلول للمشكلات وطريقة التواصل مع الدعم لتطبيقَي العدّاد وخزنة الضمانات.",
+                  "احصل على المساعدة لتطبيقات ذيبان. أسئلة شائعة وحلول للمشكلات وطريقة التواصل مع الدعم لتطبيقَي العدّاد وخزنة الضمانات.",
                   body, active="support")
 
 
@@ -987,7 +987,7 @@ def page_support_countdown():
     ]
     return support_page("countdown-keeper",
                         "Countdown Keeper Support — Thiban Tech Solutions",
-                        "دعم تطبيق العدّاد — ثيبان",
+                        "دعم تطبيق العدّاد — ذيبان",
                         "Support for Countdown Keeper: common questions, troubleshooting reminders and calendars, and how to contact us.",
                         "دعم تطبيق العدّاد: أسئلة شائعة، وحلول لمشكلات التذكيرات والتقويم، وطريقة التواصل معنا.",
                         faqs, trouble)
@@ -1020,7 +1020,7 @@ def page_support_vault():
     ]
     return support_page("vault",
                         "Vault — Warranty Manager Support — Thiban Tech Solutions",
-                        "دعم خزنة الضمانات — ثيبان",
+                        "دعم خزنة الضمانات — ذيبان",
                         "Support for Vault — Warranty Manager: backups, purchases, scanning, notifications and location troubleshooting, and how to contact us.",
                         "دعم خزنة الضمانات: النسخ الاحتياطي والمشتريات والمسح والإشعارات وحلّ مشكلات الموقع، وطريقة التواصل معنا.",
                         faqs, trouble)
@@ -1050,18 +1050,18 @@ def page_contact():
 </div></section>'''
     return render("/contact/",
                   "Contact — Thiban Tech Solutions",
-                  "تواصل معنا — ثيبان للحلول التقنية",
+                  "تواصل معنا — ذيبان للحلول التقنية",
                   f"Contact Thiban Tech Solutions by email at {SUPPORT_EMAIL} for questions, feedback, or app support.",
-                  f"تواصل مع ثيبان للحلول التقنية عبر البريد {SUPPORT_EMAIL} للأسئلة أو الملاحظات أو دعم التطبيقات.",
+                  f"تواصل مع ذيبان للحلول التقنية عبر البريد {SUPPORT_EMAIL} للأسئلة أو الملاحظات أو دعم التطبيقات.",
                   body, active="")
 
 
 def page_about():
     body = f'''{crumbs([("Home","الرئيسية","/"),("About","من نحن",None)])}
 <section class="section"><div class="container prose">
-  {h(1, "About Thiban Tech Solutions", "عن ثيبان للحلول التقنية")}
+  {h(1, "About Thiban Tech Solutions", "عن ذيبان للحلول التقنية")}
   {p("Thiban Tech Solutions is a focused software studio specializing in web and mobile application development. We also design and publish our own privacy-first apps for everyday life.",
-     "ثيبان للحلول التقنية استوديو برمجيّ متخصّص في تطوير تطبيقات الويب والجوال. كما نصمّم وننشر تطبيقاتنا الخاصة التي تضع الخصوصية أولًا لحياتك اليومية.", "lead")}
+     "ذيبان للحلول التقنية استوديو برمجيّ متخصّص في تطوير تطبيقات الويب والجوال. كما نصمّم وننشر تطبيقاتنا الخاصة التي تضع الخصوصية أولًا لحياتك اليومية.", "lead")}
   {h(2, "What we build", "ما الذي نطوره")}
   <div class="services" style="margin-top:20px">
     <article class="service-card"><div class="service-icon" aria-hidden="true">&lt;/&gt;</div>
@@ -1090,9 +1090,9 @@ def page_about():
 </div></section>'''
     return render("/about/",
                   "About — Thiban Tech Solutions",
-                  "من نحن — ثيبان للحلول التقنية",
+                  "من نحن — ذيبان للحلول التقنية",
                   "Thiban Tech Solutions is an independent studio building simple, private, useful mobile apps in Arabic and English.",
-                  "ثيبان للحلول التقنية استوديو مستقلّ يبني تطبيقات جوّال بسيطة وخاصة ومفيدة بالعربية والإنجليزية.",
+                  "ذيبان للحلول التقنية استوديو مستقلّ يبني تطبيقات جوّال بسيطة وخاصة ومفيدة بالعربية والإنجليزية.",
                   body, active="about")
 
 
@@ -1109,7 +1109,7 @@ def page_404():
   </div>
 </div>'''
     return render("/404", "Page not found — Thiban Tech Solutions",
-                  "الصفحة غير موجودة — ثيبان للحلول التقنية",
+                  "الصفحة غير موجودة — ذيبان للحلول التقنية",
                   "The page you were looking for doesn't exist or has moved.",
                   "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
                   body, is404=True)
@@ -1174,9 +1174,9 @@ def render_home_and_collect():
     body = page_home()
     return render("/",
                   "Thiban Tech Solutions — Simple, useful mobile apps",
-                  "ثيبان للحلول التقنية — تطبيقات جوّال بسيطة ومفيدة",
+                  "ذيبان للحلول التقنية — تطبيقات جوّال بسيطة ومفيدة",
                   "Thiban Tech Solutions builds simple, private, useful mobile apps in Arabic and English — including Countdown Keeper and Vault, the Warranty Manager.",
-                  "ثيبان للحلول التقنية تبني تطبيقات جوّال بسيطة وخاصة ومفيدة بالعربية والإنجليزية — منها تطبيق العدّاد وخزنة الضمانات.",
+                  "ذيبان للحلول التقنية تبني تطبيقات جوّال بسيطة وخاصة ومفيدة بالعربية والإنجليزية — منها تطبيق العدّاد وخزنة الضمانات.",
                   body, active="home")
 
 
