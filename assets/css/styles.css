@@ -327,5 +327,10 @@ body.doc{background:#f8fbff}
 .doc .policy.prose h2{font-size:22px;margin-top:1.6em}
 .doc-foot{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
 
+/* WhatsApp button */
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;border-radius:12px;padding:11px 18px;font-weight:700;line-height:1.1}
+.wa-btn:hover{opacity:.92;text-decoration:none;transform:translateY(-1px)}
+.wa-btn svg{flex:none}
+
 /* 404 */
 .center-screen{flex:1;display:grid;place-items:center;text-align:center;padding:70px 20px}

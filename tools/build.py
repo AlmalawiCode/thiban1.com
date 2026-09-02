@@ -24,6 +24,28 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SITE_URL = "https://thiban1.com"
 SUPPORT_EMAIL = "thibantechsolutions@gmail.com"
+WHATSAPP_DISPLAY = "+966 55 426 0804"          # shown to visitors
+WHATSAPP_NUMBER = "966554260804"               # E.164 digits for wa.me
+WHATSAPP_LINK = f"https://wa.me/{WHATSAPP_NUMBER}"
+WHATSAPP_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="currentColor">'
+                '<path d="M.06 24l1.68-6.13A11.87 11.87 0 0 1 .16 11.9C.16 5.34 5.5.02 12.06.02c3.18 0 '
+                '6.17 1.24 8.42 3.49a11.8 11.8 0 0 1 3.49 8.4c0 6.56-5.35 11.88-11.9 11.88a11.9 11.9 0 0 '
+                '1-5.7-1.45L.06 24zM6.6 20.13c1.68.99 3.28 1.59 5.45 1.59 5.45 0 9.9-4.43 9.9-9.88a9.8 '
+                '9.8 0 0 0-2.9-6.99A9.8 9.8 0 0 0 12.06 2c-5.45 0-9.9 4.43-9.9 9.88 0 2.24.66 3.92 1.75 '
+                '5.68l-1 3.63 3.69-.96zM17.6 14.6c-.07-.12-.27-.2-.56-.34-.3-.15-1.75-.86-2.02-.96-.27-.1-'
+                '.47-.15-.66.15-.2.3-.76.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-'
+                '1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.53.15-.17.2-.3.3-.5.1-.2.05-.37-'
+                '.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.57-.02c-.2 0-.52.07-.8.37-.27.3-'
+                '1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.23 '
+                '1.36.2 1.87.12.57-.08 1.75-.72 2-1.4.24-.7.24-1.28.17-1.4z"/></svg>')
+
+
+def whatsapp_button():
+    return (f'<a class="wa-btn" href="{WHATSAPP_LINK}" target="_blank" rel="noopener">'
+            f'{WHATSAPP_SVG}<span><span data-en>WhatsApp</span><span data-ar>واتساب</span>'
+            f' · <span dir="ltr">{WHATSAPP_DISPLAY}</span></span></a>')
+
+
 YEAR = "2026"
 
 # ---------------------------------------------------------------------------
@@ -238,6 +260,7 @@ def footer():
       <p style="color:rgba(255,255,255,.7);max-width:34ch" data-en>Web &amp; mobile application development — plus our own privacy-first apps.</p>
       <p style="color:rgba(255,255,255,.7);max-width:34ch" data-ar>تطوير تطبيقات الويب والجوال — إضافةً إلى تطبيقاتنا الخاصة التي تحترم الخصوصية.</p>
       <p style="color:#94a3b8;margin-top:8px"><a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a></p>
+      <p style="color:#94a3b8;margin-top:4px"><a href="{WHATSAPP_LINK}" target="_blank" rel="noopener">WhatsApp: <span dir="ltr">{WHATSAPP_DISPLAY}</span></a></p>
     </div>
     {apps_col}{help_col}{legal_col}
   </div>
@@ -944,8 +967,11 @@ def page_support_index():
   {h(1, "Support", "الدعم")}
   {p("We're here to help. Choose your app below for common questions and troubleshooting, or contact us directly.",
      "نحن هنا للمساعدة. اختر تطبيقك أدناه لتطّلع على الأسئلة الشائعة وحلول المشكلات، أو تواصل معنا مباشرةً.", "lead")}
-  <div class="callout">{p(f'Email us any time: <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>',
-     f'راسلنا في أي وقت: <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>')}</div>
+  <div class="callout">
+    {p(f'Email us any time: <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>',
+       f'راسلنا في أي وقت: <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>')}
+    <div style="margin-top:10px">{whatsapp_button()}</div>
+  </div>
 </div>
 <div class="container"><div class="grid grid-2" style="margin-top:8px">{"".join(cards)}</div></div>
 </section>'''
@@ -972,8 +998,11 @@ def support_page(slug, title_en, title_ar, desc_en, desc_ar, faqs, trouble):
   <p><a href="/tutorials/{slug}/"><span data-en>Read the {a['name_en']} tutorials</span><span data-ar>اقرأ شروحات {a['name_ar']}</span></a>
      &nbsp;·&nbsp;
      <a href="/privacy/{slug}/"><span data-en>Privacy policy</span><span data-ar>سياسة الخصوصية</span></a></p>
-  <div class="callout">{p(f'Contact support: <a href="mailto:{SUPPORT_EMAIL}?subject={a["name_en"]} support">{SUPPORT_EMAIL}</a>',
-     f'تواصل مع الدعم: <a href="mailto:{SUPPORT_EMAIL}?subject={a["name_ar"]} - دعم">{SUPPORT_EMAIL}</a>')}</div>
+  <div class="callout">
+    {p(f'Contact support: <a href="mailto:{SUPPORT_EMAIL}?subject={a["name_en"]} support">{SUPPORT_EMAIL}</a>',
+       f'تواصل مع الدعم: <a href="mailto:{SUPPORT_EMAIL}?subject={a["name_ar"]} - دعم">{SUPPORT_EMAIL}</a>')}
+    <div style="margin-top:10px">{whatsapp_button()}</div>
+  </div>
 </div></section>'''
     return render(f"/support/{slug}/", title_en, title_ar, desc_en, desc_ar, body, active="support")
 
@@ -1047,10 +1076,18 @@ def page_contact():
   {h(1, "Contact us", "تواصل معنا")}
   {p("Questions, feedback, or need help with one of our apps? We'd love to hear from you.",
      "أسئلة أو ملاحظات أو تحتاج إلى مساعدة في أحد تطبيقاتنا؟ يسعدنا أن نسمع منك.", "lead")}
-  <div class="card" style="margin-top:24px">
-    {h(3, "Email", "البريد الإلكتروني")}
-    <p style="font-size:1.15rem"><a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a></p>
-    {p("We aim to respond to support requests as soon as possible.", "نسعى للردّ على طلبات الدعم في أقرب وقت ممكن.")}
+  <div class="grid grid-2" style="margin-top:24px">
+    <div class="card">
+      {h(3, "WhatsApp", "واتساب")}
+      <p style="font-size:1.15rem"><a href="{WHATSAPP_LINK}" target="_blank" rel="noopener" dir="ltr">{WHATSAPP_DISPLAY}</a></p>
+      {p("Message us on WhatsApp for the quickest reply.", "راسلنا على واتساب لأسرع ردّ.")}
+      <div style="margin-top:14px">{whatsapp_button()}</div>
+    </div>
+    <div class="card">
+      {h(3, "Email", "البريد الإلكتروني")}
+      <p style="font-size:1.15rem"><a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a></p>
+      {p("We aim to respond to support requests as soon as possible.", "نسعى للردّ على طلبات الدعم في أقرب وقت ممكن.")}
+    </div>
   </div>
   <div style="margin-top:24px">
     {p("Looking for something specific?", "تبحث عن شيء محدّد؟")}
