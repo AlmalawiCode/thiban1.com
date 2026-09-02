@@ -41,9 +41,12 @@ WHATSAPP_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="
 
 
 def whatsapp_button():
+    # Action button only — the number itself is shown as a tappable link on the
+    # contact card and in the footer. Keeping the number out of the button avoids
+    # mid-number wrapping and any LTR/RTL bidi issues.
     return (f'<a class="wa-btn" href="{WHATSAPP_LINK}" target="_blank" rel="noopener">'
-            f'{WHATSAPP_SVG}<span><span data-en>WhatsApp</span><span data-ar>واتساب</span>'
-            f' · <span dir="ltr">{WHATSAPP_DISPLAY}</span></span></a>')
+            f'{WHATSAPP_SVG}'
+            f'<span data-en>Message on WhatsApp</span><span data-ar>راسلنا على واتساب</span></a>')
 
 
 YEAR = "2026"
@@ -259,8 +262,8 @@ def footer():
         <span data-en>Thiban Tech Solutions</span><span data-ar>ذيبان للحلول التقنية</span></div>
       <p style="color:rgba(255,255,255,.7);max-width:34ch" data-en>Web &amp; mobile application development — plus our own privacy-first apps.</p>
       <p style="color:rgba(255,255,255,.7);max-width:34ch" data-ar>تطوير تطبيقات الويب والجوال — إضافةً إلى تطبيقاتنا الخاصة التي تحترم الخصوصية.</p>
-      <p style="color:#94a3b8;margin-top:8px"><a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a></p>
-      <p style="color:#94a3b8;margin-top:4px"><a href="{WHATSAPP_LINK}" target="_blank" rel="noopener">WhatsApp: <span dir="ltr">{WHATSAPP_DISPLAY}</span></a></p>
+      <p style="color:#94a3b8;margin-top:8px"><a href="mailto:{SUPPORT_EMAIL}"><bdi dir="ltr">{SUPPORT_EMAIL}</bdi></a></p>
+      <p style="color:#94a3b8;margin-top:4px"><a href="{WHATSAPP_LINK}" target="_blank" rel="noopener"><span data-en>WhatsApp</span><span data-ar>واتساب</span>: <bdi dir="ltr">{WHATSAPP_DISPLAY}</bdi></a></p>
     </div>
     {apps_col}{help_col}{legal_col}
   </div>
