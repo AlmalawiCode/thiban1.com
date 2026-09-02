@@ -137,10 +137,10 @@ APPS = {
 
 NAV = [
     ("home", "Home", "الرئيسية", "/"),
+    ("services", "Services", "الخدمات", "/#services"),
     ("apps", "Apps", "التطبيقات", "/apps/"),
     ("tutorials", "Tutorials", "الشروحات", "/tutorials/"),
     ("support", "Support", "الدعم", "/support/"),
-    ("privacy", "Privacy", "الخصوصية", "/privacy/"),
     ("about", "About", "من نحن", "/about/"),
 ]
 
@@ -208,8 +208,8 @@ def footer():
     <div>
       <div class="footer-brand"><img src="/assets/img/brand/icon-192.png" alt="" width="32" height="32">
         <span data-en>Thiban Tech Solutions</span><span data-ar>ثيبان للحلول التقنية</span></div>
-      <p style="color:#94a3b8;max-width:34ch" data-en>Simple, private, and useful mobile apps for everyday life.</p>
-      <p style="color:#94a3b8;max-width:34ch" data-ar>تطبيقات جوّال بسيطة ومفيدة تحترم خصوصيتك، لحياتك اليومية.</p>
+      <p style="color:rgba(255,255,255,.7);max-width:34ch" data-en>Web &amp; mobile application development — plus our own privacy-first apps.</p>
+      <p style="color:rgba(255,255,255,.7);max-width:34ch" data-ar>تطوير تطبيقات الويب والجوال — إضافةً إلى تطبيقاتنا الخاصة التي تحترم الخصوصية.</p>
       <p style="color:#94a3b8;margin-top:8px"><a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a></p>
     </div>
     {apps_col}{help_col}{legal_col}
@@ -263,8 +263,8 @@ def render(path, title_en, title_ar, desc_en, desc_ar, body,
 <title>{esc(title_en)}</title>
 <meta name="description" content="{esc(desc_en)}">
 {canonical_tag}
-<meta name="theme-color" content="#4f46e5">
-<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#165dff">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Thiban Tech Solutions">
 <meta property="og:title" content="{esc(title_en)}">
@@ -354,38 +354,130 @@ def shots(app):
 # PAGES
 # ===========================================================================
 
+def featured_app_card(app, shot, desc_en, desc_ar):
+    slug = app["slug"]
+    if app["status"] == "live":
+        actions = []
+        if app.get("appstore"):
+            actions.append(store_button("apple", app["appstore"]))
+        if app.get("playstore"):
+            actions.append(store_button("play", app["playstore"]))
+        action_block = f'<div class="stores">{"".join(actions)}</div>'
+    else:
+        action_block = ('<div class="chips"><span class="chip">'
+                        '<span data-en>App Store &amp; Google Play — coming soon</span>'
+                        '<span data-ar>App Store وGoogle Play — قريبًا</span></span></div>')
+    links = (f'<div class="linkrow">'
+             f'<a href="/apps/{slug}/"><span data-en>Learn more</span><span data-ar>اعرف المزيد</span></a>'
+             f'<a href="/tutorials/{slug}/"><span data-en>Tutorial</span><span data-ar>الشرح</span></a>'
+             f'<a href="/privacy/{slug}/"><span data-en>Privacy</span><span data-ar>الخصوصية</span></a>'
+             f'<a href="/support/{slug}/"><span data-en>Support</span><span data-ar>الدعم</span></a></div>')
+    return f'''<article class="app-card-large">
+  <div class="app-visual"><div class="device">
+    <img class="app-icon" src="{app['icon']}" alt="{esc(app['name_en'])} icon" width="76" height="76">
+    <img class="app-shot" src="{shot}" alt="{esc(app['name_en'])} screenshot" loading="lazy">
+  </div></div>
+  <div class="app-body">
+    <h3><a href="/apps/{slug}/"><span data-en>{app['name_en']}</span><span data-ar>{app['name_ar']}</span></a></h3>
+    <p data-en>{desc_en}</p><p data-ar>{desc_ar}</p>
+    {action_block}
+    {links}
+  </div>
+</article>'''
+
+
 def page_home():
-    hero = f'''<section class="hero"><div class="container">
-  <span class="eyebrow" data-en>Thiban Tech Solutions</span><span class="eyebrow" data-ar>ثيبان للحلول التقنية</span>
-  {h(1, "Simple, useful apps for everyday life.", "تطبيقات بسيطة ومفيدة لحياتك اليومية.")}
-  {p("We design privacy-first mobile apps that do one job well — no accounts, no tracking, and your data stays on your device.",
-     "نصمّم تطبيقات جوّال تضع خصوصيتك أولًا وتُتقن مهمّة واحدة — بلا حسابات، وبلا تتبّع، وبياناتك تبقى على جهازك.", "lead")}
-  <div class="btn-row">
-    <a class="btn btn-primary" href="/apps/"><span data-en>Explore our apps</span><span data-ar>استعرض تطبيقاتنا</span></a>
-    <a class="btn btn-ghost" href="/support/"><span data-en>Get support</span><span data-ar>الحصول على الدعم</span></a>
+    hero = f'''<section class="hero" id="home"><div class="container hero-grid">
+  <div>
+    <span class="eyebrow" data-en>Web &amp; Mobile Application Development</span><span class="eyebrow" data-ar>تطوير تطبيقات الويب والجوال</span>
+    {h(1, "Modern web and mobile applications, built with purpose.", "تطبيقات ويب وجوال حديثة، تُبنى لهدف واضح.")}
+    {p("Thiban Tech Solutions designs and develops reliable web and mobile applications — and publishes its own privacy-first apps for everyday life.",
+       "تصمّم ثيبان للحلول التقنية وتطوّر تطبيقات ويب وجوال موثوقة — وتنشر تطبيقاتها الخاصة التي تضع الخصوصية أولًا لحياتك اليومية.", "lead")}
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/#services"><span data-en>Our Services</span><span data-ar>خدماتنا</span></a>
+      <a class="btn btn-secondary" href="/apps/"><span data-en>View Apps</span><span data-ar>عرض التطبيقات</span></a>
+    </div>
+  </div>
+  <div class="device-stage" aria-hidden="true">
+    <div class="glow"></div>
+    <div class="fbadge web"><span>&lt;/&gt;</span><b data-en>Web Apps</b><b data-ar>تطبيقات الويب</b></div>
+    <div class="fbadge mobile"><span>▣</span><b data-en>Mobile Apps</b><b data-ar>تطبيقات الجوال</b></div>
+    <div class="laptop"><div class="screen">
+      <div class="screen-top"><div class="mini-logo"></div><div class="dots"><i></i><i></i><i></i></div></div>
+      <div class="dash">
+        <div class="panel"><div class="bars"><span></span><span></span><span></span><span></span></div></div>
+        <div class="panel"><div class="rowline"></div><div class="rowline"></div><div class="rowline"></div><div class="rowline"></div></div>
+      </div>
+    </div></div>
+    <div class="phone"><img src="/assets/img/apps/countdown/Countdown_Home.jpg" alt="" loading="lazy"></div>
   </div>
 </div></section>'''
 
-    apps_section = f'''<section class="section"><div class="container">
-  {h(2, "Our Apps", "تطبيقاتنا", "center")}
-  {p("Focused tools you can rely on, in Arabic and English.", "أدوات مركّزة يمكنك الاعتماد عليها، بالعربية والإنجليزية.", "lead center")}
-  <div class="grid grid-2" style="margin-top:36px">
-    {app_card(APPS['countdown-keeper'])}
-    {app_card(APPS['vault'])}
+    services = f'''<section id="services"><div class="container">
+  <div class="section-head">
+    {h(2, "What we build", "ما الذي نطوره")}
+    {p("A focused software studio specializing in two core areas: modern web applications and mobile applications.",
+       "استوديو برمجيّ متخصّص في مجالين أساسيين: تطبيقات الويب الحديثة وتطبيقات الجوال.")}
+  </div>
+  <div class="services">
+    <article class="service-card">
+      <div class="service-icon" aria-hidden="true">&lt;/&gt;</div>
+      {h(3, "Web Application Development", "تطوير تطبيقات الويب")}
+      {p("Responsive, secure, and maintainable web applications designed around real business and user requirements.",
+         "تطبيقات ويب متجاوبة وآمنة وقابلة للصيانة، مصمّمة وفق احتياجات العمل والمستخدم الفعلية.")}
+    </article>
+    <article class="service-card">
+      <div class="service-icon" aria-hidden="true">▣</div>
+      {h(3, "Mobile Application Development", "تطوير تطبيقات الجوال")}
+      {p("Polished cross-platform mobile applications for Android and iOS, with a strong focus on usability, reliability, performance, and a consistent experience.",
+         "تطبيقات جوال متقنة تعمل على أندرويد و iOS، مع تركيز قوي على سهولة الاستخدام والموثوقية والأداء وتجربة متناسقة.")}
+    </article>
   </div>
 </div></section>'''
 
-    values = f'''<section class="section section-soft"><div class="container">
-  {h(2, "Built the right way", "مبنيّة كما ينبغي", "center")}
-  <div class="features" style="margin-top:32px">
-    {feature("🔒", "Privacy first", "الخصوصية أولًا", "Local-first apps with no ads, no analytics, and no third-party trackers.", "تطبيقات تعمل محليًا بلا إعلانات ولا تحليلات ولا أدوات تتبّع من طرف ثالث.")}
-    {feature("🌐", "Arabic &amp; English", "العربية والإنجليزية", "Full right-to-left support and professional Arabic throughout.", "دعم كامل للكتابة من اليمين إلى اليسار ولغة عربية سليمة في كل مكان.")}
-    {feature("📱", "Made for mobile", "مصمّمة للجوّال", "Fast, clean interfaces designed for phones and tablets.", "واجهات سريعة وأنيقة مصمّمة للهواتف والأجهزة اللوحية.")}
-    {feature("⚙️", "Thoughtful details", "تفاصيل مدروسة", "Careful engineering, dual Hijri/Gregorian calendars, and reliable reminders.", "هندسة دقيقة، وتقويمان هجري وميلادي، وتذكيرات موثوقة.")}
+    apps_section = f'''<section class="apps-section" id="apps"><div class="container">
+  <div class="section-head">
+    {h(2, "Featured applications", "التطبيقات المميّزة")}
+    {p("Our own published apps — private by design, and available in Arabic and English.",
+       "تطبيقاتنا المنشورة — خاصّة بطبيعتها، ومتوفّرة بالعربية والإنجليزية.")}
+  </div>
+  <div class="app-grid">
+    {featured_app_card(APPS['countdown-keeper'], "/assets/img/apps/countdown/event.jpg",
+        "A clean way to track important dates — countdowns, elapsed time, recurring Hijri/Gregorian events, reminders, and handy date tools.",
+        "طريقة أنيقة لمتابعة التواريخ المهمة — عدّ تنازلي، ووقت منقضٍ، وأحداث متكرّرة هجرية/ميلادية، وتذكيرات، وأدوات تاريخ عملية.")}
+    {featured_app_card(APPS['vault'], "/assets/img/apps/vault/dashboard.jpg",
+        "Organize invoices and warranty records, scan receipts and ZATCA QR codes, and get reminded before a warranty expires.",
+        "نظّم الفواتير وسجلّات الضمان، وامسح الإيصالات ورموز QR الضريبية، واحصل على تذكير قبل انتهاء الضمان.")}
   </div>
 </div></section>'''
 
-    return hero + apps_section + values
+    why = f'''<section id="about"><div class="container">
+  <div class="section-head center">{h(2, "Why Thiban Tech Solutions?", "لماذا ثيبان للحلول التقنية؟")}</div>
+  <div class="why-grid">
+    <article class="why-card"><div class="service-icon" aria-hidden="true">◎</div>
+      <strong data-en>Focused</strong><strong data-ar>تركيز واضح</strong>
+      {p("We concentrate on web and mobile application development — not services we don't provide.",
+         "نركّز على تطوير تطبيقات الويب والجوال — لا على خدمات لا نقدّمها.")}</article>
+    <article class="why-card"><div class="service-icon" aria-hidden="true">✓</div>
+      <strong data-en>Reliable</strong><strong data-ar>موثوقية</strong>
+      {p("Every application is understandable, maintainable, tested, and practical for real users.",
+         "كل تطبيق واضح وقابل للصيانة ومختبَر وعمليّ للمستخدم الحقيقي.")}</article>
+    <article class="why-card"><div class="service-icon" aria-hidden="true">♥</div>
+      <strong data-en>User-centered</strong><strong data-ar>يركّز على المستخدم</strong>
+      {p("Simple, professional, and consistent across desktop and mobile — in Arabic and English.",
+         "بسيط واحترافيّ ومتناسق على الحاسب والجوال — بالعربية والإنجليزية.")}</article>
+  </div>
+</div></section>'''
+
+    cta = f'''<section style="padding-top:0"><div class="container"><div class="cta-band">
+  <div>
+    {h(2, "Have an application idea?", "لديك فكرة لتطبيق؟")}
+    {p("Let's turn it into a clear, useful web or mobile application.", "لنحوّلها إلى تطبيق ويب أو جوال واضح ومفيد.")}
+  </div>
+  <a class="btn btn-secondary" href="/contact/"><span data-en>Contact us</span><span data-ar>تواصل معنا</span></a>
+</div></div></section>'''
+
+    return hero + services + apps_section + why + cta
 
 
 def page_apps():
@@ -968,8 +1060,19 @@ def page_about():
     body = f'''{crumbs([("Home","الرئيسية","/"),("About","من نحن",None)])}
 <section class="section"><div class="container prose">
   {h(1, "About Thiban Tech Solutions", "عن ثيبان للحلول التقنية")}
-  {p("Thiban Tech Solutions is an independent software studio building simple, private, and genuinely useful mobile apps for everyday life.",
-     "ثيبان للحلول التقنية استوديو برمجيات مستقلّ يبني تطبيقات جوّال بسيطة وخاصة ومفيدة حقًّا لحياتك اليومية.", "lead")}
+  {p("Thiban Tech Solutions is a focused software studio specializing in web and mobile application development. We also design and publish our own privacy-first apps for everyday life.",
+     "ثيبان للحلول التقنية استوديو برمجيّ متخصّص في تطوير تطبيقات الويب والجوال. كما نصمّم وننشر تطبيقاتنا الخاصة التي تضع الخصوصية أولًا لحياتك اليومية.", "lead")}
+  {h(2, "What we build", "ما الذي نطوره")}
+  <div class="services" style="margin-top:20px">
+    <article class="service-card"><div class="service-icon" aria-hidden="true">&lt;/&gt;</div>
+      {h(3, "Web Application Development", "تطوير تطبيقات الويب")}
+      {p("Responsive, secure, and maintainable web applications designed around real business and user requirements.",
+         "تطبيقات ويب متجاوبة وآمنة وقابلة للصيانة، مصمّمة وفق احتياجات العمل والمستخدم الفعلية.")}</article>
+    <article class="service-card"><div class="service-icon" aria-hidden="true">▣</div>
+      {h(3, "Mobile Application Development", "تطوير تطبيقات الجوال")}
+      {p("Polished cross-platform mobile applications for Android and iOS, focused on usability, reliability, and performance.",
+         "تطبيقات جوال متقنة تعمل على أندرويد و iOS، مع تركيز على سهولة الاستخدام والموثوقية والأداء.")}</article>
+  </div>
   {h(2, "What we believe", "بماذا نؤمن")}
   <div class="features" style="margin-top:20px">
     {feature("🔒","Privacy by default","الخصوصية افتراضيًا","Your data belongs to you and stays on your device. No ads, no analytics, no tracking.","بياناتك مِلكك وتبقى على جهازك. بلا إعلانات ولا تحليلات ولا تتبّع.")}
