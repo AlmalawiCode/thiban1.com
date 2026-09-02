@@ -326,6 +326,19 @@ body.doc{background:#f8fbff}
 .doc .policy.prose{max-width:none;margin:0}
 .doc .policy.prose h2{font-size:22px;margin-top:1.6em}
 .doc-foot{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+/* language switcher on the standalone privacy doc */
+.doc-topbar{display:flex;justify-content:flex-end;width:100%;margin-bottom:10px}
+.lang-dd{position:relative;display:inline-block}
+.lang-dd>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;color:var(--ink);font-size:.9rem}
+.lang-dd>summary::-webkit-details-marker{display:none}
+.lang-dd>summary:hover{border-color:var(--primary-2);color:var(--primary)}
+.lang-dd>summary svg{width:16px;height:16px}
+.lang-dd .chev{color:var(--muted);font-size:.8em}
+.lang-dd[open] .chev{transform:rotate(180deg)}
+.lang-dd-menu{position:absolute;inset-inline-end:0;top:calc(100% + 8px);z-index:20;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);padding:8px;min-width:190px;display:grid;gap:2px;max-height:60vh;overflow:auto}
+.lang-opt{display:block;padding:9px 12px;border-radius:9px;color:var(--ink);font-weight:600;font-size:.92rem}
+.lang-opt:hover{background:var(--soft);text-decoration:none}
+.lang-opt.active{background:var(--grad-btn);color:#fff}
 
 /* WhatsApp button */
 .wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;border-radius:12px;padding:11px 18px;font-weight:700;line-height:1.1}

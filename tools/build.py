@@ -869,13 +869,40 @@ def privacy_hreflang(slug, langs):
     return "\n".join(tags)
 
 
-def privacy_doc(app, lang, data, canonical):
-    """A fully self-contained, single-language privacy document.
+GLOBE_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" '
+             'stroke-width="1.8" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 0c2.5 2.5 2.5 15.5 0 18M12 '
+             '3c-2.5 2.5-2.5 15.5 0 18M3.5 9h17M3.5 15h17"/></svg>')
 
-    No global site header, footer, or language switcher — opening the Japanese
-    URL shows only the Japanese policy. Language discovery lives on the app page
-    and the /privacy/ overview; hreflang tags below keep the set linked for SEO
-    and store crawlers. Works with zero JavaScript."""
+
+def lang_dropdown(app, current):
+    """Compact language switcher for a single-language privacy page. Native
+    <details> disclosure — no JavaScript needed; every option is a direct URL,
+    so the content stays one language but other languages are easy to find."""
+    langs = app["privacy_langs"]
+    if len(langs) <= 1:
+        return ""
+    slug = app["slug"]
+    label = "تغيير اللغة" if current == "ar" else "Change language"
+    items = []
+    for L in langs:
+        name = LANG_META[L][0]
+        active = " active" if L == current else ""
+        cur = ' aria-current="true"' if L == current else ""
+        items.append(f'<a class="lang-opt{active}" href="/privacy/{slug}/{L}/" '
+                     f'hreflang="{L}" lang="{L}"{cur}>{name}</a>')
+    return (f'<details class="lang-dd">'
+            f'<summary aria-label="{esc(label)}">{GLOBE_SVG}'
+            f'<span class="lang-cur">{LANG_META[current][0]}</span>'
+            f'<span class="chev" aria-hidden="true">▾</span></summary>'
+            f'<div class="lang-dd-menu">{"".join(items)}</div></details>')
+
+
+def privacy_doc(app, lang, data, canonical):
+    """A self-contained, single-language privacy document (no global site
+    header/footer). Shows only this language's policy, but includes a compact
+    language switcher so the other languages are easy to reach. Every language
+    is a direct URL; hreflang keeps the set linked for SEO / store crawlers.
+    Works with zero JavaScript."""
     slug = app["slug"]
     d = data["dir"]
     app_name = app["name_ar"] if lang == "ar" else app["name_en"]
@@ -913,6 +940,7 @@ def privacy_doc(app, lang, data, canonical):
 <body class="doc">
 <main class="doc-wrap">
   <header class="doc-head">
+    <div class="doc-topbar">{lang_dropdown(app, lang)}</div>
     <img class="doc-icon" src="{app['icon']}" alt="{esc(app['name_en'])} icon" width="72" height="72">
     <div class="doc-app">{esc(app_name)}</div>
     <h1 class="doc-title">{data['title']}</h1>
