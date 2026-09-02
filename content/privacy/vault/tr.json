@@ -1,0 +1,97 @@
+{
+ "lang": "tr",
+ "lang_name": "Türkçe",
+ "dir": "ltr",
+ "title": "Vault — Warranty Manager Gizlilik Politikası",
+ "effective": "<strong>Yürürlük Tarihi:</strong> 10 Temmuz 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Vault — Warranty Manager, kullanıcıların faturalarını kaydetmesine ve ürün garantilerini takip etmesine yardımcı olur."
+  },
+  {
+   "t": "p",
+   "html": "Gizliliğinize saygı duyuyoruz. Uygulama oturum açmayı gerektirmez; kişisel bilgilerinizi toplamayız, satmayız veya paylaşmayız."
+  },
+  {
+   "t": "h2",
+   "html": "Uygulamada Saklanan Bilgiler"
+  },
+  {
+   "t": "p",
+   "html": "Uygulama; faturaları, fişleri, ürün ayrıntılarını, garanti tarihlerini, mağaza bilgilerini ve ilgili belgeleri kaydetmenize olanak tanır. Bu bilgiler cihazınızda saklanır ve yalnızca faturalarınızı ve garantilerinizi yönetmenize yardımcı olmak için kullanılır."
+  },
+  {
+   "t": "h2",
+   "html": "Faturalar ve Belgeler"
+  },
+  {
+   "t": "p",
+   "html": "Uygulamaya eklediğiniz her fatura, fiş veya garanti belgesi size aittir. Uygulama bu belgeleri yayımlamaz, dağıtmaz veya başkalarıyla paylaşmaz."
+  },
+  {
+   "t": "h2",
+   "html": "Kamera ve Dosya Erişimi"
+  },
+  {
+   "t": "p",
+   "html": "Uygulama, kağıt faturaları tarayabilmeniz için kameranıza erişim isteyebilir. Ayrıca cihazınızdan veya desteklenen hizmetlerden dosya içe aktarmanıza da olanak tanıyabilir. Bu izinler yalnızca kullanmayı seçtiğiniz özellikler için kullanılır."
+  },
+  {
+   "t": "h2",
+   "html": "Bildirimler"
+  },
+  {
+   "t": "p",
+   "html": "Uygulama, süresi dolmak üzere olan garantileri hatırlatmak için yerel bildirimler kullanabilir. Bu hatırlatıcılar cihazınızda oluşturulur."
+  },
+  {
+   "t": "h2",
+   "html": "Uygulama İçi Satın Alma"
+  },
+  {
+   "t": "p",
+   "html": "Uygulama, tek seferlik bir “Ömür Boyu Erişim” uygulama içi satın alma seçeneği sunar. Satın alma işlemleri, uygulamayı indirdiğiniz mağaza (Apple App Store veya Google Play) tarafından güvenli bir şekilde işlenir. Ödeme kartı bilgilerinizi almayız ve saklamayız."
+  },
+  {
+   "t": "h2",
+   "html": "Veri Paylaşımı"
+  },
+  {
+   "t": "p",
+   "html": "Verilerinizi satmıyoruz. Faturalarınızı, fişlerinizi, garanti belgelerinizi veya ürün bilgilerinizi reklamverenlerle veya üçüncü taraflarla paylaşmıyoruz."
+  },
+  {
+   "t": "h2",
+   "html": "Yedekleme"
+  },
+  {
+   "t": "p",
+   "html": "Yedekleme özellikleri mevcutsa, yalnızca kendi fatura ve garanti verilerinizin bir kopyasını saklamanıza yardımcı olmak için kullanılır. Yedekleme dosyalarınızı nerede saklayacağınız veya nereye aktaracağınız sizin sorumluluğunuzdadır."
+  },
+  {
+   "t": "h2",
+   "html": "Çocukların Gizliliği"
+  },
+  {
+   "t": "p",
+   "html": "Uygulama, çocuklardan bilgi toplamak için tasarlanmamıştır ve özellikle çocuklara yönelik içerik barındırmaz."
+  },
+  {
+   "t": "h2",
+   "html": "Bu Gizlilik Politikasındaki Değişiklikler"
+  },
+  {
+   "t": "p",
+   "html": "Bu Gizlilik Politikasını zaman zaman güncelleyebiliriz. Yapılan değişiklikler bu sayfada yayımlanacaktır."
+  },
+  {
+   "t": "h2",
+   "html": "İletişim"
+  },
+  {
+   "t": "p",
+   "html": "Bu Gizlilik Politikası hakkında sorularınız varsa bize şu adresten ulaşabilirsiniz: <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>"
+  }
+ ]
+}

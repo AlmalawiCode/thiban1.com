@@ -4,7 +4,7 @@
   "start_url": "/",
   "display": "browser",
   "background_color": "#ffffff",
-  "theme_color": "#4f46e5",
+  "theme_color": "#165dff",
   "icons": [
     {
       "src": "/assets/img/brand/icon-192.png",

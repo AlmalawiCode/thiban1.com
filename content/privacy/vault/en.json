@@ -1,0 +1,97 @@
+{
+ "lang": "en",
+ "lang_name": "English",
+ "dir": "ltr",
+ "title": "Privacy Policy for Vault — Warranty Manager",
+ "effective": "<strong>Effective Date:</strong> July 10, 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Vault — Warranty Manager helps users save invoices and track product warranties."
+  },
+  {
+   "t": "p",
+   "html": "We respect your privacy. The app does not require sign-in, and we do not collect, sell, or share your personal information."
+  },
+  {
+   "t": "h2",
+   "html": "Information Stored in the App"
+  },
+  {
+   "t": "p",
+   "html": "The app allows you to save invoices, receipts, product details, warranty dates, store information, and related documents. This information is stored on your device and is used only to help you manage your invoices and warranties."
+  },
+  {
+   "t": "h2",
+   "html": "Invoices and Documents"
+  },
+  {
+   "t": "p",
+   "html": "Any invoice, receipt, or warranty document you add to the app belongs to you. The app does not publish, distribute, or share these documents with others."
+  },
+  {
+   "t": "h2",
+   "html": "Camera and File Access"
+  },
+  {
+   "t": "p",
+   "html": "The app may request access to your camera so you can scan paper invoices. It may also allow you to import files from your device or supported services. These permissions are used only for the features you choose to use."
+  },
+  {
+   "t": "h2",
+   "html": "Notifications"
+  },
+  {
+   "t": "p",
+   "html": "The app may use local notifications to remind you about warranties that are close to expiration. These reminders are generated on your device."
+  },
+  {
+   "t": "h2",
+   "html": "In-App Purchase"
+  },
+  {
+   "t": "p",
+   "html": "The app offers a one-time Lifetime Access in-app purchase. Purchases are processed securely by the store you downloaded the app from (Apple App Store or Google Play). We do not receive or store your payment card information."
+  },
+  {
+   "t": "h2",
+   "html": "Data Sharing"
+  },
+  {
+   "t": "p",
+   "html": "We do not sell your data. We do not share your invoices, receipts, warranty documents, or product information with advertisers or third parties."
+  },
+  {
+   "t": "h2",
+   "html": "Backup"
+  },
+  {
+   "t": "p",
+   "html": "If backup features are available, they are used only to help you keep a copy of your own invoice and warranty data. You are responsible for where you choose to store or export your backup files."
+  },
+  {
+   "t": "h2",
+   "html": "Children’s Privacy"
+  },
+  {
+   "t": "p",
+   "html": "The app is not designed to collect information from children. The app does not include content intended specifically for children."
+  },
+  {
+   "t": "h2",
+   "html": "Changes to This Privacy Policy"
+  },
+  {
+   "t": "p",
+   "html": "We may update this Privacy Policy from time to time. Any changes will be posted on this page."
+  },
+  {
+   "t": "h2",
+   "html": "Contact"
+  },
+  {
+   "t": "p",
+   "html": "If you have questions about this Privacy Policy, you can contact us at: <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>"
+  }
+ ]
+}

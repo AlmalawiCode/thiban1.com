@@ -1,0 +1,101 @@
+{
+ "lang": "en",
+ "lang_name": "English",
+ "dir": "ltr",
+ "title": "Privacy Policy for Countdown Keeper",
+ "effective": "Last updated: September 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Countdown Keeper (“the app”) is a mobile app published by Thiban Tech Solutions. This policy explains how the app handles your information. We respect your privacy: the app does not require sign-in, and we do not collect, sell, or share your personal information."
+  },
+  {
+   "t": "h2",
+   "html": "Information the app handles"
+  },
+  {
+   "t": "p",
+   "html": "The app stores the content you create: event titles, dates and times, notes, colours, an emoji or an optional photo you attach, and your app settings. This information is stored on your device and is used only to show your counters and reminders."
+  },
+  {
+   "t": "h2",
+   "html": "Device permissions"
+  },
+  {
+   "t": "html",
+   "html": "<ul><li><strong>Notifications</strong> — used only if you enable reminders, to alert you before an event.</li><li><strong>Camera</strong> — optional, so you can take a photo to attach to an event.</li><li><strong>Photos</strong> — optional, so you can choose a photo for an event or save an event image to your gallery.</li><li><strong>Biometric / Face ID</strong> — optional, only to unlock the app if you turn on the app lock.</li><li><strong>Run after restart (Android)</strong> — so scheduled reminders survive a device reboot.</li></ul><p>Each permission is requested only when you use the related feature.</p>"
+  },
+  {
+   "t": "h2",
+   "html": "Data storage"
+  },
+  {
+   "t": "p",
+   "html": "All of your events and settings are stored locally on your device. The app can export your events to a JSON file and import them back; you choose where that file is saved and with whom, if anyone, you share it."
+  },
+  {
+   "t": "h2",
+   "html": "Data sharing"
+  },
+  {
+   "t": "p",
+   "html": "We do not sell or share your data. The app has no user accounts and no Countdown Keeper server; nothing you type is sent to us."
+  },
+  {
+   "t": "h2",
+   "html": "Third-party services"
+  },
+  {
+   "t": "p",
+   "html": "The app does not use analytics, advertising, or crash-reporting services. The only network request it may make is to Google Fonts to download the display typeface the first time it is needed; like any web request this includes your device's IP address, but no personal data or app content is sent. The app otherwise works fully offline."
+  },
+  {
+   "t": "h2",
+   "html": "Data retention"
+  },
+  {
+   "t": "p",
+   "html": "Your data stays on your device until you delete it. Deleting an event moves it to the recycle bin, from which it is permanently removed later. Uninstalling the app removes all of its local data."
+  },
+  {
+   "t": "h2",
+   "html": "Children's privacy"
+  },
+  {
+   "t": "p",
+   "html": "The app is not directed to children and does not knowingly collect information from children."
+  },
+  {
+   "t": "h2",
+   "html": "Security"
+  },
+  {
+   "t": "p",
+   "html": "Your data is protected by your device's own security and app sandbox. You can add an extra layer with the optional biometric app lock."
+  },
+  {
+   "t": "h2",
+   "html": "Your choices"
+  },
+  {
+   "t": "p",
+   "html": "You control the app's permissions from your device settings, and you can export or delete your data at any time from within the app."
+  },
+  {
+   "t": "h2",
+   "html": "Changes to this policy"
+  },
+  {
+   "t": "p",
+   "html": "We may update this policy from time to time. Any changes will be posted on this page with a new date."
+  },
+  {
+   "t": "h2",
+   "html": "Contact"
+  },
+  {
+   "t": "p",
+   "html": "If you have questions about this policy, contact us at <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>."
+  }
+ ]
+}

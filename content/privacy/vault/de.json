@@ -1,0 +1,97 @@
+{
+ "lang": "de",
+ "lang_name": "Deutsch",
+ "dir": "ltr",
+ "title": "Datenschutzerklärung für Vault — Warranty Manager",
+ "effective": "<strong>Gültig ab:</strong> 10. Juli 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Vault — Warranty Manager hilft Nutzern, Rechnungen zu speichern und Produktgarantien zu verfolgen."
+  },
+  {
+   "t": "p",
+   "html": "Wir respektieren Ihre Privatsphäre. Die App erfordert keine Anmeldung, und wir erheben, verkaufen oder teilen Ihre persönlichen Daten nicht."
+  },
+  {
+   "t": "h2",
+   "html": "In der App gespeicherte Informationen"
+  },
+  {
+   "t": "p",
+   "html": "Mit der App können Sie Rechnungen, Belege, Produktdetails, Garantiedaten, Händlerinformationen und zugehörige Dokumente speichern. Diese Informationen werden auf Ihrem Gerät gespeichert und ausschließlich dazu verwendet, Ihnen bei der Verwaltung Ihrer Rechnungen und Garantien zu helfen."
+  },
+  {
+   "t": "h2",
+   "html": "Rechnungen und Dokumente"
+  },
+  {
+   "t": "p",
+   "html": "Jede Rechnung, jeder Beleg und jedes Garantiedokument, das Sie der App hinzufügen, gehört Ihnen. Die App veröffentlicht, verbreitet oder teilt diese Dokumente nicht mit anderen."
+  },
+  {
+   "t": "h2",
+   "html": "Kamera- und Dateizugriff"
+  },
+  {
+   "t": "p",
+   "html": "Die App kann Zugriff auf Ihre Kamera anfordern, damit Sie Papierrechnungen scannen können. Außerdem können Sie Dateien von Ihrem Gerät oder aus unterstützten Diensten importieren. Diese Berechtigungen werden nur für die Funktionen verwendet, die Sie nutzen möchten."
+  },
+  {
+   "t": "h2",
+   "html": "Benachrichtigungen"
+  },
+  {
+   "t": "p",
+   "html": "Die App kann lokale Benachrichtigungen verwenden, um Sie an Garantien zu erinnern, die bald ablaufen. Diese Erinnerungen werden auf Ihrem Gerät erstellt."
+  },
+  {
+   "t": "h2",
+   "html": "In-App-Kauf"
+  },
+  {
+   "t": "p",
+   "html": "Die App bietet einen einmaligen In-App-Kauf „Lebenslanger Zugriff“ an. Käufe werden sicher über den Store abgewickelt, aus dem Sie die App heruntergeladen haben (Apple App Store oder Google Play). Wir erhalten oder speichern Ihre Zahlungskartendaten nicht."
+  },
+  {
+   "t": "h2",
+   "html": "Datenweitergabe"
+  },
+  {
+   "t": "p",
+   "html": "Wir verkaufen Ihre Daten nicht. Wir geben Ihre Rechnungen, Belege, Garantiedokumente oder Produktinformationen nicht an Werbetreibende oder Dritte weiter."
+  },
+  {
+   "t": "h2",
+   "html": "Sicherung (Backup)"
+  },
+  {
+   "t": "p",
+   "html": "Sofern Backup-Funktionen verfügbar sind, dienen sie ausschließlich dazu, Ihnen eine Kopie Ihrer eigenen Rechnungs- und Garantiedaten zu ermöglichen. Sie sind selbst dafür verantwortlich, wo Sie Ihre Backup-Dateien speichern oder exportieren."
+  },
+  {
+   "t": "h2",
+   "html": "Datenschutz von Kindern"
+  },
+  {
+   "t": "p",
+   "html": "Die App ist nicht darauf ausgelegt, Informationen von Kindern zu erheben, und enthält keine speziell an Kinder gerichteten Inhalte."
+  },
+  {
+   "t": "h2",
+   "html": "Änderungen dieser Datenschutzerklärung"
+  },
+  {
+   "t": "p",
+   "html": "Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite veröffentlicht."
+  },
+  {
+   "t": "h2",
+   "html": "Kontakt"
+  },
+  {
+   "t": "p",
+   "html": "Bei Fragen zu dieser Datenschutzerklärung erreichen Sie uns unter: <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>"
+  }
+ ]
+}

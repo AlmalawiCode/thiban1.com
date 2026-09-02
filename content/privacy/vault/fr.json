@@ -1,0 +1,97 @@
+{
+ "lang": "fr",
+ "lang_name": "Français",
+ "dir": "ltr",
+ "title": "Politique de confidentialité de Vault — Warranty Manager",
+ "effective": "<strong>Date d’entrée en vigueur :</strong> 10 juillet 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Vault — Warranty Manager aide les utilisateurs à enregistrer leurs factures et à suivre les garanties de leurs produits."
+  },
+  {
+   "t": "p",
+   "html": "Nous respectons votre vie privée. L’application ne nécessite aucune connexion, et nous ne collectons, ne vendons ni ne partageons vos informations personnelles."
+  },
+  {
+   "t": "h2",
+   "html": "Informations stockées dans l’application"
+  },
+  {
+   "t": "p",
+   "html": "L’application vous permet d’enregistrer des factures, des reçus, des détails de produits, des dates de garantie, des informations sur les magasins et des documents associés. Ces informations sont stockées sur votre appareil et servent uniquement à vous aider à gérer vos factures et vos garanties."
+  },
+  {
+   "t": "h2",
+   "html": "Factures et documents"
+  },
+  {
+   "t": "p",
+   "html": "Toute facture, tout reçu ou tout document de garantie que vous ajoutez à l’application vous appartient. L’application ne publie, ne distribue ni ne partage ces documents avec des tiers."
+  },
+  {
+   "t": "h2",
+   "html": "Accès à la caméra et aux fichiers"
+  },
+  {
+   "t": "p",
+   "html": "L’application peut demander l’accès à votre caméra afin de numériser des factures papier. Elle peut également vous permettre d’importer des fichiers depuis votre appareil ou des services pris en charge. Ces autorisations ne sont utilisées que pour les fonctionnalités que vous choisissez d’utiliser."
+  },
+  {
+   "t": "h2",
+   "html": "Notifications"
+  },
+  {
+   "t": "p",
+   "html": "L’application peut utiliser des notifications locales pour vous rappeler les garanties proches de leur expiration. Ces rappels sont générés sur votre appareil."
+  },
+  {
+   "t": "h2",
+   "html": "Achat intégré"
+  },
+  {
+   "t": "p",
+   "html": "L’application propose un achat intégré unique « Accès à vie ». Les achats sont traités en toute sécurité par la boutique depuis laquelle vous avez téléchargé l’application (App Store d’Apple ou Google Play). Nous ne recevons ni ne stockons les informations de votre carte de paiement."
+  },
+  {
+   "t": "h2",
+   "html": "Partage des données"
+  },
+  {
+   "t": "p",
+   "html": "Nous ne vendons pas vos données. Nous ne partageons pas vos factures, reçus, documents de garantie ou informations sur vos produits avec des annonceurs ou des tiers."
+  },
+  {
+   "t": "h2",
+   "html": "Sauvegarde"
+  },
+  {
+   "t": "p",
+   "html": "Si des fonctionnalités de sauvegarde sont disponibles, elles servent uniquement à vous aider à conserver une copie de vos propres données de factures et de garanties. Vous êtes responsable de l’endroit où vous choisissez de stocker ou d’exporter vos fichiers de sauvegarde."
+  },
+  {
+   "t": "h2",
+   "html": "Confidentialité des enfants"
+  },
+  {
+   "t": "p",
+   "html": "L’application n’est pas conçue pour collecter des informations auprès des enfants et ne contient pas de contenu spécifiquement destiné aux enfants."
+  },
+  {
+   "t": "h2",
+   "html": "Modifications de cette politique de confidentialité"
+  },
+  {
+   "t": "p",
+   "html": "Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Toute modification sera publiée sur cette page."
+  },
+  {
+   "t": "h2",
+   "html": "Contact"
+  },
+  {
+   "t": "p",
+   "html": "Si vous avez des questions concernant cette politique de confidentialité, vous pouvez nous contacter à : <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>"
+  }
+ ]
+}

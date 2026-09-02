@@ -18,6 +18,7 @@ To add a new app: add an entry to APPS below and a page function, then re-run.
 """
 
 import os
+import json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -107,6 +108,12 @@ APPS = {
         "tagline_en": "Count down to what matters — and count up from what already happened.",
         "tagline_ar": "عُدّ تنازليًا لما يهمّك، وتصاعديًا لما مضى من أحداثك.",
         "status": "soon",   # not yet on stores
+        # Language availability is tracked per CONTENT TYPE — an app may ship
+        # its privacy policy in more languages than its other content.
+        "overview_langs": ["en", "ar"],
+        "privacy_langs": ["en", "ar"],
+        "tutorial_langs": ["en", "ar"],
+        "support_langs": ["en", "ar"],
         "screens": [
             ("/assets/img/apps/countdown/Countdown_Home.jpg", "Countdown Keeper home screen with event counters", "الشاشة الرئيسية لتطبيق العدّاد تعرض عدّادات المناسبات"),
             ("/assets/img/apps/countdown/event.jpg", "Creating an event in Countdown Keeper", "إنشاء مناسبة في تطبيق العدّاد"),
@@ -126,6 +133,12 @@ APPS = {
         "playstore": "https://play.google.com/store/apps/details?id=com.vault.warranty",
         "youtube": "https://www.youtube.com/watch?v=SjafmkwycsA&t=167s",
         "youtube_embed": "https://www.youtube.com/embed/SjafmkwycsA?start=167",
+        # Vault ships its privacy policy in 8 languages (real, authoritative
+        # translations preserved from the app project); other content is EN/AR.
+        "overview_langs": ["en", "ar"],
+        "privacy_langs": ["en", "ar", "fr", "de", "es", "tr", "ja", "ko"],
+        "tutorial_langs": ["en", "ar"],
+        "support_langs": ["en", "ar"],
         "screens": [
             ("/assets/img/apps/vault/dashboard.jpg", "Vault dashboard showing warranty overview", "لوحة معلومات خزنة الضمانات تعرض ملخّص الضمانات"),
             ("/assets/img/apps/vault/list.jpg", "List of saved purchases in Vault", "قائمة المشتريات المحفوظة في خزنة الضمانات"),
@@ -133,6 +146,20 @@ APPS = {
             ("/assets/img/apps/vault/warranty.jpg", "A warranty countdown in Vault", "عدّاد انتهاء ضمان في خزنة الضمانات"),
         ],
     },
+}
+
+# Native display name + text direction for every content language we support.
+# The GLOBAL website language is only English/Arabic; these extra languages
+# exist purely for APP-SPECIFIC content (e.g. Vault's privacy policy).
+LANG_META = {
+    "en": ("English",  "ltr"),
+    "ar": ("العربية",  "rtl"),
+    "fr": ("Français", "ltr"),
+    "de": ("Deutsch",  "ltr"),
+    "es": ("Español",  "ltr"),
+    "tr": ("Türkçe",   "ltr"),
+    "ja": ("日本語",    "ltr"),
+    "ko": ("한국어",    "ltr"),
 }
 
 NAV = [
@@ -237,8 +264,13 @@ def crumbs(items):
 
 
 def render(path, title_en, title_ar, desc_en, desc_ar, body,
-           active="", og_image="/assets/img/brand/og-default.png", is404=False):
-    """Write <path>/index.html (or a bare file for 404)."""
+           active="", og_image="/assets/img/brand/og-default.png", is404=False,
+           canonical_override=None, head_extra=""):
+    """Write <path>/index.html (or a bare file for 404).
+
+    canonical_override lets a page point its canonical elsewhere (used by the
+    /privacy/<app>/ entry point, which canonicalises to its /en/ URL).
+    head_extra injects extra <head> markup (used for hreflang alternates)."""
     if is404:
         canonical = ""
         out_file = os.path.join(ROOT, "404.html")
@@ -250,9 +282,10 @@ def render(path, title_en, title_ar, desc_en, desc_ar, body,
         os.makedirs(out_dir, exist_ok=True)
         out_file = os.path.join(out_dir, "index.html")
 
+    canonical_href = canonical_override or canonical
     og_abs = SITE_URL + og_image
-    canonical_tag = f'<link rel="canonical" href="{canonical}">' if canonical else ''
-    og_url = f'<meta property="og:url" content="{canonical}">' if canonical else ''
+    canonical_tag = f'<link rel="canonical" href="{canonical_href}">' if canonical_href else ''
+    og_url = f'<meta property="og:url" content="{canonical_href}">' if canonical_href else ''
 
     html = f'''<!DOCTYPE html>
 <html lang="en" dir="ltr" data-lang="en" data-title-en="{esc(title_en)}" data-title-ar="{esc(title_ar)}">
@@ -277,6 +310,7 @@ def render(path, title_en, title_ar, desc_en, desc_ar, body,
 <meta name="twitter:title" content="{esc(title_en)}">
 <meta name="twitter:description" content="{esc(desc_en)}">
 <meta name="twitter:image" content="{og_abs}">
+{head_extra}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png">
@@ -517,6 +551,27 @@ def app_overview_body(app, features_list, intro_en, intro_ar, extra=""):
 
     feats = "".join(feature(*f) for f in features_list)
 
+    # Available languages — tracked per content type (privacy may exceed the rest)
+    priv_pills = "".join(
+        f'<a class="lang-pill" href="/privacy/{slug}/{L}/" hreflang="{L}" lang="{L}">{LANG_META[L][0]}</a>'
+        for L in app["privacy_langs"])
+    other_langs = " · ".join(LANG_META[L][0] for L in app["overview_langs"])
+    availability = f'''<section class="section section-soft"><div class="container">
+  {h(2, "Available languages", "اللغات المتوفّرة", "center")}
+  {p("Privacy Policy is available in every language below. App overview, tutorials, and support are available in English and Arabic.",
+     "سياسة الخصوصية متوفّرة بكل اللغات أدناه. أمّا نبذة التطبيق والشروحات والدعم فمتوفّرة بالعربية والإنجليزية.", "lead center")}
+  <div class="avail">
+    <div class="avail-row">
+      <span class="avail-label"><span data-en>Privacy Policy</span><span data-ar>سياسة الخصوصية</span></span>
+      <div class="lang-pills">{priv_pills}</div>
+    </div>
+    <div class="avail-row">
+      <span class="avail-label"><span data-en>Overview · Tutorials · Support</span><span data-ar>النبذة · الشروحات · الدعم</span></span>
+      <div class="lang-pills"><span class="lang-pill static">{other_langs}</span></div>
+    </div>
+  </div>
+</div></section>'''
+
     return f'''{crumbs([("Home","الرئيسية","/"),("Apps","التطبيقات","/apps/"),(app['name_en'],app['name_ar'],None)])}
 <section class="section"><div class="container">
   <div class="app-head" style="margin-bottom:18px">
@@ -540,7 +595,8 @@ def app_overview_body(app, features_list, intro_en, intro_ar, extra=""):
   {h(2, "Features", "المزايا", "center")}
   <div class="features" style="margin-top:30px">{feats}</div>
   {extra}
-</div></section>'''
+</div></section>
+{availability}'''
 
 
 def page_app_countdown():
@@ -776,143 +832,111 @@ def page_privacy_index():
                   body, active="privacy")
 
 
-def privacy_page(slug, title_en, title_ar, desc_en, desc_ar, updated_en, updated_ar, sections):
-    a = APPS[slug]
-    # sections: list of (id, heading_en, heading_ar, html_en, html_ar)
-    toc = "".join(
-        f'<li><a href="#{sid}"><span data-en>{he}</span><span data-ar>{ha}</span></a></li>'
-        for sid, he, ha, *_ in sections)
-    blocks = []
-    for sid, he, ha, be, ba in sections:
-        blocks.append(h(2, he, ha, _id=sid) +
-                      f'<div data-en>{be}</div><div data-ar>{ba}</div>')
-    body = f'''{crumbs([("Home","الرئيسية","/"),("Privacy","الخصوصية","/privacy/"),(a['name_en'],a['name_ar'],None)])}
-<section class="section"><div class="container prose">
-  {h(1, a['name_en'] + " Privacy Policy", "سياسة خصوصية " + a['name_ar'])}
-  <p class="updated"><span data-en>Last updated: {updated_en}</span><span data-ar>آخر تحديث: {updated_ar}</span></p>
-  <div class="toc"><strong data-en>Contents</strong><strong data-ar>المحتويات</strong><ul>{toc}</ul></div>
-  {"".join(blocks)}
+def load_privacy(slug, lang):
+    with open(os.path.join(ROOT, "content", "privacy", slug, f"{lang}.json"), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def privacy_selector(slug, langs, current):
+    """Language selector rendered as real links — one direct, shareable URL per
+    language. Works with no JavaScript (important for store review crawlers)."""
+    pills = []
+    for L in langs:
+        name = LANG_META[L][0]
+        cls = "lang-pill active" if L == current else "lang-pill"
+        cur = ' aria-current="true"' if L == current else ""
+        pills.append(f'<a class="{cls}" href="/privacy/{slug}/{L}/" hreflang="{L}" lang="{L}"{cur}>{name}</a>')
+    return ('<div class="lang-select">'
+            '<span class="lang-select-label" data-en>Language:</span>'
+            '<span class="lang-select-label" data-ar>اللغة:</span>'
+            f'<div class="lang-pills">{"".join(pills)}</div></div>')
+
+
+def privacy_hreflang(slug, langs):
+    tags = [f'<link rel="alternate" hreflang="{L}" href="{SITE_URL}/privacy/{slug}/{L}/">' for L in langs]
+    tags.append(f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}/privacy/{slug}/en/">')
+    return "\n".join(tags)
+
+
+def privacy_body(app, lang, data, is_entry=False):
+    slug = app["slug"]
+    d = data["dir"]
+    toc, parts, sidx = [], [], 0
+    for b in data["blocks"]:
+        if b["t"] == "h2":
+            sidx += 1
+            sid = f"s{sidx}"
+            toc.append(f'<li><a href="#{sid}">{b["html"]}</a></li>')
+            parts.append(f'<h2 id="{sid}">{b["html"]}</h2>')
+        elif b["t"] == "p":
+            parts.append(f'<p>{b["html"]}</p>')
+        else:
+            parts.append(b["html"])
+    toc_title = "المحتويات" if lang == "ar" else "Contents"
+    toc_html = ""
+    if toc:
+        toc_html = (f'<nav class="toc" aria-label="{esc(toc_title)}" dir="{d}" lang="{lang}">'
+                    f'<strong>{toc_title}</strong><ul>{"".join(toc)}</ul></nav>')
+
+    stores = []
+    if app.get("appstore"):
+        stores.append(store_button("apple", app["appstore"]))
+    if app.get("playstore"):
+        stores.append(store_button("play", app["playstore"]))
+    stores_html = f'<div class="stores">{"".join(stores)}</div>' if stores else ""
+
+    back = "← العودة إلى التطبيق" if lang == "ar" else "← Back to app"
+    support = "الدعم" if lang == "ar" else "Support"
+
+    crumb = crumbs([("Home", "الرئيسية", "/"),
+                    ("Privacy", "الخصوصية", "/privacy/"),
+                    (app["name_en"], app["name_ar"], f"/apps/{slug}/")])
+    return f'''{crumb}
+<section class="section"><div class="container">
+  <div class="policy-card">
+    <div class="policy-head">
+      <img class="policy-icon" src="{app['icon']}" alt="{esc(app['name_en'])} icon" width="76" height="76">
+      <div class="policy-heading">
+        <span class="eyebrow" data-en>Privacy Policy</span><span class="eyebrow" data-ar>سياسة الخصوصية</span>
+        <h1 class="policy-title" dir="{d}" lang="{lang}">{data['title']}</h1>
+        <p class="updated" dir="{d}" lang="{lang}">{data['effective']}</p>
+      </div>
+    </div>
+    {privacy_selector(slug, app['privacy_langs'], lang)}
+    <div class="policy-actions">
+      <a class="btn btn-secondary" href="/apps/{slug}/">{back}</a>
+      <a class="text-link" href="/support/{slug}/">{support}</a>
+      {stores_html}
+    </div>
+  </div>
+  <article class="policy prose" dir="{d}" lang="{lang}">
+    {toc_html}
+    {"".join(parts)}
+  </article>
 </div></section>'''
-    return render(f"/privacy/{slug}/", title_en, title_ar, desc_en, desc_ar, body, active="privacy")
 
 
-def page_privacy_countdown():
-    sections = [
-        ("intro", "Introduction", "مقدّمة",
-         "<p>Countdown Keeper (\"the app\") is a mobile app published by Thiban Tech Solutions. This policy explains how the app handles your information. We respect your privacy: the app does not require sign-in, and we do not collect, sell, or share your personal information.</p>",
-         "<p>تطبيق العدّاد (\"التطبيق\") تطبيقُ جوّالٍ تصدره ذيبان للحلول التقنية. توضّح هذه السياسة كيف يتعامل التطبيق مع معلوماتك. نحن نحترم خصوصيتك: لا يتطلّب التطبيق تسجيل الدخول، ولا نجمع معلوماتك الشخصية أو نبيعها أو نشاركها.</p>"),
-        ("handles", "Information the app handles", "المعلومات التي يتعامل معها التطبيق",
-         "<p>The app stores the content you create: event titles, dates and times, notes, colours, an emoji or an optional photo you attach, and your app settings. This information is stored on your device and is used only to show your counters and reminders.</p>",
-         "<p>يحفظ التطبيق المحتوى الذي تُنشئه: عناوين المناسبات وتواريخها وأوقاتها، والملاحظات، والألوان، ورمزًا تعبيريًا أو صورةً اختياريةً تُرفقها، وإعداداتك. تُخزَّن هذه المعلومات على جهازك وتُستخدم فقط لعرض عدّاداتك وتذكيراتك.</p>"),
-        ("permissions", "Device permissions", "أذونات الجهاز",
-         "<ul><li><strong>Notifications</strong> — used only if you enable reminders, to alert you before an event.</li>"
-         "<li><strong>Camera</strong> — optional, so you can take a photo to attach to an event.</li>"
-         "<li><strong>Photos</strong> — optional, so you can choose a photo for an event or save an event image to your gallery.</li>"
-         "<li><strong>Biometric / Face ID</strong> — optional, only to unlock the app if you turn on the app lock.</li>"
-         "<li><strong>Run after restart (Android)</strong> — so scheduled reminders survive a device reboot.</li></ul>"
-         "<p>Each permission is requested only when you use the related feature.</p>",
-         "<ul><li><strong>الإشعارات</strong> — تُستخدم فقط إذا فعّلت التذكيرات، لتنبيهك قبل المناسبة.</li>"
-         "<li><strong>الكاميرا</strong> — اختيارية، لتلتقط صورةً تُرفقها بمناسبة.</li>"
-         "<li><strong>الصور</strong> — اختيارية، لتختار صورةً لمناسبة أو تحفظ صورة مناسبة في معرضك.</li>"
-         "<li><strong>البصمة / بصمة الوجه</strong> — اختيارية، لفتح التطبيق فقط إذا فعّلت قفل التطبيق.</li>"
-         "<li><strong>التشغيل بعد إعادة التشغيل (أندرويد)</strong> — لتبقى التذكيرات المجدولة بعد إعادة تشغيل الجهاز.</li></ul>"
-         "<p>يُطلب كل إذن فقط عند استخدامك للميزة المرتبطة به.</p>"),
-        ("storage", "Data storage", "تخزين البيانات",
-         "<p>All of your events and settings are stored locally on your device. The app can export your events to a JSON file and import them back; you choose where that file is saved and with whom, if anyone, you share it.</p>",
-         "<p>تُخزَّن جميع مناسباتك وإعداداتك محليًا على جهازك. يمكن للتطبيق تصدير مناسباتك إلى ملف JSON واستيرادها مجددًا؛ وأنت تختار مكان حفظ الملف ومَن تشاركه معه — إن شاركته أصلًا.</p>"),
-        ("sharing", "Data sharing", "مشاركة البيانات",
-         "<p>We do not sell or share your data. The app has no user accounts and no Countdown Keeper server; nothing you type is sent to us.</p>",
-         "<p>لا نبيع بياناتك ولا نشاركها. لا توجد في التطبيق حسابات مستخدمين ولا خادم خاص بتطبيق العدّاد؛ ولا يُرسَل إلينا أي شيء تكتبه.</p>"),
-        ("third", "Third-party services", "خدمات الأطراف الثالثة",
-         "<p>The app does not use analytics, advertising, or crash-reporting services. The only network request it may make is to Google Fonts to download the display typeface the first time it is needed; like any web request this includes your device's IP address, but no personal data or app content is sent. The app otherwise works fully offline.</p>",
-         "<p>لا يستخدم التطبيق خدمات تحليلات أو إعلانات أو إبلاغ عن الأعطال. والطلب الوحيد الذي قد يُرسله عبر الشبكة هو إلى خدمة خطوط Google لتنزيل خطّ العرض عند الحاجة إليه أول مرة؛ ويتضمّن ذلك — كأي طلب ويب — عنوان IP لجهازك، دون إرسال أي بيانات شخصية أو محتوى من التطبيق. وفيما عدا ذلك يعمل التطبيق دون اتصال تمامًا.</p>"),
-        ("retention", "Data retention", "الاحتفاظ بالبيانات",
-         "<p>Your data stays on your device until you delete it. Deleting an event moves it to the recycle bin, from which it is permanently removed later. Uninstalling the app removes all of its local data.</p>",
-         "<p>تبقى بياناتك على جهازك حتى تحذفها. يؤدّي حذف المناسبة إلى نقلها إلى سلة المحذوفات، ثم تُزال منها نهائيًا لاحقًا. وتؤدّي إزالة التطبيق إلى حذف كل بياناته المحلية.</p>"),
-        ("children", "Children's privacy", "خصوصية الأطفال",
-         "<p>The app is not directed to children and does not knowingly collect information from children.</p>",
-         "<p>التطبيق غير موجَّه للأطفال ولا يجمع عن قصد أي معلومات منهم.</p>"),
-        ("security", "Security", "الأمان",
-         "<p>Your data is protected by your device's own security and app sandbox. You can add an extra layer with the optional biometric app lock.</p>",
-         "<p>بياناتك محميّة بأمان جهازك نفسه وبعزل التطبيقات فيه. ويمكنك إضافة طبقة حماية إضافية عبر قفل التطبيق الاختياري بالبصمة.</p>"),
-        ("choices", "Your choices", "خياراتك",
-         "<p>You control the app's permissions from your device settings, and you can export or delete your data at any time from within the app.</p>",
-         "<p>أنت تتحكّم بأذونات التطبيق من إعدادات جهازك، ويمكنك تصدير بياناتك أو حذفها في أي وقت من داخل التطبيق.</p>"),
-        ("changes", "Changes to this policy", "التغييرات على هذه السياسة",
-         "<p>We may update this policy from time to time. Any changes will be posted on this page with a new date.</p>",
-         "<p>قد نحدّث هذه السياسة من وقت لآخر. وستُنشر أي تغييرات على هذه الصفحة مع تاريخ جديد.</p>"),
-        ("contact", "Contact", "التواصل",
-         f'<p>If you have questions about this policy, contact us at <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>.</p>',
-         f'<p>إذا كانت لديك أسئلة حول هذه السياسة، تواصل معنا عبر <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>.</p>'),
-    ]
-    return privacy_page("countdown-keeper",
-                        "Countdown Keeper Privacy Policy — Thiban Tech Solutions",
-                        "سياسة خصوصية تطبيق العدّاد — ذيبان",
-                        "Privacy policy for Countdown Keeper: local-first, no accounts, no analytics, and no third-party tracking. Your events stay on your device.",
-                        "سياسة خصوصية تطبيق العدّاد: يعمل محليًا، بلا حسابات ولا تحليلات ولا تتبّع من طرف ثالث. مناسباتك تبقى على جهازك.",
-                        "September 2026", "سبتمبر 2026", sections)
-
-
-def page_privacy_vault():
-    sections = [
-        ("intro", "Introduction", "مقدّمة",
-         "<p>Vault — Warranty Manager (\"the app\") is a mobile app published by Thiban Tech Solutions that helps you save invoices and track product warranties. We respect your privacy. The app does not require sign-in, and we do not collect, sell, or share your personal information.</p>",
-         "<p>خزنة الضمانات (\"التطبيق\") تطبيقُ جوّالٍ تصدره ذيبان للحلول التقنية، يساعدك على حفظ الفواتير وتتبّع ضمانات المنتجات. نحن نحترم خصوصيتك. لا يتطلّب التطبيق تسجيل الدخول، ولا نجمع معلوماتك الشخصية أو نبيعها أو نشاركها.</p>"),
-        ("handles", "Information the app handles", "المعلومات التي يتعامل معها التطبيق",
-         "<p>The app lets you save invoices, receipts, product details, warranty dates, store information, and related documents and photos. This information is stored on your device and is used only to help you manage your invoices and warranties. Any invoice or document you add belongs to you; the app does not publish or distribute it.</p>",
-         "<p>يتيح لك التطبيق حفظ الفواتير والإيصالات وتفاصيل المنتجات وتواريخ الضمان ومعلومات المتاجر والمستندات والصور ذات الصلة. تُخزَّن هذه المعلومات على جهازك وتُستخدم فقط لمساعدتك في إدارة فواتيرك وضماناتك. وأي فاتورة أو مستند تضيفه فهو مِلكك؛ ولا ينشره التطبيق أو يوزّعه.</p>"),
-        ("permissions", "Device permissions", "أذونات الجهاز",
-         "<ul><li><strong>Camera</strong> — to scan paper invoices and receipts and to read invoice QR codes.</li>"
-         "<li><strong>Photos / files</strong> — to import invoice images or PDFs, and to save images to your gallery.</li>"
-         "<li><strong>Location</strong> — optional, used only when you tap \"use my current location\" to save where a store is, so you can find it again. The location is stored with that record on your device.</li>"
-         "<li><strong>Notifications</strong> — to remind you before a warranty expires.</li>"
-         "<li><strong>Biometric / Face ID</strong> — optional, to unlock the app and confirm sensitive actions when the app lock is on.</li>"
-         "<li><strong>Internet</strong> — to open a store in your maps app, to process an in-app purchase, and to fetch the display typeface the first time.</li>"
-         "<li><strong>Receive shared files</strong> — so you can share a PDF or image from another app into Vault.</li></ul>",
-         "<ul><li><strong>الكاميرا</strong> — لمسح الفواتير والإيصالات الورقية وقراءة رموز QR للفواتير.</li>"
-         "<li><strong>الصور / الملفات</strong> — لاستيراد صور الفواتير أو ملفات PDF، ولحفظ الصور في معرضك.</li>"
-         "<li><strong>الموقع</strong> — اختياري، ويُستخدم فقط عند الضغط على «استخدام موقعي الحالي» لحفظ مكان المتجر لتجده مجددًا. ويُخزَّن الموقع مع ذلك السجلّ على جهازك.</li>"
-         "<li><strong>الإشعارات</strong> — لتذكيرك قبل انتهاء الضمان.</li>"
-         "<li><strong>البصمة / بصمة الوجه</strong> — اختيارية، لفتح التطبيق وتأكيد الإجراءات الحسّاسة عند تفعيل قفل التطبيق.</li>"
-         "<li><strong>الإنترنت</strong> — لفتح متجر في تطبيق الخرائط، ولإتمام عملية شراء داخل التطبيق، ولتنزيل خطّ العرض أول مرة.</li>"
-         "<li><strong>استقبال الملفات المشارَكة</strong> — لتتمكّن من مشاركة ملف PDF أو صورة من تطبيق آخر إلى الخزنة.</li></ul>"),
-        ("storage", "Data storage", "تخزين البيانات",
-         "<p>Your invoices, products and warranty records are stored on your device. If you create a backup, it is packaged into a single encrypted file (AES-256) protected by a password you choose; you decide where that backup file is stored or exported.</p>",
-         "<p>تُخزَّن فواتيرك ومنتجاتك وسجلّات ضماناتك على جهازك. وإذا أنشأت نسخة احتياطية، فإنها تُحزَّم في ملف واحد مشفّر (AES-256) محميّ بكلمة مرور تختارها؛ وأنت مَن يقرّر مكان تخزين ذلك الملف أو تصديره.</p>"),
-        ("sharing", "Data sharing", "مشاركة البيانات",
-         "<p>We do not sell your data. We do not share your invoices, receipts, warranty documents, or product information with advertisers or any third parties. Scanned invoice data (including QR codes) is processed on your device.</p>",
-         "<p>لا نبيع بياناتك. ولا نشارك فواتيرك أو إيصالاتك أو مستندات ضمانك أو معلومات منتجاتك مع المعلنين أو أي أطراف ثالثة. وتُعالَج بيانات الفواتير الممسوحة (بما فيها رموز QR) على جهازك.</p>"),
-        ("purchases", "In-app purchase", "الشراء داخل التطبيق",
-         "<p>The app offers a single one-time \"Lifetime Access\" purchase. Purchases are processed by Apple (App Store) or Google (Google Play). We do not receive or store your payment card information. There are no subscriptions.</p>",
-         "<p>يوفّر التطبيق عملية شراء واحدة لمرة واحدة هي «الوصول مدى الحياة». وتُعالَج عمليات الشراء بواسطة Apple (App Store) أو Google (Google Play). ولا نستلم معلومات بطاقة الدفع الخاصة بك ولا نخزّنها. ولا توجد اشتراكات.</p>"),
-        ("third", "Third-party services", "خدمات الأطراف الثالثة",
-         "<p>The app does not use analytics, advertising, or trackers. It interacts with a few services only when you choose to: the App Store or Google Play (for the purchase), a maps app you pick when opening a store location, and Google Fonts to download the display typeface the first time it is needed. These involve standard request metadata (such as your IP address) but not your invoices or personal content.</p>",
-         "<p>لا يستخدم التطبيق تحليلات أو إعلانات أو أدوات تتبّع. ولا يتعامل مع بعض الخدمات إلا عند اختيارك ذلك: App Store أو Google Play (للشراء)، وتطبيق الخرائط الذي تختاره عند فتح موقع متجر، وخدمة خطوط Google لتنزيل خطّ العرض عند الحاجة أول مرة. وتتضمّن هذه بيانات طلبٍ معتادة (كعنوان IP) دون فواتيرك أو محتواك الشخصي.</p>"),
-        ("retention", "Data retention", "الاحتفاظ بالبيانات",
-         "<p>Your data remains on your device until you delete it. You are responsible for any backup files you export. Uninstalling the app removes its local data from your device.</p>",
-         "<p>تبقى بياناتك على جهازك حتى تحذفها. وأنت المسؤول عن أي ملفات نسخ احتياطي تصدّرها. وتؤدّي إزالة التطبيق إلى حذف بياناته المحلية من جهازك.</p>"),
-        ("children", "Children's privacy", "خصوصية الأطفال",
-         "<p>The app is not designed to collect information from children and does not include content directed specifically at children.</p>",
-         "<p>لم يُصمَّم التطبيق لجمع معلومات من الأطفال، ولا يتضمّن محتوى موجَّهًا إليهم على وجه التحديد.</p>"),
-        ("security", "Security", "الأمان",
-         "<p>Your data is protected by your device's security and app sandbox, an optional biometric app lock, and — for backups — AES-256 encryption with your password. Keep your backup password safe: it cannot be recovered.</p>",
-         "<p>بياناتك محميّة بأمان جهازك وعزل التطبيقات، وبقفل تطبيق اختياري بالبصمة، وللنسخ الاحتياطية بتشفير AES-256 بكلمة مرورك. احتفظ بكلمة مرور النسخة الاحتياطية: إذ لا يمكن استعادتها.</p>"),
-        ("choices", "Your choices", "خياراتك",
-         "<p>You control every permission from your device settings, and you can delete records or the whole database from within the app at any time.</p>",
-         "<p>أنت تتحكّم بكل إذن من إعدادات جهازك، ويمكنك حذف السجلّات أو قاعدة البيانات كاملةً من داخل التطبيق في أي وقت.</p>"),
-        ("changes", "Changes to this policy", "التغييرات على هذه السياسة",
-         "<p>We may update this Privacy Policy from time to time. Any changes will be posted on this page.</p>",
-         "<p>قد نحدّث سياسة الخصوصية هذه من وقت لآخر. وستُنشر أي تغييرات على هذه الصفحة.</p>"),
-        ("contact", "Contact", "التواصل",
-         f'<p>If you have questions about this policy, contact us at <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>.</p>',
-         f'<p>إذا كانت لديك أسئلة حول هذه السياسة، تواصل معنا عبر <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>.</p>'),
-    ]
-    return privacy_page("vault",
-                        "Vault — Warranty Manager Privacy Policy — Thiban Tech Solutions",
-                        "سياسة خصوصية خزنة الضمانات — ذيبان",
-                        "Privacy policy for Vault — Warranty Manager: local-first, no accounts, no analytics or ads. Invoices and warranties stay on your device; backups are encrypted.",
-                        "سياسة خصوصية خزنة الضمانات: تعمل محليًا، بلا حسابات ولا تحليلات ولا إعلانات. الفواتير والضمانات تبقى على جهازك، والنسخ الاحتياطية مشفّرة.",
-                        "September 2026", "سبتمبر 2026", sections)
+def gen_privacy(slug):
+    """Generate one direct, canonical page per privacy language plus a canonical
+    entry point at /privacy/<slug>/. Returns the localized URLs for the sitemap."""
+    app = APPS[slug]
+    langs = app["privacy_langs"]
+    hreflang = privacy_hreflang(slug, langs)
+    sitemap_urls = []
+    for L in langs:
+        data = load_privacy(slug, L)
+        title = f"{data['title']} — Thiban Tech Solutions"
+        desc = data['title']
+        u = render(f"/privacy/{slug}/{L}/", title, title, desc, desc,
+                   privacy_body(app, L, data), active="privacy", head_extra=hreflang)
+        sitemap_urls.append(u)
+    data = load_privacy(slug, "en")
+    title = f"{app['name_en']} Privacy Policy — Thiban Tech Solutions"
+    desc = f"Privacy Policy for {app['name_en']}. Available in {len(langs)} languages."
+    render(f"/privacy/{slug}/", title, title, desc, desc,
+           privacy_body(app, "en", data, is_entry=True), active="privacy",
+           canonical_override=f"{SITE_URL}/privacy/{slug}/en/", head_extra=hreflang)
+    return sitemap_urls
 
 
 # ---------------------------- support --------------------------------------
@@ -1144,7 +1168,7 @@ def write_manifest():
         "start_url": "/",
         "display": "browser",
         "background_color": "#ffffff",
-        "theme_color": "#4f46e5",
+        "theme_color": "#165dff",
         "icons": [
             {"src": "/assets/img/brand/icon-192.png", "sizes": "192x192", "type": "image/png"},
             {"src": "/assets/img/brand/icon-512.png", "sizes": "512x512", "type": "image/png"},
@@ -1159,15 +1183,21 @@ def main():
     urls.append(render_home_and_collect())
     for fn in (page_apps, page_app_countdown, page_app_vault,
                page_tutorials, page_tutorial_countdown, page_tutorial_vault,
-               page_privacy_index, page_privacy_countdown, page_privacy_vault,
+               page_privacy_index,
                page_support_index, page_support_countdown, page_support_vault,
                page_contact, page_about):
         urls.append(fn())
+    # Localized privacy policies (one direct URL per language, per app).
+    priv_count = 0
+    for slug in APPS:
+        localized = gen_privacy(slug)   # also writes the /privacy/<slug>/ entry
+        urls.extend(localized)          # /privacy/<slug>/<lang>/ in sitemap
+        priv_count += len(localized)
     page_404()  # not in sitemap
     write_sitemap([u for u in urls if u])
     write_robots()
     write_manifest()
-    print(f"Built {len(urls)} pages + 404, sitemap, robots, manifest.")
+    print(f"Built {len(urls)} sitemap URLs ({priv_count} localized privacy pages) + 404, sitemap, robots, manifest.")
 
 
 def render_home_and_collect():

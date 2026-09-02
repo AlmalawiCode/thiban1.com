@@ -1,0 +1,97 @@
+{
+ "lang": "es",
+ "lang_name": "Español",
+ "dir": "ltr",
+ "title": "Política de Privacidad de Vault — Warranty Manager",
+ "effective": "<strong>Fecha de entrada en vigor:</strong> 10 de julio de 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Vault — Warranty Manager ayuda a los usuarios a guardar facturas y a hacer seguimiento de las garantías de sus productos."
+  },
+  {
+   "t": "p",
+   "html": "Respetamos tu privacidad. La aplicación no requiere iniciar sesión y no recopilamos, vendemos ni compartimos tu información personal."
+  },
+  {
+   "t": "h2",
+   "html": "Información almacenada en la aplicación"
+  },
+  {
+   "t": "p",
+   "html": "La aplicación te permite guardar facturas, recibos, detalles de productos, fechas de garantía, información de tiendas y documentos relacionados. Esta información se almacena en tu dispositivo y se utiliza únicamente para ayudarte a gestionar tus facturas y garantías."
+  },
+  {
+   "t": "h2",
+   "html": "Facturas y documentos"
+  },
+  {
+   "t": "p",
+   "html": "Cualquier factura, recibo o documento de garantía que añadas a la aplicación te pertenece. La aplicación no publica, distribuye ni comparte estos documentos con otras personas."
+  },
+  {
+   "t": "h2",
+   "html": "Acceso a la cámara y a los archivos"
+  },
+  {
+   "t": "p",
+   "html": "La aplicación puede solicitar acceso a tu cámara para que puedas escanear facturas en papel. También puede permitirte importar archivos desde tu dispositivo o desde servicios compatibles. Estos permisos se utilizan únicamente para las funciones que decidas usar."
+  },
+  {
+   "t": "h2",
+   "html": "Notificaciones"
+  },
+  {
+   "t": "p",
+   "html": "La aplicación puede usar notificaciones locales para recordarte las garantías próximas a vencer. Estos recordatorios se generan en tu dispositivo."
+  },
+  {
+   "t": "h2",
+   "html": "Compra dentro de la aplicación"
+  },
+  {
+   "t": "p",
+   "html": "La aplicación ofrece una compra única de «Acceso de por vida». Las compras se procesan de forma segura a través de la tienda desde la que descargaste la aplicación (App Store de Apple o Google Play). No recibimos ni almacenamos los datos de tu tarjeta de pago."
+  },
+  {
+   "t": "h2",
+   "html": "Compartición de datos"
+  },
+  {
+   "t": "p",
+   "html": "No vendemos tus datos. No compartimos tus facturas, recibos, documentos de garantía ni información de productos con anunciantes ni terceros."
+  },
+  {
+   "t": "h2",
+   "html": "Copia de seguridad"
+  },
+  {
+   "t": "p",
+   "html": "Si hay funciones de copia de seguridad disponibles, se utilizan únicamente para ayudarte a conservar una copia de tus propios datos de facturas y garantías. Tú eres responsable del lugar donde decidas almacenar o exportar tus archivos de copia de seguridad."
+  },
+  {
+   "t": "h2",
+   "html": "Privacidad de los menores"
+  },
+  {
+   "t": "p",
+   "html": "La aplicación no está diseñada para recopilar información de menores y no incluye contenido dirigido específicamente a ellos."
+  },
+  {
+   "t": "h2",
+   "html": "Cambios en esta Política de Privacidad"
+  },
+  {
+   "t": "p",
+   "html": "Podemos actualizar esta Política de Privacidad ocasionalmente. Cualquier cambio se publicará en esta página."
+  },
+  {
+   "t": "h2",
+   "html": "Contacto"
+  },
+  {
+   "t": "p",
+   "html": "Si tienes preguntas sobre esta Política de Privacidad, puedes contactarnos en: <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>"
+  }
+ ]
+}
