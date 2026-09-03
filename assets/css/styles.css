@@ -345,5 +345,31 @@ body.doc{background:#f8fbff}
 .wa-btn:hover{opacity:.92;text-decoration:none;transform:translateY(-1px)}
 .wa-btn svg{flex:none}
 
+/* ---------------- small-screen (phone) polish ---------------- */
+@media (max-width:480px){
+  body{font-size:16px}
+  h1{font-size:33px;line-height:1.1}
+  h2,.section-head h2{font-size:25px}
+  .hero-grid{padding:26px 0 40px;gap:24px}
+  .hero .lead{font-size:16px;margin:16px 0 24px}
+  .btn{min-height:50px;flex:1 1 auto}          /* comfortable, full-width taps */
+  .hero .btn-row{gap:10px}
+  .card,.service-card,.policy-card,.why-card{padding:22px}
+  .app-visual{min-height:210px;padding:20px}
+  .app-body{padding:22px}
+  .cta-band{padding:26px;border-radius:24px}
+  .cta-band h2{font-size:24px}
+  .doc-wrap{padding:30px 18px 52px}
+  .doc-icon{width:64px;height:64px}
+  .policy.prose h2,.doc .policy.prose h2{font-size:20px}
+  .prose{font-size:16px}
+  .lang-dd-menu{min-width:170px}
+  .crumbs{font-size:.82rem}
+}
+/* never allow a stray element to force sideways scrolling on phones.
+   Use clip (not hidden) so it doesn't turn body into a scroll container,
+   which would break the sticky header. */
+html{overflow-x:clip}
+
 /* 404 */
 .center-screen{flex:1;display:grid;place-items:center;text-align:center;padding:70px 20px}
