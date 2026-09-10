@@ -27,6 +27,12 @@ SUPPORT_EMAIL = "thibantechsolutions@gmail.com"
 WHATSAPP_DISPLAY = "+966 55 426 0804"          # shown to visitors
 WHATSAPP_NUMBER = "966554260804"               # E.164 digits for wa.me
 WHATSAPP_LINK = f"https://wa.me/{WHATSAPP_NUMBER}"
+
+# Public branded campaign URL /vault -> existing Google Apps Script web app.
+# To change the destination later, edit ONLY this constant and rebuild;
+# the public URL (https://thiban1.com/vault) never changes.
+VAULT_TARGET = ("https://script.google.com/macros/s/"
+                "AKfycbwnPfxZyhVzHT7LeKh_t9bJ6PtqDBxNoT1-1OBdc8belWGpx3gQmF7jtBUZ1f-DXbaK/exec")
 WHATSAPP_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="currentColor">'
                 '<path d="M.06 24l1.68-6.13A11.87 11.87 0 0 1 .16 11.9C.16 5.34 5.5.02 12.06.02c3.18 0 '
                 '6.17 1.24 8.42 3.49a11.8 11.8 0 0 1 3.49 8.4c0 6.56-5.35 11.88-11.9 11.88a11.9 11.9 0 0 '
@@ -1235,6 +1241,55 @@ def write_manifest():
         json.dump(manifest, f, ensure_ascii=False, indent=2)
 
 
+def page_vault_redirect():
+    """Standalone, dependency-free redirect at /vault/ -> VAULT_TARGET.
+
+    Not a server 301 (GitHub Pages can't do server redirects, and a 301 would be
+    aggressively cached, making a future destination change painful). Instead a
+    JS-first client redirect using location.replace() so it is instant, leaves no
+    entry in history, and is trivial to re-point later. Query params (utm_source,
+    utm_medium, utm_campaign, ...) and any #hash are carried over verbatim.
+    A <noscript> meta-refresh is the fallback when JavaScript is disabled.
+    Marked noindex so it never competes with real content in search."""
+    target = VAULT_TARGET
+    html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redirecting…</title>
+<meta name="robots" content="noindex, follow">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="canonical" href="{target}">
+<script>
+(function () {{
+  try {{
+    location.replace({json.dumps(target)} + location.search + location.hash);
+  }} catch (e) {{
+    location.href = {json.dumps(target)} + location.search + location.hash;
+  }}
+}})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url={target}"></noscript>
+<style>
+  html,body{{height:100%;margin:0}}
+  body{{display:flex;align-items:center;justify-content:center;
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:#0f172a;background:#f8fafc;padding:24px;text-align:center}}
+  a{{color:#165dff}}
+</style>
+</head>
+<body>
+<p>Redirecting to the Thiban campaign…<br>
+<a href="{target}">Continue if you are not redirected</a>.</p>
+</body>
+</html>'''
+    out_dir = os.path.join(ROOT, "vault")
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(html)
+
+
 def main():
     urls = []
     urls.append(render_home_and_collect())
@@ -1250,6 +1305,7 @@ def main():
         localized = gen_privacy(slug)   # also writes the /privacy/<slug>/ entry
         urls.extend(localized)          # /privacy/<slug>/<lang>/ in sitemap
         priv_count += len(localized)
+    page_vault_redirect()  # branded /vault redirect, not in sitemap
     page_404()  # not in sitemap
     write_sitemap([u for u in urls if u])
     write_robots()
