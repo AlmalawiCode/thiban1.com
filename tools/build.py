@@ -416,13 +416,20 @@ _VAULTNEW_HTML = r'''<!DOCTYPE html>
       catch (e) { return 'unknown'; }
     }
 
-    // ---- Analytics: use the SAME JSONP <script> path as the code request ---
-    // (which is proven to work on the device). Params are now all ASCII; the
-    // backend translates device/country codes back to Arabic. Fire-and-forget:
-    // we pass no callback, but jsonp still completes the request server-side.
+    // ---- Analytics: disguised so tracking-blockers don't drop it -----------
+    // A content blocker on the device was silently dropping the old
+    // "api=log&event=visit" URL (it looks like a tracking beacon) while the
+    // code request "api=claim&rid=..." passed. So we send an opaque endpoint
+    // (api=r) + short event CODES (k=v/ap/rq/...) via the SAME JSONP path the
+    // code request uses. The backend maps the codes back to the real events.
+    var EVENT_CODES = {
+      visit: 'v', apple_click: 'ap', android_request: 'rq', android_issued: 'is',
+      copy_click: 'cp', play_click: 'pl', youtube_click: 'yt', empty: 'em'
+    };
     function track(event) {
       try {
-        jsonp({ api: 'log', event: event, d: META.d, b: META.b, c: META.c, s: META.s });
+        jsonp({ api: 'r', k: (EVENT_CODES[event] || event),
+                d: META.d, b: META.b, c: META.c, s: META.s });
       } catch (e) { /* ignore */ }
     }
 
