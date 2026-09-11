@@ -371,17 +371,13 @@
       catch (e) { return 'unknown'; }
     }
 
-    // ---- Analytics: image beacon (most reliable fire-and-forget) -----------
-    // Auto-fired cross-origin <script> beacons were being dropped on iOS Safari;
-    // an <img> GET is the classic analytics pixel and reaches the backend
-    // reliably. All params are ASCII; '_' is a cache-buster.
+    // ---- Analytics: use the SAME JSONP <script> path as the code request ---
+    // (which is proven to work on the device). Params are now all ASCII; the
+    // backend translates device/country codes back to Arabic. Fire-and-forget:
+    // we pass no callback, but jsonp still completes the request server-side.
     function track(event) {
       try {
-        var params = { api: 'log', event: event, d: META.d, b: META.b, c: META.c, s: META.s, _: Date.now() };
-        var qs = Object.keys(params).map(function (k) {
-          return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
-        }).join('&');
-        (new Image()).src = API + '?' + qs;
+        jsonp({ api: 'log', event: event, d: META.d, b: META.b, c: META.c, s: META.s });
       } catch (e) { /* ignore */ }
     }
 
