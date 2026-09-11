@@ -366,10 +366,14 @@
       visit: 'v', apple_click: 'ap', android_request: 'rq', android_issued: 'is',
       copy_click: 'cp', play_click: 'pl', youtube_click: 'yt', empty: 'em'
     };
+    // NOTE: we deliberately do NOT send a "c" param — Google's web-app
+    // infrastructure reserves a query param literally named "c" and rejects the
+    // request ("cannot open the file"), which silently broke ALL analytics.
+    // Country isn't needed, so we omit it entirely. (device/browser/source only)
     function track(event) {
       try {
         fetch(apiUrl({ api: 'r', k: (EVENT_CODES[event] || event),
-                       d: META.d, b: META.b, c: META.c, s: META.s }),
+                       d: META.d, b: META.b, s: META.s }),
               { keepalive: true, cache: 'no-store' });
       } catch (e) { /* ignore */ }
     }
