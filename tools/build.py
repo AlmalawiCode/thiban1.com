@@ -62,15 +62,15 @@ _VAULTNEW_HTML = r'''<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>خزنة الضمانات | النسخة الكاملة مجانًا</title>
-  <meta name="description" content="احصل على تطبيق خزنة الضمانات مجانًا لفترة محدودة على Apple وAndroid.">
+  <title>خزنة الضمانات | النسخة الكاملة مجانًا مدى الحياة</title>
+  <meta name="description" content="احصل على النسخة الكاملة من تطبيق خزنة الضمانات مجانًا مدى الحياة — لمستخدمي أبل وسامسونج وأندرويد. العرض لفترة محدودة والعدد محدود.">
   <meta name="theme-color" content="#0a7d5a">
   <meta name="robots" content="noindex, follow">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta property="og:title" content="خزنة الضمانات | النسخة الكاملة مجانًا">
-  <meta property="og:description" content="احصل على تطبيق خزنة الضمانات مجانًا لفترة محدودة على Apple وAndroid.">
+  <meta property="og:title" content="خزنة الضمانات | النسخة الكاملة مجانًا مدى الحياة">
+  <meta property="og:description" content="احصل على النسخة الكاملة من تطبيق خزنة الضمانات مجانًا مدى الحياة — لمستخدمي أبل وسامسونج وأندرويد. العرض لفترة محدودة والعدد محدود.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <style>
@@ -237,67 +237,67 @@ _VAULTNEW_HTML = r'''<!DOCTYPE html>
     <header class="hero">
       <div class="brandmark">🔐</div>
       <h1>خزنة الضمانات</h1>
-      <p class="sub">احفظ فواتيرك وضماناتك وتابع تواريخ انتهائها بسهولة</p>
-      <div class="free-badge"><span class="dot"></span> 🎁 النسخة الكاملة مجانًا لفترة محدودة</div>
+      <p class="sub">احفظ فواتيرك وضماناتك في مكان واحد، وتابع تواريخ انتهائها بسهولة</p>
+      <div class="free-badge"><span class="dot"></span> 🎁 النسخة الكاملة مجانًا مدى الحياة — العدد محدود</div>
     </header>
 
     <!-- ===== APPLE ===== -->
     <section class="card" id="appleCard">
       <div class="platform-head">
         <div class="platform-icon icon-apple">🍎</div>
-        <h2 class="platform-title">مستخدمو Apple</h2>
+        <h2 class="platform-title">مستخدمو أبل (آيفون وآيباد)</h2>
         <span class="badge-you hidden" id="appleYou">جهازك</span>
       </div>
-      <p class="platform-text">احصل على النسخة الكاملة مجانًا مباشرة من متجر Apple.</p>
-      <button class="btn-apple" onclick="openApple()">احصل عليها مجانًا</button>
+      <p class="platform-text">حمِّل التطبيق الآن واحصل على النسخة الكاملة مجانًا مدى الحياة من متجر أبل — العرض لفترة محدودة.</p>
+      <button class="btn-apple" onclick="openApple()">احصل على التطبيق مجانًا</button>
     </section>
 
     <!-- ===== ANDROID ===== -->
     <section class="card" id="androidCard">
       <div class="platform-head">
         <div class="platform-icon icon-android">🤖</div>
-        <h2 class="platform-title">مستخدمو Android</h2>
+        <h2 class="platform-title">مستخدمو سامسونج وأندرويد</h2>
         <span class="badge-you hidden" id="androidYou">جهازك</span>
       </div>
 
       <!-- state: intro -->
       <div id="androidIntro">
-        <p class="platform-text">احصل على كود Google Play المجاني لتفعيل النسخة الكاملة.</p>
-        <button class="btn-android" id="getBtn" onclick="requestCode()">احصل على الكود</button>
+        <p class="platform-text">احصل على كود العرض المجاني، وفعِّل به النسخة الكاملة مجانًا مدى الحياة من متجر جوجل بلاي — العدد محدود.</p>
+        <button class="btn-android" id="getBtn" onclick="requestCode()">احصل على كود العرض</button>
       </div>
 
       <!-- state: success (one code) -->
       <div id="androidResult" class="hidden">
-        <p class="code-label">كودك المجاني:</p>
+        <p class="code-label">كود العرض الخاص بك:</p>
         <div id="codeBox" class="code-box"></div>
         <button class="btn-copy" onclick="copyCode()">نسخ الكود</button>
         <div class="steps">
-          <b>الطريقة:</b> انسخ الكود، ثم افتح Google Play وأدخِله لتحصل على النسخة الكاملة مجانًا.
+          <b>الطريقة:</b> انسخ الكود، ثم اضغط «فتح متجر جوجل بلاي» وأدخِل الكود لتحصل على النسخة الكاملة مجانًا مدى الحياة.
         </div>
-        <button class="btn-play" onclick="openPlay()">فتح Google Play</button>
+        <button class="btn-play" onclick="openPlay()">فتح متجر جوجل بلاي</button>
       </div>
 
       <!-- state: codes exhausted -->
       <div id="androidEmpty" class="hidden">
         <p class="msg"><span class="big">💛</span>
-          عذرًا، تم استخدام جميع الأكواد المجانية المتاحة حاليًا.</p>
+          عذرًا، نفدت الأكواد المجانية حاليًا لاكتمال العدد.</p>
       </div>
 
       <!-- state: transient error -->
       <div id="androidError" class="hidden">
-        <p class="msg">حدث خطأ أثناء الحصول على الكود. حاول مرة أخرى.</p>
+        <p class="msg">تعذّر الحصول على الكود. حاول مرة أخرى.</p>
         <button class="btn-android" onclick="retry()">إعادة المحاولة</button>
       </div>
     </section>
 
     <!-- ===== VIDEO ===== -->
     <section class="card video-card">
-      <h3>🎥 شاهد طريقة استخدام التطبيق</h3>
-      <p>شرح قصير لطريقة حفظ الفواتير ومتابعة الضمانات.</p>
-      <button class="btn-video" onclick="openVideo()">شاهد الفيديو</button>
+      <h3>🎥 كيف يحميك التطبيق من ضياع الضمان؟</h3>
+      <p>شرح قصير يريك كيف تحفظ الفاتورة في ثوانٍ، وكيف يذكّرك التطبيق قبل انتهاء الضمان.</p>
+      <button class="btn-video" onclick="openVideo()">شاهد الشرح القصير</button>
     </section>
 
-    <p class="foot">خزنة الضمانات — تطبيق حفظ الفواتير ومتابعة الضمانات.<br>العرض متاح لفترة محدودة وبكميات محدودة من الأكواد.</p>
+    <p class="foot">خزنة الضمانات — احفظ فواتيرك ولا تفقد حقّك في الضمان.<br>العرض لفترة محدودة وبعدد محدود من الأكواد.</p>
   </div>
 
   <div id="toast" class="toast">تم نسخ الكود ✓</div>
