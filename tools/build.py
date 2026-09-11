@@ -1758,48 +1758,14 @@ def write_manifest():
 
 
 def page_vault_redirect():
-    """Standalone, dependency-free redirect at /vault/ -> VAULT_TARGET.
+    """/vault/ now serves the FULL campaign page (same as /vault-new/).
 
-    Not a server 301 (GitHub Pages can't do server redirects, and a 301 would be
-    aggressively cached, making a future destination change painful). Instead a
-    JS-first client redirect using location.replace() so it is instant, leaves no
-    entry in history, and is trivial to re-point later. Query params (utm_source,
-    utm_medium, utm_campaign, ...) and any #hash are carried over verbatim.
-    A <noscript> meta-refresh is the fallback when JavaScript is disabled.
-    Marked noindex so it never competes with real content in search."""
-    target = VAULT_TARGET
-    html = f'''<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Redirecting…</title>
-<meta name="robots" content="noindex, follow">
-<meta name="referrer" content="no-referrer-when-downgrade">
-<link rel="canonical" href="{target}">
-<script>
-(function () {{
-  try {{
-    location.replace({json.dumps(target)} + location.search + location.hash);
-  }} catch (e) {{
-    location.href = {json.dumps(target)} + location.search + location.hash;
-  }}
-}})();
-</script>
-<noscript><meta http-equiv="refresh" content="0; url={target}"></noscript>
-<style>
-  html,body{{height:100%;margin:0}}
-  body{{display:flex;align-items:center;justify-content:center;
-    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:#0f172a;background:#f8fafc;padding:24px;text-align:center}}
-  a{{color:#165dff}}
-</style>
-</head>
-<body>
-<p>Redirecting to the Thiban campaign…<br>
-<a href="{target}">Continue if you are not redirected</a>.</p>
-</body>
-</html>'''
+    Was a client-side redirect to the Apps Script web app (VAULT_TARGET, kept
+    above for reference/rollback); cut over on 2026-09-11 so visitors stay on
+    thiban1.com — no Google "created by an Apps Script user" banner. All
+    previously distributed /vault?utm_source=... links keep working unchanged.
+    Rollback = git revert of this cutover commit + rebuild."""
+    html = _VAULTNEW_HTML.replace("__API_BASE__", VAULTNEW_API_BASE)
     out_dir = os.path.join(ROOT, "vault")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:

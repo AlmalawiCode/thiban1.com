@@ -1,32 +1,498 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- ==========================================================================
+     /vault-new — Vault campaign landing page (Arabic RTL), hosted on
+     thiban1.com. Two CTAs (Apple / Android), a short video, and best-effort
+     analytics. The Android promo code is fetched ONLY on button click via a
+     JSONP call to the Apps Script v2 backend; no code list ever reaches the
+     browser — only the single code assigned to this request.
+     ======================================================================= -->
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Redirecting…</title>
-<meta name="robots" content="noindex, follow">
-<meta name="referrer" content="no-referrer-when-downgrade">
-<link rel="canonical" href="https://script.google.com/macros/s/AKfycbwnPfxZyhVzHT7LeKh_t9bJ6PtqDBxNoT1-1OBdc8belWGpx3gQmF7jtBUZ1f-DXbaK/exec">
-<script>
-(function () {
-  try {
-    location.replace("https://script.google.com/macros/s/AKfycbwnPfxZyhVzHT7LeKh_t9bJ6PtqDBxNoT1-1OBdc8belWGpx3gQmF7jtBUZ1f-DXbaK/exec" + location.search + location.hash);
-  } catch (e) {
-    location.href = "https://script.google.com/macros/s/AKfycbwnPfxZyhVzHT7LeKh_t9bJ6PtqDBxNoT1-1OBdc8belWGpx3gQmF7jtBUZ1f-DXbaK/exec" + location.search + location.hash;
-  }
-})();
-</script>
-<noscript><meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwnPfxZyhVzHT7LeKh_t9bJ6PtqDBxNoT1-1OBdc8belWGpx3gQmF7jtBUZ1f-DXbaK/exec"></noscript>
-<style>
-  html,body{height:100%;margin:0}
-  body{display:flex;align-items:center;justify-content:center;
-    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:#0f172a;background:#f8fafc;padding:24px;text-align:center}
-  a{color:#165dff}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>خزنة الضمانات | النسخة الكاملة مجانًا</title>
+  <meta name="description" content="احصل على تطبيق خزنة الضمانات مجانًا لفترة محدودة على Apple وAndroid.">
+  <meta name="theme-color" content="#0a7d5a">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:title" content="خزنة الضمانات | النسخة الكاملة مجانًا">
+  <meta property="og:description" content="احصل على تطبيق خزنة الضمانات مجانًا لفترة محدودة على Apple وAndroid.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    :root {
+      --bg1: #0a7d5a;             /* brand emerald */
+      --bg2: #064a37;             /* deep emerald   */
+      --card: #ffffff;
+      --ink: #10241d;
+      --muted: #5b6b66;
+      --brand: #0a7d5a;
+      --brand-dark: #086048;
+      --gold: #c8912b;            /* premium accent */
+      --line: #e6ece9;
+      --apple: #111318;
+      --android: #0a7d5a;
+      --radius: 20px;
+      --shadow: 0 10px 30px rgba(6,42,32,.10);
+      --shadow-lg: 0 18px 44px rgba(6,42,32,.16);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0; padding: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 42%, #f2f6f4 42%, #f2f6f4 100%);
+      background-attachment: fixed;
+      font-family: "Segoe UI", "Helvetica Neue", "Noto Kufi Arabic", Tahoma, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      max-width: 460px; margin: 0 auto;
+      padding: 26px 18px calc(40px + env(safe-area-inset-bottom));
+      min-height: 100vh;
+    }
+
+    /* ---- Hero ---- */
+    .hero { text-align: center; color: #fff; padding: 8px 4px 22px; }
+    .brandmark {
+      width: 76px; height: 76px; margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 22px;
+      backdrop-filter: blur(4px);
+    }
+    .hero h1 { font-size: 30px; font-weight: 800; margin: 0 0 8px; letter-spacing: -.2px; }
+    .hero .sub { font-size: 15px; line-height: 1.85; margin: 0 auto; max-width: 320px; color: rgba(255,255,255,.9); }
+    .free-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 18px; padding: 11px 20px;
+      background: #fff; color: var(--brand-dark);
+      font-weight: 800; font-size: 16px;
+      border-radius: 999px; box-shadow: var(--shadow-lg);
+    }
+    .free-badge .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(200,145,43,.22); animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+
+    /* ---- Cards ---- */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+      margin-top: 16px;
+    }
+    .platform-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .platform-icon {
+      width: 46px; height: 46px; flex: 0 0 46px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; border-radius: 14px;
+    }
+    .icon-apple   { background: #f0f1f4; }
+    .icon-android { background: #e7f4ee; }
+    .platform-title { font-size: 19px; font-weight: 800; margin: 0; }
+    .platform-text { color: var(--muted); font-size: 14.5px; line-height: 1.8; margin: 8px 0 16px; }
+
+    .badge-you {
+      margin-inline-start: auto; font-size: 12px; font-weight: 700;
+      color: var(--brand-dark); background: #e7f4ee;
+      padding: 5px 10px; border-radius: 999px; white-space: nowrap;
+    }
+    .card.highlight { box-shadow: var(--shadow-lg); border-color: #bfe0d1; }
+
+    button {
+      font-family: inherit; font-size: 17px; font-weight: 800;
+      border: none; border-radius: 14px; cursor: pointer;
+      width: 100%; padding: 16px 18px; line-height: 1.2;
+      transition: transform .12s ease, background .15s, opacity .15s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 54px;
+    }
+    button:active { transform: scale(.985); }
+    .btn-apple   { background: var(--apple); color: #fff; }
+    .btn-apple:hover { background: #000; }
+    .btn-android { background: var(--android); color: #fff; }
+    .btn-android:hover { background: var(--brand-dark); }
+    .btn-android:disabled { opacity: .65; cursor: default; }
+    .btn-copy { background: #eef6f2; color: var(--brand-dark); margin-top: 14px; }
+    .btn-play {
+      background: #fff; color: var(--brand-dark);
+      border: 2px solid var(--brand); margin-top: 10px;
+    }
+    .btn-video {
+      background: #fff; color: var(--ink);
+      border: 1.5px solid var(--line);
+    }
+    .hidden { display: none !important; }
+
+    .spinner {
+      width: 20px; height: 20px;
+      border: 3px solid rgba(255,255,255,.45);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin .8s linear infinite; display: inline-block;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---- Android result ---- */
+    .code-box {
+      margin: 4px 0 2px;
+      background: #0f221b; color: #fff;
+      font-size: 27px; font-weight: 800; letter-spacing: 3px;
+      padding: 18px; border-radius: 14px;
+      direction: ltr; word-break: break-all; text-align: center;
+      font-family: "Menlo", "Consolas", "SF Mono", monospace;
+    }
+    .code-label { color: var(--muted); font-size: 13.5px; margin: 2px 0 8px; text-align: center; }
+    .steps {
+      background: #f6faf8; border: 1px solid var(--line);
+      border-radius: 12px; padding: 13px 15px; margin-top: 16px;
+      font-size: 13.5px; color: var(--ink); line-height: 1.9;
+    }
+    .steps b { color: var(--brand-dark); }
+    .msg { font-size: 15.5px; line-height: 1.9; color: var(--ink); margin: 6px 0; text-align: center; }
+    .msg .big { font-size: 30px; display: block; margin-bottom: 6px; }
+
+    /* ---- Video ---- */
+    .video-card { text-align: center; }
+    .video-card h3 { font-size: 16px; margin: 0 0 4px; }
+    .video-card p { color: var(--muted); font-size: 13.5px; margin: 0 0 14px; }
+
+    .foot { text-align: center; color: #6b7d77; font-size: 12px; margin-top: 22px; line-height: 1.8; }
+
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed; bottom: calc(24px + env(safe-area-inset-bottom));
+      left: 50%; transform: translateX(-50%);
+      background: #0f221b; color: #fff; padding: 12px 22px; border-radius: 999px;
+      font-size: 14.5px; font-weight: 700; opacity: 0; transition: opacity .2s;
+      pointer-events: none; z-index: 50; box-shadow: var(--shadow-lg);
+    }
+    .toast.show { opacity: 1; }
+
+    @media (min-width: 620px) {
+      .hero h1 { font-size: 34px; }
+    }
+  </style>
 </head>
 <body>
-<p>Redirecting to the Thiban campaign…<br>
-<a href="https://script.google.com/macros/s/AKfycbwnPfxZyhVzHT7LeKh_t9bJ6PtqDBxNoT1-1OBdc8belWGpx3gQmF7jtBUZ1f-DXbaK/exec">Continue if you are not redirected</a>.</p>
+  <div class="page">
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+      <div class="brandmark">🔐</div>
+      <h1>خزنة الضمانات</h1>
+      <p class="sub">احفظ فواتيرك وضماناتك وتابع تواريخ انتهائها بسهولة</p>
+      <div class="free-badge"><span class="dot"></span> 🎁 النسخة الكاملة مجانًا لفترة محدودة</div>
+    </header>
+
+    <!-- ===== APPLE ===== -->
+    <section class="card" id="appleCard">
+      <div class="platform-head">
+        <div class="platform-icon icon-apple">🍎</div>
+        <h2 class="platform-title">مستخدمو Apple</h2>
+        <span class="badge-you hidden" id="appleYou">جهازك</span>
+      </div>
+      <p class="platform-text">احصل على النسخة الكاملة مجانًا مباشرة من متجر Apple.</p>
+      <button class="btn-apple" onclick="openApple()">احصل عليها مجانًا</button>
+    </section>
+
+    <!-- ===== ANDROID ===== -->
+    <section class="card" id="androidCard">
+      <div class="platform-head">
+        <div class="platform-icon icon-android">🤖</div>
+        <h2 class="platform-title">مستخدمو Android</h2>
+        <span class="badge-you hidden" id="androidYou">جهازك</span>
+      </div>
+
+      <!-- state: intro -->
+      <div id="androidIntro">
+        <p class="platform-text">احصل على كود Google Play المجاني لتفعيل النسخة الكاملة.</p>
+        <button class="btn-android" id="getBtn" onclick="requestCode()">احصل على الكود</button>
+      </div>
+
+      <!-- state: success (one code) -->
+      <div id="androidResult" class="hidden">
+        <p class="code-label">كودك المجاني:</p>
+        <div id="codeBox" class="code-box"></div>
+        <button class="btn-copy" onclick="copyCode()">نسخ الكود</button>
+        <div class="steps">
+          <b>الطريقة:</b> انسخ الكود، ثم افتح Google Play وأدخِله لتحصل على النسخة الكاملة مجانًا.
+        </div>
+        <button class="btn-play" onclick="openPlay()">فتح Google Play</button>
+      </div>
+
+      <!-- state: codes exhausted -->
+      <div id="androidEmpty" class="hidden">
+        <p class="msg"><span class="big">💛</span>
+          عذرًا، تم استخدام جميع الأكواد المجانية المتاحة حاليًا.</p>
+      </div>
+
+      <!-- state: transient error -->
+      <div id="androidError" class="hidden">
+        <p class="msg">حدث خطأ أثناء الحصول على الكود. حاول مرة أخرى.</p>
+        <button class="btn-android" onclick="retry()">إعادة المحاولة</button>
+      </div>
+    </section>
+
+    <!-- ===== VIDEO ===== -->
+    <section class="card video-card">
+      <h3>🎥 شاهد طريقة استخدام التطبيق</h3>
+      <p>شرح قصير لطريقة حفظ الفواتير ومتابعة الضمانات.</p>
+      <button class="btn-video" onclick="openVideo()">شاهد الفيديو</button>
+    </section>
+
+    <p class="foot">خزنة الضمانات — تطبيق حفظ الفواتير ومتابعة الضمانات.<br>العرض متاح لفترة محدودة وبكميات محدودة من الأكواد.</p>
+  </div>
+
+  <div id="toast" class="toast">تم نسخ الكود ✓</div>
+
+  <script>
+    // ---- URLs (single source of truth) ------------------------------------
+    var APPLE_URL   = 'https://apps.apple.com/redeem?ctx=offercodes&id=6773164894&code=FREE500';
+    var PLAY_URL    = 'https://play.google.com/store/apps/details?id=com.vault.warranty';
+    var YOUTUBE_URL = 'https://youtu.be/SjafmkwycsA?si=rSL71hC-_nZZMilL';
+
+    // ---- Backend API via first-party proxy (api.thiban1.com -> Apps Script) -
+    // Same-site request, so iOS tracking protection / content blockers don't
+    // drop it. (The direct cross-site call to script.google.com was blocked.)
+    var API = 'https://api.thiban1.com/';
+
+    function apiUrl(params) {
+      return API + '?' + Object.keys(params).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+      }).join('&');
+    }
+
+    // ---- Stable per-page requestId for idempotent code allocation ----------
+    var REQUEST_ID = getRequestId();
+    var currentCode = '';
+    var inFlight = false;
+
+    function getRequestId() {
+      try {
+        var k = 'vault_promo_req';
+        var existing = sessionStorage.getItem(k);
+        if (existing) return existing;
+        var id = (self.crypto && crypto.randomUUID)
+          ? crypto.randomUUID()
+          : 'r-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+        sessionStorage.setItem(k, id);
+        return id;
+      } catch (e) {
+        return 'r-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+      }
+    }
+
+    // ---- Campaign source (utm_source) — parsed CLIENT-SIDE from the URL ----
+    // Mirrors the backend normalizeSource_ exactly, then persists in
+    // sessionStorage so EVERY click this visit keeps the same source.
+    function normalizeSource(raw) {
+      var s = (raw == null ? '' : String(raw)).trim().toLowerCase();
+      s = s.replace(/[^a-z0-9_-]/g, '').slice(0, 24);
+      if (!s) return 'direct';
+      if (s === 'twitter') return 'x';
+      return s;
+    }
+    function readSourceFromUrl() {
+      try {
+        var m = (location.search || '').match(/[?&]utm_source=([^&#]*)/);
+        var raw = m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
+        return normalizeSource(raw);
+      } catch (e) { return 'direct'; }
+    }
+    var SERVER_SOURCE = readSourceFromUrl();
+    var SOURCE = resolveSource();
+
+    function resolveSource() {
+      try {
+        var k = 'vault_src';
+        var srv = (SERVER_SOURCE || '').toString();
+        if (srv && srv !== 'direct') { sessionStorage.setItem(k, srv); return srv; }
+        var saved = sessionStorage.getItem(k);   // keep source across a reload
+        if (saved) return saved;
+        return srv || 'direct';
+      } catch (e) { return SERVER_SOURCE || 'direct'; }
+    }
+
+    // ---- Anonymous, privacy-friendly meta (no IP / name / email / phone) ---
+    var META = buildMeta();
+
+    function buildMeta() {
+      var ua = navigator.userAgent || '';
+      return { d: detectDevice(ua), b: detectBrowser(ua), c: guessCountry(), s: SOURCE };
+    }
+
+    // Device/browser as short ASCII slugs; country as the raw IANA timezone.
+    // The BACKEND translates these to Arabic before writing the sheet, so NO
+    // Arabic ever travels in the analytics URL (Arabic in the URL was breaking
+    // the beacon while the short ASCII code-request kept working).
+    function detectDevice(ua) {
+      if (/iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return 'ipad';
+      if (/iPhone|iPod/.test(ua)) return 'iphone';
+      if (/Android/.test(ua)) return /Mobile/.test(ua) ? 'android_phone' : 'android_tablet';
+      if (/Windows/.test(ua)) return 'windows';
+      if (/Macintosh|Mac OS/.test(ua)) return 'mac';
+      if (/Linux/.test(ua)) return 'linux';
+      return 'unknown';
+    }
+
+    function detectBrowser(ua) {
+      if (/SamsungBrowser/.test(ua)) return 'Samsung Internet';
+      if (/Edg\//.test(ua)) return 'Edge';
+      if (/OPR\/|Opera/.test(ua)) return 'Opera';
+      if (/Firefox\//.test(ua)) return 'Firefox';
+      if (/Chrome\//.test(ua) && !/Chromium/.test(ua)) return 'Chrome';
+      if (/CriOS/.test(ua)) return 'Chrome (iOS)';
+      if (/Safari\//.test(ua)) return 'Safari';
+      return 'unknown';
+    }
+
+    function guessCountry() {
+      try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown'; }
+      catch (e) { return 'unknown'; }
+    }
+
+    // ---- Analytics: disguised so tracking-blockers don't drop it -----------
+    // A content blocker on the device was silently dropping the old
+    // "api=log&event=visit" URL (it looks like a tracking beacon) while the
+    // code request "api=claim&rid=..." passed. So we send an opaque endpoint
+    // (api=r) + short event CODES (k=v/ap/rq/...) via the SAME JSONP path the
+    // code request uses. The backend maps the codes back to the real events.
+    var EVENT_CODES = {
+      visit: 'v', apple_click: 'ap', android_request: 'rq', android_issued: 'is',
+      copy_click: 'cp', play_click: 'pl', youtube_click: 'yt', empty: 'em'
+    };
+    // NOTE: we deliberately do NOT send a "c" param — Google's web-app
+    // infrastructure reserves a query param literally named "c" and rejects the
+    // request ("cannot open the file"), which silently broke ALL analytics.
+    // Country isn't needed, so we omit it entirely. (device/browser/source only)
+    function track(event) {
+      try {
+        fetch(apiUrl({ api: 'r', k: (EVENT_CODES[event] || event),
+                       d: META.d, b: META.b, s: META.s }),
+              { keepalive: true, cache: 'no-store' });
+      } catch (e) { /* ignore */ }
+    }
+
+    // ---- Optional device highlight: highlight, never hide/redirect --------
+    (function highlightPlatform() {
+      var ua = navigator.userAgent || '';
+      var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+                  (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+      var isAndroid = /Android/.test(ua);
+      if (isIOS) {
+        document.getElementById('appleCard').classList.add('highlight');
+        document.getElementById('appleYou').classList.remove('hidden');
+      } else if (isAndroid) {
+        document.getElementById('androidCard').classList.add('highlight');
+        document.getElementById('androidYou').classList.remove('hidden');
+      }
+    })();
+
+    track('visit');   // count the landing-page view
+
+    // ---- Apple ------------------------------------------------------------
+    function openApple() {
+      track('apple_click');
+      window.open(APPLE_URL, '_blank');
+    }
+
+    // ---- Android: request one code ----------------------------------------
+    function requestCode() {
+      if (inFlight) return;            // guard against rapid double-clicks
+      inFlight = true;
+      track('android_request');
+      var btn = document.getElementById('getBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> جارٍ الحصول على الكود...';
+
+      fetch(apiUrl({ api: 'claim', rid: REQUEST_ID }), { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(onResult)
+        .catch(onFailure);
+    }
+
+    function onResult(res) {
+      inFlight = false;
+      if (!res || res.status === 'busy') { return onFailure(); }
+
+      if (res.status === 'ok') {
+        currentCode = res.code;
+        document.getElementById('codeBox').textContent = res.code;
+        track('android_issued');
+        showAndroid('androidResult');
+      } else if (res.status === 'empty') {
+        track('empty');
+        showAndroid('androidEmpty');
+      } else {
+        onFailure();
+      }
+    }
+
+    function onFailure() {
+      inFlight = false;
+      resetGetBtn();
+      showAndroid('androidError');
+    }
+
+    function retry() {
+      resetGetBtn();
+      showAndroid('androidIntro');
+    }
+
+    function resetGetBtn() {
+      var btn = document.getElementById('getBtn');
+      btn.disabled = false;
+      btn.textContent = 'احصل على الكود';
+    }
+
+    function showAndroid(id) {
+      ['androidIntro', 'androidResult', 'androidEmpty', 'androidError']
+        .forEach(function (s) {
+          document.getElementById(s).classList.toggle('hidden', s !== id);
+        });
+    }
+
+    // ---- Copy / Play / Video ----------------------------------------------
+    function copyCode() {
+      if (!currentCode) return;
+      track('copy_click');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(currentCode).then(showToast, fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    }
+
+    function fallbackCopy() {
+      var t = document.createElement('textarea');
+      t.value = currentCode;
+      t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t);
+      t.focus(); t.select();
+      try { document.execCommand('copy'); showToast(); } catch (e) {}
+      document.body.removeChild(t);
+    }
+
+    function showToast() {
+      var el = document.getElementById('toast');
+      el.classList.add('show');
+      setTimeout(function () { el.classList.remove('show'); }, 1700);
+    }
+
+    function openPlay() {
+      track('play_click');
+      window.open(PLAY_URL, '_blank');
+    }
+
+    function openVideo() {
+      track('youtube_click');
+      window.open(YOUTUBE_URL, '_blank');
+    }
+  </script>
 </body>
 </html>
