@@ -341,14 +341,18 @@
       return { d: detectDevice(ua), b: detectBrowser(ua), c: guessCountry(), s: SOURCE };
     }
 
+    // Device/browser as short ASCII slugs; country as the raw IANA timezone.
+    // The BACKEND translates these to Arabic before writing the sheet, so NO
+    // Arabic ever travels in the analytics URL (Arabic in the URL was breaking
+    // the beacon while the short ASCII code-request kept working).
     function detectDevice(ua) {
-      if (/iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return 'آيباد';
-      if (/iPhone|iPod/.test(ua)) return 'آيفون';
-      if (/Android/.test(ua)) return /Mobile/.test(ua) ? 'أندرويد (جوال)' : 'أندرويد (لوحي)';
-      if (/Windows/.test(ua)) return 'ويندوز';
-      if (/Macintosh|Mac OS/.test(ua)) return 'ماك';
-      if (/Linux/.test(ua)) return 'لينكس';
-      return 'غير معروف';
+      if (/iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return 'ipad';
+      if (/iPhone|iPod/.test(ua)) return 'iphone';
+      if (/Android/.test(ua)) return /Mobile/.test(ua) ? 'android_phone' : 'android_tablet';
+      if (/Windows/.test(ua)) return 'windows';
+      if (/Macintosh|Mac OS/.test(ua)) return 'mac';
+      if (/Linux/.test(ua)) return 'linux';
+      return 'unknown';
     }
 
     function detectBrowser(ua) {
@@ -359,33 +363,25 @@
       if (/Chrome\//.test(ua) && !/Chromium/.test(ua)) return 'Chrome';
       if (/CriOS/.test(ua)) return 'Chrome (iOS)';
       if (/Safari\//.test(ua)) return 'Safari';
-      return 'غير معروف';
+      return 'unknown';
     }
 
-    // Country guess from IANA timezone — privacy-friendly, no network call.
-    var TZ_COUNTRY = {
-      'Asia/Riyadh': 'السعودية', 'Asia/Dubai': 'الإمارات', 'Asia/Qatar': 'قطر',
-      'Asia/Bahrain': 'البحرين', 'Asia/Kuwait': 'الكويت', 'Asia/Muscat': 'عُمان',
-      'Asia/Aden': 'اليمن', 'Asia/Baghdad': 'العراق', 'Asia/Amman': 'الأردن',
-      'Asia/Beirut': 'لبنان', 'Asia/Damascus': 'سوريا', 'Asia/Jerusalem': 'فلسطين',
-      'Asia/Gaza': 'فلسطين', 'Asia/Hebron': 'فلسطين', 'Africa/Cairo': 'مصر',
-      'Africa/Khartoum': 'السودان', 'Africa/Casablanca': 'المغرب',
-      'Africa/Algiers': 'الجزائر', 'Africa/Tunis': 'تونس', 'Africa/Tripoli': 'ليبيا',
-      'Asia/Istanbul': 'تركيا', 'Europe/Istanbul': 'تركيا', 'Asia/Tehran': 'إيران',
-      'Europe/London': 'المملكة المتحدة', 'America/New_York': 'الولايات المتحدة',
-      'America/Chicago': 'الولايات المتحدة', 'America/Los_Angeles': 'الولايات المتحدة'
-    };
     function guessCountry() {
-      try {
-        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-        return TZ_COUNTRY[tz] || (tz || 'غير معروف');
-      } catch (e) { return 'غير معروف'; }
+      try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown'; }
+      catch (e) { return 'unknown'; }
     }
 
-    // ---- Analytics (fire and forget; never blocks the UI) -----------------
+    // ---- Analytics: image beacon (most reliable fire-and-forget) -----------
+    // Auto-fired cross-origin <script> beacons were being dropped on iOS Safari;
+    // an <img> GET is the classic analytics pixel and reaches the backend
+    // reliably. All params are ASCII; '_' is a cache-buster.
     function track(event) {
       try {
-        jsonp({ api: 'log', event: event, d: META.d, b: META.b, c: META.c, s: META.s });
+        var params = { api: 'log', event: event, d: META.d, b: META.b, c: META.c, s: META.s, _: Date.now() };
+        var qs = Object.keys(params).map(function (k) {
+          return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+        }).join('&');
+        (new Image()).src = API + '?' + qs;
       } catch (e) { /* ignore */ }
     }
 
