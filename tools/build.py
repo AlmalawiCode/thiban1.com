@@ -41,6 +41,13 @@ VAULT_TARGET = ("https://script.google.com/macros/s/"
 VAULTNEW_EXEC_URL = ("https://script.google.com/macros/s/"
                      "AKfycbxPmeFcL5oLIY-5UEoo7R_NyJS2J4xALkBgoKuswFQU4z9sEwNO1EC_KFraQ1-opBf2NQ/exec")
 
+# First-party proxy for /vault-new: a Cloudflare Worker on api.thiban1.com
+# forwards to VAULTNEW_EXEC_URL. Because api.thiban1.com shares the root domain,
+# the browser treats it as same-site, so iOS tracking-protection / content
+# blockers don't drop the analytics call (the direct script.google.com call was
+# being blocked). The page calls this base with a normal fetch().
+VAULTNEW_API_BASE = "https://api.thiban1.com/"
+
 # Full campaign page for /vault-new. Raw string (r'''...''') so JS regex
 # backslashes survive verbatim. __EXEC_URL__ is replaced with VAULTNEW_EXEC_URL.
 _VAULTNEW_HTML = r'''<!DOCTYPE html>
@@ -301,30 +308,15 @@ _VAULTNEW_HTML = r'''<!DOCTYPE html>
     var PLAY_URL    = 'https://play.google.com/store/apps/details?id=com.vault.warranty';
     var YOUTUBE_URL = 'https://youtu.be/SjafmkwycsA?si=rSL71hC-_nZZMilL';
 
-    // ---- Backend API (Apps Script v2), called via JSONP (no CORS issues) ---
-    var API = '__EXEC_URL__';
+    // ---- Backend API via first-party proxy (api.thiban1.com -> Apps Script) -
+    // Same-site request, so iOS tracking protection / content blockers don't
+    // drop it. (The direct cross-site call to script.google.com was blocked.)
+    var API = '__API_BASE__';
 
-    // Loads API + '?' + params via a <script> tag (JSONP). Calls cb(res) once,
-    // with the parsed object, or cb(null) on error/timeout. Self-cleaning.
-    function jsonp(params, cb) {
-      var name = 'vault_cb_' + Math.random().toString(36).slice(2);
-      var s = document.createElement('script');
-      var done = false;
-      function finish(res) {
-        if (done) return; done = true;
-        try { delete window[name]; } catch (e) { window[name] = undefined; }
-        if (s.parentNode) s.parentNode.removeChild(s);
-        if (cb) cb(res);
-      }
-      window[name] = function (res) { finish(res); };
-      params.callback = name;
-      var qs = Object.keys(params).map(function (k) {
+    function apiUrl(params) {
+      return API + '?' + Object.keys(params).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
       }).join('&');
-      s.src = API + '?' + qs;
-      s.onerror = function () { finish(null); };
-      document.head.appendChild(s);
-      setTimeout(function () { finish(null); }, 15000);   // safety timeout
     }
 
     // ---- Stable per-page requestId for idempotent code allocation ----------
@@ -428,8 +420,9 @@ _VAULTNEW_HTML = r'''<!DOCTYPE html>
     };
     function track(event) {
       try {
-        jsonp({ api: 'r', k: (EVENT_CODES[event] || event),
-                d: META.d, b: META.b, c: META.c, s: META.s });
+        fetch(apiUrl({ api: 'r', k: (EVENT_CODES[event] || event),
+                       d: META.d, b: META.b, c: META.c, s: META.s }),
+              { keepalive: true, cache: 'no-store' });
       } catch (e) { /* ignore */ }
     }
 
@@ -465,7 +458,10 @@ _VAULTNEW_HTML = r'''<!DOCTYPE html>
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span> جارٍ الحصول على الكود...';
 
-      jsonp({ api: 'claim', rid: REQUEST_ID }, onResult);
+      fetch(apiUrl({ api: 'claim', rid: REQUEST_ID }), { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(onResult)
+        .catch(onFailure);
     }
 
     function onResult(res) {
@@ -1815,7 +1811,7 @@ def page_vaultnew():
       2. The two google.script.run calls (which only work inside Apps-Script HTML)
          become JSONP calls to VAULTNEW_EXEC_URL — no CORS issues, no Google banner.
     Marked noindex and kept out of the sitemap while it's the staging route."""
-    html = _VAULTNEW_HTML.replace("__EXEC_URL__", VAULTNEW_EXEC_URL)
+    html = _VAULTNEW_HTML.replace("__API_BASE__", VAULTNEW_API_BASE)
     out_dir = os.path.join(ROOT, "vault-new")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
