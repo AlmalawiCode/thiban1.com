@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <!-- ==========================================================================
      /vault-new — Vault campaign landing page (Arabic RTL), hosted on
-     thiban1.com. Two CTAs (Apple / Android), a short video, and best-effort
-     analytics. The Android promo code is fetched ONLY on button click via a
-     JSONP call to the Apps Script v2 backend; no code list ever reaches the
-     browser — only the single code assigned to this request.
+     thiban1.com. Download-first design: both platforms lead with a download
+     CTA; the Android promo code is an explicit step 2 AFTER install (field
+     feedback showed a code-first card read as "Android not supported").
+     The code is fetched ONLY on button click via the Apps Script v2 backend
+     behind api.thiban1.com; no code list ever reaches the browser — only the
+     single code assigned to this request.
      ======================================================================= -->
 <html lang="ar" dir="rtl">
 <head>
@@ -12,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>خزنة الضمانات | النسخة الكاملة مجانًا مدى الحياة</title>
   <meta name="description" content="احصل على النسخة الكاملة من تطبيق خزنة الضمانات مجانًا مدى الحياة — لمستخدمي أبل وسامسونج وأندرويد. العرض لفترة محدودة والعدد محدود.">
-  <meta name="theme-color" content="#0a7d5a">
+  <meta name="theme-color" content="#067a57">
   <meta name="robots" content="noindex, follow">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -23,241 +25,555 @@
   <meta name="twitter:card" content="summary_large_image">
   <style>
     :root {
-      --bg1: #0a7d5a;             /* brand emerald */
-      --bg2: #064a37;             /* deep emerald   */
-      --card: #ffffff;
-      --ink: #10241d;
+      --green: #067a57;
+      --green-dark: #045a40;
+      --green-soft: #eaf7f1;
+      --green-soft-2: #dff2e8;
+      --text: #12332a;
       --muted: #5b6b66;
-      --brand: #0a7d5a;
-      --brand-dark: #086048;
-      --gold: #c8912b;            /* premium accent */
-      --line: #e6ece9;
-      --apple: #111318;
-      --android: #0a7d5a;
-      --radius: 20px;
-      --shadow: 0 10px 30px rgba(6,42,32,.10);
-      --shadow-lg: 0 18px 44px rgba(6,42,32,.16);
+      --white: #ffffff;
+      --bg: #f3f6f5;
+      --black-btn: #0b1220;
+      --border: #d9e4df;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --radius: 28px;
+      --radius-sm: 18px;
     }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body {
-      margin: 0; padding: 0;
-      color: var(--ink);
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 42%, #f2f6f4 42%, #f2f6f4 100%);
-      background-attachment: fixed;
-      font-family: "Segoe UI", "Helvetica Neue", "Noto Kufi Arabic", Tahoma, Arial, sans-serif;
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Tahoma", "Arial", sans-serif;
+      background: linear-gradient(180deg, #0b8a63 0%, #067a57 100%);
+      color: var(--text);
       -webkit-font-smoothing: antialiased;
     }
+
     .page {
-      max-width: 460px; margin: 0 auto;
-      padding: 26px 18px calc(40px + env(safe-area-inset-bottom));
-      min-height: 100vh;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 28px 16px calc(36px + env(safe-area-inset-bottom));
     }
 
-    /* ---- Hero ---- */
-    .hero { text-align: center; color: #fff; padding: 8px 4px 22px; }
-    .brandmark {
-      width: 76px; height: 76px; margin: 0 auto 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 40px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.28);
-      border-radius: 22px;
-      backdrop-filter: blur(4px);
-    }
-    .hero h1 { font-size: 30px; font-weight: 800; margin: 0 0 8px; letter-spacing: -.2px; }
-    .hero .sub { font-size: 15px; line-height: 1.85; margin: 0 auto; max-width: 320px; color: rgba(255,255,255,.9); }
-    .free-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 18px; padding: 11px 20px;
-      background: #fff; color: var(--brand-dark);
-      font-weight: 800; font-size: 16px;
-      border-radius: 999px; box-shadow: var(--shadow-lg);
-    }
-    .free-badge .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold);
-      box-shadow: 0 0 0 4px rgba(200,145,43,.22); animation: pulse 1.8s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
-
-    /* ---- Cards ---- */
     .card {
-      background: var(--card);
-      border: 1px solid var(--line);
+      background: var(--white);
       border-radius: var(--radius);
-      padding: 22px 20px;
       box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .hero-icon {
+      flex: 0 0 90px;
+      width: 90px;
+      height: 90px;
+      display: grid;
+      place-items: center;
+      font-size: 56px;
+    }
+
+    .hero-content h1 {
+      margin: 0 0 10px;
+      font-size: 2.15rem;
+      line-height: 1.2;
+      color: var(--green-dark);
+      font-weight: 800;
+    }
+
+    .hero-content p {
+      margin: 0;
+      font-size: 1.15rem;
+      color: #465752;
+      line-height: 1.8;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .icon-box {
+      flex: 0 0 110px;
+      width: 110px;
+      height: 110px;
+      border-radius: 22px;
+      background: #f2f5f4;
+      display: grid;
+      place-items: center;
+      font-size: 56px;
+    }
+
+    .section-head-content {
+      flex: 1;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.85rem;
+      line-height: 1.3;
+      color: var(--green-dark);
+      font-weight: 800;
+    }
+
+    .desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.15rem;
+      line-height: 1.9;
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 800;
+      border-radius: 22px;
+      padding: 20px 18px;
+      margin-top: 24px;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    /* Real <button> elements carry the mockup's .button look. */
+    button.button {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    button.button:disabled {
+      opacity: 0.65;
+      cursor: default;
+      transform: none;
+    }
+
+    .button-dark {
+      background: var(--black-btn);
+      color: var(--white);
+    }
+
+    .button-green {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .button-outline {
+      background: transparent;
+      color: var(--green-dark);
+      border: 2px solid #a8cabd;
+    }
+
+    .pill {
+      display: inline-block;
       margin-top: 16px;
+      margin-bottom: 22px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-size: 1.3rem;
+      font-weight: 800;
     }
-    .platform-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-    .platform-icon {
-      width: 46px; height: 46px; flex: 0 0 46px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; border-radius: 14px;
-    }
-    .icon-apple   { background: #f0f1f4; }
-    .icon-android { background: #e7f4ee; }
-    .platform-title { font-size: 19px; font-weight: 800; margin: 0; }
-    .platform-text { color: var(--muted); font-size: 14.5px; line-height: 1.8; margin: 8px 0 16px; }
 
-    .badge-you {
-      margin-inline-start: auto; font-size: 12px; font-weight: 700;
-      color: var(--brand-dark); background: #e7f4ee;
-      padding: 5px 10px; border-radius: 999px; white-space: nowrap;
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-top: 8px;
     }
-    .card.highlight { box-shadow: var(--shadow-lg); border-color: #bfe0d1; }
 
-    button {
-      font-family: inherit; font-size: 17px; font-weight: 800;
-      border: none; border-radius: 14px; cursor: pointer;
-      width: 100%; padding: 16px 18px; line-height: 1.2;
-      transition: transform .12s ease, background .15s, opacity .15s;
-      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-      min-height: 54px;
+    .step {
+      background: linear-gradient(180deg, #f3faf6 0%, #edf7f2 100%);
+      border-radius: 24px;
+      padding: 22px 18px 18px;
+      text-align: center;
+      position: relative;
+      min-height: 285px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    button:active { transform: scale(.985); }
-    .btn-apple   { background: var(--apple); color: #fff; }
-    .btn-apple:hover { background: #000; }
-    .btn-android { background: var(--android); color: #fff; }
-    .btn-android:hover { background: var(--brand-dark); }
-    .btn-android:disabled { opacity: .65; cursor: default; }
-    .btn-copy { background: #eef6f2; color: var(--brand-dark); margin-top: 14px; }
-    .btn-play {
-      background: #fff; color: var(--brand-dark);
-      border: 2px solid var(--brand); margin-top: 10px;
+
+    .step-number {
+      position: absolute;
+      top: -16px;
+      right: 24px;
+      width: 54px;
+      height: 54px;
+      background: var(--green);
+      color: var(--white);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      box-shadow: 0 6px 16px rgba(6, 122, 87, 0.28);
     }
-    .btn-video {
-      background: #fff; color: var(--ink);
-      border: 1.5px solid var(--line);
+
+    .step-icon {
+      font-size: 58px;
+      margin-top: 18px;
+      margin-bottom: 8px;
     }
+
+    .step h3 {
+      margin: 10px 0 14px;
+      font-size: 1.65rem;
+      line-height: 1.4;
+      color: var(--green-dark);
+    }
+
+    .arrow {
+      font-size: 3rem;
+      color: var(--green);
+      font-weight: bold;
+      padding: 0 6px;
+    }
+
+    .note {
+      margin-top: 20px;
+      text-align: center;
+      color: #445651;
+      font-size: 1.12rem;
+      line-height: 1.9;
+    }
+
+    .video-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .video-play {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      flex: 0 0 48px;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--white);
+      padding: 14px 8px 6px;
+    }
+
+    .footer .title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .footer .sub {
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
+    .small {
+      font-size: 0.96rem;
+    }
+
+    /* ---- Functional states the static mockup doesn't show ---- */
     .hidden { display: none !important; }
 
-    .spinner {
-      width: 20px; height: 20px;
-      border: 3px solid rgba(255,255,255,.45);
-      border-top-color: #fff; border-radius: 50%;
-      animation: spin .8s linear infinite; display: inline-block;
+    .code-label {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 14px 0 8px;
+      text-align: center;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ---- Android result ---- */
     .code-box {
-      margin: 4px 0 2px;
-      background: #0f221b; color: #fff;
-      font-size: 27px; font-weight: 800; letter-spacing: 3px;
-      padding: 18px; border-radius: 14px;
-      direction: ltr; word-break: break-all; text-align: center;
+      background: #0f221b;
+      color: #fff;
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      padding: 18px;
+      border-radius: 14px;
+      direction: ltr;
+      word-break: break-all;
+      text-align: center;
       font-family: "Menlo", "Consolas", "SF Mono", monospace;
     }
-    .code-label { color: var(--muted); font-size: 13.5px; margin: 2px 0 8px; text-align: center; }
-    .steps {
-      background: #f6faf8; border: 1px solid var(--line);
-      border-radius: 12px; padding: 13px 15px; margin-top: 16px;
-      font-size: 13.5px; color: var(--ink); line-height: 1.9;
+
+    .howto {
+      background: var(--green-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 15px;
+      margin-top: 16px;
+      font-size: 1.02rem;
+      color: var(--text);
+      line-height: 1.9;
     }
-    .steps b { color: var(--brand-dark); }
-    .msg { font-size: 15.5px; line-height: 1.9; color: var(--ink); margin: 6px 0; text-align: center; }
+
+    .howto b { color: var(--green-dark); }
+
+    .msg {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--text);
+      margin: 10px 0;
+      text-align: center;
+    }
+
     .msg .big { font-size: 30px; display: block; margin-bottom: 6px; }
 
-    /* ---- Video ---- */
-    .video-card { text-align: center; }
-    .video-card h3 { font-size: 16px; margin: 0 0 4px; }
-    .video-card p { color: var(--muted); font-size: 13.5px; margin: 0 0 14px; }
-
-    .foot { text-align: center; color: #6b7d77; font-size: 12px; margin-top: 22px; line-height: 1.8; }
-
-    /* ---- Toast ---- */
-    .toast {
-      position: fixed; bottom: calc(24px + env(safe-area-inset-bottom));
-      left: 50%; transform: translateX(-50%);
-      background: #0f221b; color: #fff; padding: 12px 22px; border-radius: 999px;
-      font-size: 14.5px; font-weight: 700; opacity: 0; transition: opacity .2s;
-      pointer-events: none; z-index: 50; box-shadow: var(--shadow-lg);
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.45);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
     }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .toast {
+      position: fixed;
+      bottom: calc(24px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f221b;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 14.5px;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      z-index: 50;
+      box-shadow: var(--shadow);
+    }
+
     .toast.show { opacity: 1; }
 
-    @media (min-width: 620px) {
-      .hero h1 { font-size: 34px; }
+    @media (max-width: 680px) {
+      .hero,
+      .section-head {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      .desc {
+        font-size: 1.05rem;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+        text-align: center;
+      }
+
+      .step {
+        min-height: auto;
+      }
+
+      .button {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <main class="page">
 
-    <!-- ===== HERO ===== -->
-    <header class="hero">
-      <div class="brandmark">🔐</div>
-      <h1>خزنة الضمانات</h1>
-      <p class="sub">احفظ فواتيرك وضماناتك في مكان واحد، وتابع تواريخ انتهائها بسهولة</p>
-      <div class="free-badge"><span class="dot"></span> 🎁 النسخة الكاملة مجانًا مدى الحياة — العدد محدود</div>
-    </header>
-
-    <!-- ===== APPLE ===== -->
-    <section class="card" id="appleCard">
-      <div class="platform-head">
-        <div class="platform-icon icon-apple">🍎</div>
-        <h2 class="platform-title">مستخدمو أبل (آيفون وآيباد)</h2>
-        <span class="badge-you hidden" id="appleYou">جهازك</span>
+    <!-- Hero -->
+    <section class="card hero">
+      <div class="hero-icon">🎁</div>
+      <div class="hero-content">
+        <h1>النسخة الكاملة مجاناً مدى الحياة — العدد محدود</h1>
+        <p>
+          روابط التحميل أدناه. ولمستخدمي أندرويد:
+          <strong>التحميل أولاً</strong> ثم استخدام كود العرض.
+        </p>
       </div>
-      <p class="platform-text">حمِّل التطبيق الآن واحصل على النسخة الكاملة مجانًا مدى الحياة من متجر أبل — العرض لفترة محدودة.</p>
-      <button class="btn-apple" onclick="openApple()">احصل على التطبيق مجانًا</button>
     </section>
 
-    <!-- ===== ANDROID ===== -->
-    <section class="card" id="androidCard">
-      <div class="platform-head">
-        <div class="platform-icon icon-android">🤖</div>
-        <h2 class="platform-title">مستخدمو سامسونج وأندرويد</h2>
-        <span class="badge-you hidden" id="androidYou">جهازك</span>
+    <!-- Apple -->
+    <section class="card" id="appleCard">
+      <div class="section-head">
+        <div class="icon-box">🍎</div>
+        <div class="section-head-content">
+          <h2>مستخدمو أبل (آيفون وآيباد)</h2>
+          <p class="desc">
+            الطريقة مباشرة وسهلة: حمّل التطبيق من رابط
+            <strong>App Store</strong>،
+            وستحصل على النسخة الكاملة مجاناً مدى الحياة لفترة محدودة.
+          </p>
+        </div>
       </div>
 
-      <!-- state: intro -->
+      <button class="button button-dark" onclick="openApple()">
+        <span>حمّل التطبيق من App Store</span>
+        <span>›</span>
+      </button>
+    </section>
+
+    <!-- Android -->
+    <section class="card" id="androidCard">
+      <div class="section-head">
+        <div class="icon-box">🤖</div>
+        <div class="section-head-content">
+          <h2>مستخدمو أندرويد (سامسونج وغيرها)</h2>
+          <div class="pill">مهم: لأندرويد توجد خطوتان</div>
+        </div>
+      </div>
+
+      <!-- state: intro — the two-step flow -->
       <div id="androidIntro">
-        <p class="platform-text">احصل على كود العرض المجاني، وفعِّل به النسخة الكاملة مجانًا مدى الحياة من متجر جوجل بلاي — العدد محدود.</p>
-        <button class="btn-android" id="getBtn" onclick="requestCode()">احصل على كود العرض</button>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div>
+              <div class="step-icon">▶️</div>
+              <h3>حمّل التطبيق من<br>Google Play</h3>
+            </div>
+            <button class="button button-green" onclick="openPlayStore()">
+              <span>حمّل من Google Play</span>
+              <span>›</span>
+            </button>
+          </div>
+
+          <div class="arrow">←</div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div>
+              <div class="step-icon">🎟️</div>
+              <h3>بعد التحميل، احصل<br>على كود العرض</h3>
+            </div>
+            <button class="button button-green" id="getBtn" onclick="requestCode()">
+              <span>احصل على كود العرض</span>
+              <span>›</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="note">
+          بعد تثبيت التطبيق، استخدم كود العرض لتفعيل النسخة الكاملة مجاناً<br>
+          مدى الحياة — العدد محدود.
+        </p>
       </div>
 
       <!-- state: success (one code) -->
       <div id="androidResult" class="hidden">
         <p class="code-label">كود العرض الخاص بك:</p>
         <div id="codeBox" class="code-box"></div>
-        <button class="btn-android" onclick="redeemOnPlay()">فعِّل الكود في جوجل بلاي</button>
-        <div class="steps">
-          <b>الطريقة:</b> اضغط «فعِّل الكود في جوجل بلاي» وسيفتح المتجر والكود مُعبّأ تلقائيًا — أكِّد التفعيل ثم حمِّل التطبيق لتحصل على النسخة الكاملة مجانًا مدى الحياة.
+        <button class="button button-green" onclick="redeemOnPlay()">
+          <span>فعِّل الكود في جوجل بلاي</span>
+          <span>›</span>
+        </button>
+        <div class="howto">
+          <b>الطريقة:</b> اضغط «فعِّل الكود في جوجل بلاي» وسيفتح المتجر والكود مُعبّأ تلقائيًا — أكِّد التفعيل لتحصل على النسخة الكاملة مجاناً مدى الحياة.
           <br>لم يفتح المتجر؟ انسخ الكود، ثم من تطبيق جوجل بلاي: صورة حسابك ← <b>الدفع والاشتراكات</b> ← <b>تفعيل رمز</b>.
+          <br>لم تحمّل التطبيق بعد؟ <a href="#" onclick="openPlayStore(); return false;">حمّله من Google Play أولاً</a>.
         </div>
-        <button class="btn-copy" onclick="copyCode()">نسخ الكود</button>
+        <button class="button button-outline" onclick="copyCode()">
+          <span>نسخ الكود</span>
+        </button>
       </div>
 
-      <!-- state: codes exhausted -->
+      <!-- state: codes exhausted — the download itself is never blocked -->
       <div id="androidEmpty" class="hidden">
         <p class="msg"><span class="big">💛</span>
           عذرًا، نفدت الأكواد المجانية حاليًا لاكتمال العدد.</p>
+        <p class="msg">ما زال بإمكانك تحميل التطبيق والاستفادة من النسخة المجانية.</p>
+        <button class="button button-green" onclick="openPlayStore()">
+          <span>حمّل من Google Play</span>
+          <span>›</span>
+        </button>
       </div>
 
       <!-- state: transient error -->
       <div id="androidError" class="hidden">
         <p class="msg">تعذّر الحصول على الكود. حاول مرة أخرى.</p>
-        <button class="btn-android" onclick="retry()">إعادة المحاولة</button>
+        <button class="button button-green" onclick="retry()">
+          <span>إعادة المحاولة</span>
+        </button>
       </div>
     </section>
 
-    <!-- ===== VIDEO ===== -->
-    <section class="card video-card">
-      <h3>🎥 كيف يحميك التطبيق من ضياع الضمان؟</h3>
-      <p>شرح قصير يريك كيف تحفظ الفاتورة في ثوانٍ، وكيف يذكّرك التطبيق قبل انتهاء الضمان.</p>
-      <button class="btn-video" onclick="openVideo()">شاهد الشرح القصير</button>
+    <!-- Video -->
+    <section class="card">
+      <div class="section-head">
+        <div class="icon-box">🎥</div>
+        <div class="section-head-content">
+          <h2>كيف يحميك التطبيق من ضياع الضمان؟</h2>
+          <p class="desc">
+            شاهد شرحاً قصيراً يوضح كيف تحفظ الفاتورة في ثوانٍ،
+            وكيف يذكّرك التطبيق قبل انتهاء الضمان.
+          </p>
+        </div>
+      </div>
+
+      <button class="button button-outline video-button" onclick="openVideo()">
+        <span class="video-play">▶</span>
+        <span>شاهد الشرح القصير</span>
+        <span>›</span>
+      </button>
     </section>
 
-    <p class="foot">خزنة الضمانات — احفظ فواتيرك ولا تفقد حقّك في الضمان.<br>العرض لفترة محدودة وبعدد محدود من الأكواد.</p>
-  </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="title">🛡️ خزنة الضمانات — احفظ فواتيرك ولا تفقد حقك في الضمان</div>
+      <div class="sub">العرض لفترة محدودة، وعدد الأكواد محدود.</div>
+    </footer>
+
+  </main>
 
   <div id="toast" class="toast">تم نسخ الكود ✓</div>
 
   <script>
     // ---- URLs (single source of truth) ------------------------------------
     var APPLE_URL   = 'https://apps.apple.com/redeem?ctx=offercodes&id=6773164894&code=FREE500';
+    var PLAY_URL    = 'https://play.google.com/store/apps/details?id=com.vault.warranty';
     // Play redeem deep link — opens the store's redeem sheet with the code
     // already filled in, mirroring the Apple offer-code link above. The
-    // app-details listing has NO code-entry field, so sending users there
-    // with a copied code was a dead end.
+    // app-details listing (step 1) has no code-entry field, so redeeming
+    // goes through this link or the manual path in the instructions.
     var PLAY_REDEEM_BASE = 'https://play.google.com/redeem?code=';
     var YOUTUBE_URL = 'https://youtu.be/SjafmkwycsA?si=rSL71hC-_nZZMilL';
 
@@ -383,24 +699,16 @@
       } catch (e) { /* ignore */ }
     }
 
-    // ---- Optional device highlight: highlight, never hide/redirect --------
-    // On Android the card is also moved ABOVE the Apple card: with Apple
+    // ---- Platform-aware card order: reorder, never hide/redirect ----------
+    // On Android the Android card moves ABOVE the Apple card: with Apple
     // always on top, Android visitors were tapping the first big button,
     // landing on apps.apple.com, and concluding the app "isn't supported"
-    // on their phone. Both cards stay visible — highlight and reorder only.
-    (function highlightPlatform() {
+    // on their phone. Both cards stay visible on every device.
+    (function orderCardsForPlatform() {
       var ua = navigator.userAgent || '';
-      var isIOS = /iPad|iPhone|iPod/.test(ua) ||
-                  (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-      var isAndroid = /Android/.test(ua);
-      if (isIOS) {
-        document.getElementById('appleCard').classList.add('highlight');
-        document.getElementById('appleYou').classList.remove('hidden');
-      } else if (isAndroid) {
+      if (/Android/.test(ua)) {
         var androidCard = document.getElementById('androidCard');
         var appleCard = document.getElementById('appleCard');
-        androidCard.classList.add('highlight');
-        document.getElementById('androidYou').classList.remove('hidden');
         appleCard.parentNode.insertBefore(androidCard, appleCard);
       }
     })();
@@ -442,7 +750,13 @@
       window.open(APPLE_URL, '_blank');
     }
 
-    // ---- Android: request one code ----------------------------------------
+    // ---- Android step 1: plain Play listing — download first --------------
+    function openPlayStore() {
+      track('play_click');
+      window.open(PLAY_URL, '_blank');
+    }
+
+    // ---- Android step 2: request one code ----------------------------------
     function requestCode() {
       if (inFlight) return;            // guard against rapid double-clicks
       inFlight = true;
@@ -488,7 +802,7 @@
     function resetGetBtn() {
       var btn = document.getElementById('getBtn');
       btn.disabled = false;
-      btn.textContent = 'احصل على الكود';
+      btn.innerHTML = '<span>احصل على كود العرض</span><span>›</span>';
     }
 
     function showAndroid(id) {
@@ -498,7 +812,13 @@
         });
     }
 
-    // ---- Copy / Play / Video ----------------------------------------------
+    // ---- Redeem / Copy / Video ---------------------------------------------
+    function redeemOnPlay() {
+      if (!currentCode) return;
+      track('play_click');
+      window.open(PLAY_REDEEM_BASE + encodeURIComponent(currentCode), '_blank');
+    }
+
     function copyCode() {
       if (!currentCode) return;
       track('copy_click');
@@ -523,12 +843,6 @@
       var el = document.getElementById('toast');
       el.classList.add('show');
       setTimeout(function () { el.classList.remove('show'); }, 1700);
-    }
-
-    function redeemOnPlay() {
-      if (!currentCode) return;
-      track('play_click');
-      window.open(PLAY_REDEEM_BASE + encodeURIComponent(currentCode), '_blank');
     }
 
     function openVideo() {
