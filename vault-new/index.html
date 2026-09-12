@@ -393,7 +393,36 @@
       }
     })();
 
-    track('visit');   // count the landing-page view
+    // ---- Visit counting: fresh arrivals only, once per tab session --------
+    // iOS evicts backgrounded tabs; when the browser is foregrounded it fully
+    // RELOADS the restored tab, so this script runs again and re-fired the
+    // visit beacon (observed: opening link N logged a phantom visit for the
+    // still-open link N-1 tab one second earlier). Two independent checks,
+    // each covering the other's blind spot: the navigation type catches
+    // restores/reloads even if sessionStorage was wiped during eviction; the
+    // session flag catches browsers that mislabel a restore as 'navigate'.
+    // Click events are unaffected. ANY uncertainty fails open to counting —
+    // the worst outcome of an edge case is one extra visit, never a lost one.
+    function shouldCountVisit() {
+      var freshNavigation = true;
+      try {
+        var nav = performance.getEntriesByType &&
+                  performance.getEntriesByType('navigation');
+        if (nav && nav.length &&
+            (nav[0].type === 'reload' || nav[0].type === 'back_forward')) {
+          freshNavigation = false;
+        }
+      } catch (e) { /* timing API unavailable -> treat as fresh */ }
+      var alreadyCounted = false;
+      try {
+        var k = 'vault_visited';
+        alreadyCounted = !!sessionStorage.getItem(k);
+        if (!alreadyCounted) sessionStorage.setItem(k, '1');
+      } catch (e) { /* storage unavailable -> count every load */ }
+      return freshNavigation && !alreadyCounted;
+    }
+
+    if (shouldCountVisit()) track('visit');   // count the landing-page view
 
     // ---- Apple ------------------------------------------------------------
     function openApple() {
