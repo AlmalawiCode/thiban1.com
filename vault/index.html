@@ -218,11 +218,12 @@
       <div id="androidResult" class="hidden">
         <p class="code-label">كود العرض الخاص بك:</p>
         <div id="codeBox" class="code-box"></div>
-        <button class="btn-copy" onclick="copyCode()">نسخ الكود</button>
+        <button class="btn-android" onclick="redeemOnPlay()">فعِّل الكود في جوجل بلاي</button>
         <div class="steps">
-          <b>الطريقة:</b> انسخ الكود، ثم اضغط «فتح متجر جوجل بلاي» وأدخِل الكود لتحصل على النسخة الكاملة مجانًا مدى الحياة.
+          <b>الطريقة:</b> اضغط «فعِّل الكود في جوجل بلاي» وسيفتح المتجر والكود مُعبّأ تلقائيًا — أكِّد التفعيل ثم حمِّل التطبيق لتحصل على النسخة الكاملة مجانًا مدى الحياة.
+          <br>لم يفتح المتجر؟ انسخ الكود، ثم من تطبيق جوجل بلاي: صورة حسابك ← <b>الدفع والاشتراكات</b> ← <b>تفعيل رمز</b>.
         </div>
-        <button class="btn-play" onclick="openPlay()">فتح متجر جوجل بلاي</button>
+        <button class="btn-copy" onclick="copyCode()">نسخ الكود</button>
       </div>
 
       <!-- state: codes exhausted -->
@@ -253,7 +254,11 @@
   <script>
     // ---- URLs (single source of truth) ------------------------------------
     var APPLE_URL   = 'https://apps.apple.com/redeem?ctx=offercodes&id=6773164894&code=FREE500';
-    var PLAY_URL    = 'https://play.google.com/store/apps/details?id=com.vault.warranty';
+    // Play redeem deep link — opens the store's redeem sheet with the code
+    // already filled in, mirroring the Apple offer-code link above. The
+    // app-details listing has NO code-entry field, so sending users there
+    // with a copied code was a dead end.
+    var PLAY_REDEEM_BASE = 'https://play.google.com/redeem?code=';
     var YOUTUBE_URL = 'https://youtu.be/SjafmkwycsA?si=rSL71hC-_nZZMilL';
 
     // ---- Backend API via first-party proxy (api.thiban1.com -> Apps Script) -
@@ -379,6 +384,10 @@
     }
 
     // ---- Optional device highlight: highlight, never hide/redirect --------
+    // On Android the card is also moved ABOVE the Apple card: with Apple
+    // always on top, Android visitors were tapping the first big button,
+    // landing on apps.apple.com, and concluding the app "isn't supported"
+    // on their phone. Both cards stay visible — highlight and reorder only.
     (function highlightPlatform() {
       var ua = navigator.userAgent || '';
       var isIOS = /iPad|iPhone|iPod/.test(ua) ||
@@ -388,8 +397,11 @@
         document.getElementById('appleCard').classList.add('highlight');
         document.getElementById('appleYou').classList.remove('hidden');
       } else if (isAndroid) {
-        document.getElementById('androidCard').classList.add('highlight');
+        var androidCard = document.getElementById('androidCard');
+        var appleCard = document.getElementById('appleCard');
+        androidCard.classList.add('highlight');
         document.getElementById('androidYou').classList.remove('hidden');
+        appleCard.parentNode.insertBefore(androidCard, appleCard);
       }
     })();
 
@@ -513,9 +525,10 @@
       setTimeout(function () { el.classList.remove('show'); }, 1700);
     }
 
-    function openPlay() {
+    function redeemOnPlay() {
+      if (!currentCode) return;
       track('play_click');
-      window.open(PLAY_URL, '_blank');
+      window.open(PLAY_REDEEM_BASE + encodeURIComponent(currentCode), '_blank');
     }
 
     function openVideo() {
