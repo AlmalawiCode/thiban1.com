@@ -378,6 +378,13 @@
 
     .toast.show { opacity: 1; }
 
+    /* ---- Brand icons ---- */
+    .ic { flex: 0 0 auto; fill: currentColor; }
+    .btn-logo { width: 24px; height: 24px; }
+    .mark-apple { width: 46px; height: 56px; color: #0b1220; }
+    .mark-android { width: 64px; height: 40px; }
+    .gp-mark { width: 54px; height: 54px; margin-top: 18px; margin-bottom: 8px; }
+
     @media (max-width: 680px) {
       .hero,
       .section-head {
@@ -403,7 +410,9 @@
       }
 
       .arrow {
-        transform: rotate(90deg);
+        /* Stacked layout: the RTL "←" must rotate counter-clockwise to
+           point DOWN (clockwise was right for the LTR mockup's "→"). */
+        transform: rotate(-90deg);
         text-align: center;
       }
 
@@ -418,6 +427,33 @@
   </style>
 </head>
 <body>
+  <!-- Inline brand icons (SVG symbols) — no external requests, crisp at any
+       size. Referenced below via <use>. The monochrome Play glyph inherits
+       currentColor; the colored one carries the official palette. -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="ic-apple" viewBox="0 0 384 512">
+      <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.7-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+    </symbol>
+    <symbol id="ic-play" viewBox="0 0 24 24">
+      <path d="M3.4 1.5v21L14.7 12z"/>
+      <path d="M3.4 1.5l14.6 7.6-3.3 2.9z"/>
+      <path d="M3.4 22.5l14.6-7.6-3.3-2.9z"/>
+      <path d="M18 9.1l3 1.7c.9.5.9 1.9 0 2.4l-3 1.7L14.7 12z"/>
+    </symbol>
+    <symbol id="ic-play-color" viewBox="0 0 24 24">
+      <path fill="#00A0FF" d="M3.4 1.5v21L14.7 12z"/>
+      <path fill="#00F076" d="M3.4 1.5l14.6 7.6-3.3 2.9z"/>
+      <path fill="#FF3A44" d="M3.4 22.5l14.6-7.6-3.3-2.9z"/>
+      <path fill="#FFBC00" d="M18 9.1l3 1.7c.9.5.9 1.9 0 2.4l-3 1.7L14.7 12z"/>
+    </symbol>
+    <symbol id="ic-android" viewBox="0 0 24 15">
+      <path fill="#3DDC84" d="M3.2 13.8C3.5 8.9 7.3 5.1 12 5.1s8.5 3.8 8.8 8.7H3.2z"/>
+      <path stroke="#3DDC84" stroke-width="1.5" stroke-linecap="round" fill="none" d="M8.4 5.9 6.7 3M15.6 5.9 17.3 3"/>
+      <circle cx="8.8" cy="10.4" r="1.2" fill="#fff"/>
+      <circle cx="15.2" cy="10.4" r="1.2" fill="#fff"/>
+    </symbol>
+  </svg>
+
   <main class="page">
 
     <!-- Hero -->
@@ -435,7 +471,7 @@
     <!-- Apple -->
     <section class="card" id="appleCard">
       <div class="section-head">
-        <div class="icon-box">🍎</div>
+        <div class="icon-box"><svg class="ic mark-apple"><use href="#ic-apple"/></svg></div>
         <div class="section-head-content">
           <h2>مستخدمو أبل (آيفون وآيباد)</h2>
           <p class="desc">
@@ -447,6 +483,7 @@
       </div>
 
       <button class="button button-dark" onclick="openApple()">
+        <svg class="ic btn-logo"><use href="#ic-apple"/></svg>
         <span>حمّل التطبيق من App Store</span>
         <span>›</span>
       </button>
@@ -455,7 +492,7 @@
     <!-- Android -->
     <section class="card" id="androidCard">
       <div class="section-head">
-        <div class="icon-box">🤖</div>
+        <div class="icon-box"><svg class="ic mark-android"><use href="#ic-android"/></svg></div>
         <div class="section-head-content">
           <h2>مستخدمو أندرويد (سامسونج وغيرها)</h2>
           <div class="pill">مهم: لأندرويد توجد خطوتان</div>
@@ -468,10 +505,11 @@
           <div class="step">
             <div class="step-number">1</div>
             <div>
-              <div class="step-icon">▶️</div>
+              <svg class="ic gp-mark"><use href="#ic-play-color"/></svg>
               <h3>حمّل التطبيق من<br>Google Play</h3>
             </div>
             <button class="button button-green" onclick="openPlayStore()">
+              <svg class="ic btn-logo"><use href="#ic-play"/></svg>
               <span>حمّل من Google Play</span>
               <span>›</span>
             </button>
@@ -503,6 +541,7 @@
         <p class="code-label">كود العرض الخاص بك:</p>
         <div id="codeBox" class="code-box"></div>
         <button class="button button-green" onclick="redeemOnPlay()">
+          <svg class="ic btn-logo"><use href="#ic-play"/></svg>
           <span>فعِّل الكود في جوجل بلاي</span>
           <span>›</span>
         </button>
@@ -522,6 +561,7 @@
           عذرًا، نفدت الأكواد المجانية حاليًا لاكتمال العدد.</p>
         <p class="msg">ما زال بإمكانك تحميل التطبيق والاستفادة من النسخة المجانية.</p>
         <button class="button button-green" onclick="openPlayStore()">
+          <svg class="ic btn-logo"><use href="#ic-play"/></svg>
           <span>حمّل من Google Play</span>
           <span>›</span>
         </button>
