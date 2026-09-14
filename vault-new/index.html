@@ -247,21 +247,51 @@
       justify-content: space-between;
     }
 
-    .step-number {
-      position: absolute;
-      top: -16px;
-      right: 24px;
-      width: 54px;
-      height: 54px;
-      background: var(--green);
-      color: var(--white);
+    /* Step number, carried INSIDE the button as a leading circle. White disc so
+       it reads on both the black store badge and the green action button. */
+    .btn-num-inline {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
+      background: var(--white);
+      color: var(--green-dark);
       display: grid;
       place-items: center;
-      font-size: 1.8rem;
+      font-size: 1.05rem;
       font-weight: 800;
-      box-shadow: 0 6px 16px rgba(6, 122, 87, 0.28);
     }
+
+    /* Official-style store badge for the step-1 download buttons. Content is
+       LTR (logo left, two-line label right) like the real App Store / Play
+       badges; the leading number circle stays first in the RTL flow. */
+    .button-badge {
+      background: #000;
+      color: var(--white);
+      gap: 12px;
+    }
+
+    .button-badge .badge-label {
+      direction: ltr;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.12;
+      text-align: left;
+    }
+
+    .button-badge .badge-label small {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      opacity: 0.92;
+    }
+
+    .button-badge .badge-label b { font-size: 1.3rem; font-weight: 700; }
+
+    .badge-apple { width: 26px; height: 32px; color: var(--white); }
+    .badge-play  { width: 30px; height: 30px; }
 
     .arrow {
       font-size: 3rem;
@@ -274,7 +304,7 @@
        so each platform card scans in ~2s and takes far less vertical space. */
     .steps-compact .step {
       min-height: auto;
-      padding: 40px 16px 18px;
+      padding: 18px 16px 16px;
       justify-content: flex-start;
     }
 
@@ -505,19 +535,18 @@
       </div>
       <div class="steps steps-compact">
         <div class="step">
-          <div class="step-number">1</div>
-          <button class="button button-dark" onclick="openAppleStore()">
-            <svg class="ic btn-logo"><use href="#ic-apple"/></svg>
-            <span>حمّل من App Store</span>
-            <span>›</span>
+          <button class="button button-badge" onclick="openAppleStore()">
+            <span class="btn-num-inline">1</span>
+            <svg class="ic badge-apple"><use href="#ic-apple"/></svg>
+            <span class="badge-label"><small>Download on the</small><b>App Store</b></span>
           </button>
         </div>
 
         <div class="arrow">←</div>
 
         <div class="step">
-          <div class="step-number">2</div>
           <button class="button button-green" onclick="openAppleRedeem()">
+            <span class="btn-num-inline">2</span>
             <span>فعّل العرض المجاني</span>
             <span>›</span>
           </button>
@@ -540,19 +569,18 @@
       <div id="androidIntro">
         <div class="steps steps-compact">
           <div class="step">
-            <div class="step-number">1</div>
-            <button class="button button-green" onclick="openPlayStore()">
-              <svg class="ic btn-logo"><use href="#ic-play"/></svg>
-              <span>حمّل من Google Play</span>
-              <span>›</span>
+            <button class="button button-badge" onclick="openPlayStore()">
+              <span class="btn-num-inline">1</span>
+              <svg class="ic badge-play"><use href="#ic-play-color"/></svg>
+              <span class="badge-label"><small>GET IT ON</small><b>Google Play</b></span>
             </button>
           </div>
 
           <div class="arrow">←</div>
 
           <div class="step">
-            <div class="step-number">2</div>
             <button class="button button-green" id="getBtn" onclick="requestCode()">
+              <span class="btn-num-inline">2</span>
               <span>احصل على كود العرض</span>
               <span>›</span>
             </button>
@@ -877,7 +905,7 @@
     function resetGetBtn() {
       var btn = document.getElementById('getBtn');
       btn.disabled = false;
-      btn.innerHTML = '<span>احصل على كود العرض</span><span>›</span>';
+      btn.innerHTML = '<span class="btn-num-inline">2</span><span>احصل على كود العرض</span><span>›</span>';
     }
 
     function showAndroid(id) {
