@@ -272,23 +272,9 @@
     }
 
     .button-badge .badge-label {
-      direction: ltr;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      line-height: 1.12;
-      text-align: left;
+      font-size: 1.2rem;
+      font-weight: 700;
     }
-
-    .button-badge .badge-label small {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      opacity: 0.92;
-    }
-
-    .button-badge .badge-label b { font-size: 1.3rem; font-weight: 700; }
 
     .badge-apple { width: 26px; height: 32px; color: var(--white); }
     .badge-play  { width: 30px; height: 30px; }
@@ -459,6 +445,7 @@
 
       .steps {
         grid-template-columns: 1fr;
+        gap: 4px;
       }
 
       .arrow {
@@ -466,6 +453,9 @@
            point DOWN (clockwise was right for the LTR mockup's "→"). */
         transform: rotate(-90deg);
         text-align: center;
+        font-size: 1.6rem;
+        padding: 0;
+        line-height: 1;
       }
 
       .step {
@@ -537,8 +527,8 @@
         <div class="step">
           <button class="button button-badge" onclick="openAppleStore()">
             <span class="btn-num-inline">1</span>
+            <span class="badge-label">نزّل من App Store</span>
             <svg class="ic badge-apple"><use href="#ic-apple"/></svg>
-            <span class="badge-label"><small>Download on the</small><b>App Store</b></span>
           </button>
         </div>
 
@@ -571,8 +561,8 @@
           <div class="step">
             <button class="button button-badge" onclick="openPlayStore()">
               <span class="btn-num-inline">1</span>
+              <span class="badge-label">نزّل من Google Play</span>
               <svg class="ic badge-play"><use href="#ic-play-color"/></svg>
-              <span class="badge-label"><small>GET IT ON</small><b>Google Play</b></span>
             </button>
           </div>
 
