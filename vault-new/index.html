@@ -101,6 +101,33 @@
       line-height: 1.8;
     }
 
+    /* Availability badges — signal BOTH stores up front. Some visitors saw the
+       Apple card first (it leads on iPhone) and assumed the app was Apple-only.
+       Informational only; the real download actions live in the cards below. */
+    .hero-stores {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .store-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .store-chip .chip-apple { width: 18px; height: 22px; color: #0b1220; }
+    .store-chip .chip-play  { width: 20px; height: 20px; }
+
     .section-head {
       display: flex;
       align-items: flex-start;
@@ -402,6 +429,10 @@
         font-size: 1.8rem;
       }
 
+      .hero-stores {
+        justify-content: center;
+      }
+
       h2 {
         font-size: 1.6rem;
       }
@@ -470,6 +501,16 @@
           روابط التحميل أدناه. في الحالتين:
           <strong>حمّل التطبيق أولاً</strong> ثم فعّل العرض المجاني.
         </p>
+        <div class="hero-stores" aria-label="متوفر على App Store و Google Play">
+          <span class="store-chip">
+            <svg class="ic chip-apple"><use href="#ic-apple"/></svg>
+            <span>App Store</span>
+          </span>
+          <span class="store-chip">
+            <svg class="ic chip-play"><use href="#ic-play-color"/></svg>
+            <span>Google Play</span>
+          </span>
+        </div>
       </div>
     </section>
 
