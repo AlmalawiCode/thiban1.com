@@ -128,27 +128,6 @@
     .store-chip .chip-apple { width: 18px; height: 22px; color: #0b1220; }
     .store-chip .chip-play  { width: 20px; height: 20px; }
 
-    .section-head {
-      display: flex;
-      align-items: flex-start;
-      gap: 18px;
-    }
-
-    .icon-box {
-      flex: 0 0 110px;
-      width: 110px;
-      height: 110px;
-      border-radius: 22px;
-      background: #f2f5f4;
-      display: grid;
-      place-items: center;
-      font-size: 56px;
-    }
-
-    .section-head-content {
-      flex: 1;
-    }
-
     h2 {
       margin: 0 0 10px;
       font-size: 1.85rem;
@@ -157,7 +136,7 @@
       font-weight: 800;
     }
 
-    /* Compact platform-card header — small title + inline brand glyph, replacing
+    /* Compact card header — small title + inline brand glyph / emoji, replacing
        the old icon-box + heading + "two steps" pill (all repeated the buttons). */
     .card-title {
       display: flex;
@@ -171,12 +150,7 @@
       font-size: 1.4rem;
     }
 
-    .desc {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.15rem;
-      line-height: 1.9;
-    }
+    .title-emoji { font-size: 1.5rem; line-height: 1; }
 
     .button {
       display: flex;
@@ -306,24 +280,22 @@
       text-align: center;
     }
 
-    .video-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
+    /* Responsive 16:9 YouTube embed — plays inline, or tap through to YouTube. */
+    .video-embed {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: #000;
     }
 
-    .video-play {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--green);
-      color: white;
-      display: grid;
-      place-items: center;
-      font-size: 1.2rem;
-      font-weight: bold;
-      flex: 0 0 48px;
+    .video-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     .footer {
@@ -420,8 +392,7 @@
     .title-mark-android { width: 30px; height: 19px; }
 
     @media (max-width: 680px) {
-      .hero,
-      .section-head {
+      .hero {
         flex-direction: column;
         align-items: center;
         text-align: center;
@@ -433,14 +404,6 @@
 
       .hero-stores {
         justify-content: center;
-      }
-
-      h2 {
-        font-size: 1.6rem;
-      }
-
-      .desc {
-        font-size: 1.05rem;
       }
 
       .steps {
@@ -619,22 +582,16 @@
 
     <!-- Video -->
     <section class="card">
-      <div class="section-head">
-        <div class="icon-box">🎥</div>
-        <div class="section-head-content">
-          <h2>كيف يحميك التطبيق من ضياع الضمان؟</h2>
-          <p class="desc">
-            شاهد شرحاً قصيراً يوضح كيف تحفظ الفاتورة في ثوانٍ،
-            وكيف يذكّرك التطبيق قبل انتهاء الضمان.
-          </p>
-        </div>
+      <div class="card-title">
+        <span class="title-emoji">🎥</span>
+        <h2>شاهد الشرح</h2>
       </div>
-
-      <button class="button button-outline video-button" onclick="openVideo()">
-        <span class="video-play">▶</span>
-        <span>شاهد الشرح القصير</span>
-        <span>›</span>
-      </button>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/SjafmkwycsA" title="شاهد الشرح"
+          loading="lazy" allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
     </section>
 
     <!-- Footer -->
@@ -661,7 +618,6 @@
     // app-details listing (step 1) has no code-entry field, so redeeming
     // goes through this link or the manual path in the instructions.
     var PLAY_REDEEM_BASE = 'https://play.google.com/redeem?code=';
-    var YOUTUBE_URL = 'https://youtu.be/SjafmkwycsA?si=rSL71hC-_nZZMilL';
 
     // ---- Backend API via first-party proxy (api.thiban1.com -> Apps Script) -
     // Same-site request, so iOS tracking protection / content blockers don't
@@ -936,11 +892,6 @@
       var el = document.getElementById('toast');
       el.classList.add('show');
       setTimeout(function () { el.classList.remove('show'); }, 1700);
-    }
-
-    function openVideo() {
-      track('youtube_click');
-      window.open(YOUTUBE_URL, '_blank');
     }
   </script>
 </body>
