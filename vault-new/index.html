@@ -157,6 +157,20 @@
       font-weight: 800;
     }
 
+    /* Compact platform-card header — small title + inline brand glyph, replacing
+       the old icon-box + heading + "two steps" pill (all repeated the buttons). */
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .card-title h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
     .desc {
       margin: 0;
       color: var(--muted);
@@ -213,18 +227,6 @@
       border: 2px solid #a8cabd;
     }
 
-    .pill {
-      display: inline-block;
-      margin-top: 16px;
-      margin-bottom: 22px;
-      background: var(--green-soft);
-      color: var(--green-dark);
-      padding: 14px 20px;
-      border-radius: 999px;
-      font-size: 1.3rem;
-      font-weight: 800;
-    }
-
     .steps {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -261,19 +263,6 @@
       box-shadow: 0 6px 16px rgba(6, 122, 87, 0.28);
     }
 
-    .step-icon {
-      font-size: 58px;
-      margin-top: 18px;
-      margin-bottom: 8px;
-    }
-
-    .step h3 {
-      margin: 10px 0 14px;
-      font-size: 1.65rem;
-      line-height: 1.4;
-      color: var(--green-dark);
-    }
-
     .arrow {
       font-size: 3rem;
       color: var(--green);
@@ -281,12 +270,24 @@
       padding: 0 6px;
     }
 
-    .note {
-      margin-top: 20px;
+    /* Compact steps: number badge + button only (no repeated heading/icon),
+       so each platform card scans in ~2s and takes far less vertical space. */
+    .steps-compact .step {
+      min-height: auto;
+      padding: 40px 16px 18px;
+      justify-content: flex-start;
+    }
+
+    .steps-compact .button {
+      margin-top: 0;
+    }
+
+    .step-note {
+      margin: 12px 0 0;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--muted);
       text-align: center;
-      color: #445651;
-      font-size: 1.12rem;
-      line-height: 1.9;
     }
 
     .video-button {
@@ -354,19 +355,6 @@
       font-family: "Menlo", "Consolas", "SF Mono", monospace;
     }
 
-    .howto {
-      background: var(--green-soft);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 13px 15px;
-      margin-top: 16px;
-      font-size: 1.02rem;
-      color: var(--text);
-      line-height: 1.9;
-    }
-
-    .howto b { color: var(--green-dark); }
-
     .msg {
       font-size: 1.1rem;
       line-height: 1.9;
@@ -412,10 +400,8 @@
     /* ---- Brand icons ---- */
     .ic { flex: 0 0 auto; fill: currentColor; }
     .btn-logo { width: 24px; height: 24px; }
-    .mark-apple { width: 46px; height: 56px; color: #0b1220; }
-    .mark-android { width: 64px; height: 40px; }
-    .gp-mark { width: 54px; height: 54px; margin-top: 18px; margin-bottom: 8px; }
-    .step-apple-mark { width: 44px; height: 54px; color: #0b1220; margin-top: 18px; margin-bottom: 8px; }
+    .title-mark-apple { width: 20px; height: 25px; color: #0b1220; }
+    .title-mark-android { width: 30px; height: 19px; }
 
     @media (max-width: 680px) {
       .hero,
@@ -497,10 +483,7 @@
       <div class="hero-icon">🎁</div>
       <div class="hero-content">
         <h1>النسخة الكاملة مجاناً مدى الحياة — العدد محدود</h1>
-        <p>
-          روابط التحميل أدناه. في الحالتين:
-          <strong>حمّل التطبيق أولاً</strong> ثم فعّل العرض المجاني.
-        </p>
+        <p>روابط التحميل أدناه.</p>
         <div class="hero-stores" aria-label="متوفر على App Store و Google Play">
           <span class="store-chip">
             <svg class="ic chip-play"><use href="#ic-play-color"/></svg>
@@ -516,21 +499,13 @@
 
     <!-- Apple -->
     <section class="card" id="appleCard">
-      <div class="section-head">
-        <div class="icon-box"><svg class="ic mark-apple"><use href="#ic-apple"/></svg></div>
-        <div class="section-head-content">
-          <h2>مستخدمو أبل (آيفون وآيباد)</h2>
-          <div class="pill">مهم: لأبل توجد خطوتان</div>
-        </div>
+      <div class="card-title">
+        <svg class="ic title-mark-apple"><use href="#ic-apple"/></svg>
+        <h2>أبل — آيفون وآيباد</h2>
       </div>
-
-      <div class="steps">
+      <div class="steps steps-compact">
         <div class="step">
           <div class="step-number">1</div>
-          <div>
-            <svg class="ic step-apple-mark"><use href="#ic-apple"/></svg>
-            <h3>حمّل التطبيق من<br>App Store</h3>
-          </div>
           <button class="button button-dark" onclick="openAppleStore()">
             <svg class="ic btn-logo"><use href="#ic-apple"/></svg>
             <span>حمّل من App Store</span>
@@ -542,42 +517,30 @@
 
         <div class="step">
           <div class="step-number">2</div>
-          <div>
-            <div class="step-icon">🎁</div>
-            <h3>فعّل النسخة الكاملة<br>مجانًا مدى الحياة</h3>
-          </div>
           <button class="button button-green" onclick="openAppleRedeem()">
             <span>فعّل العرض المجاني</span>
             <span>›</span>
           </button>
+          <p class="step-note">
+            العرض محدود بالعدد والمدة، وبعد انتهائه يمكنك استخدام التطبيق
+            مجانًا حتى 3 فواتير.
+          </p>
         </div>
       </div>
-
-      <p class="note">
-        العرض محدود بالعدد والمدة، وبعد انتهائه يمكنك استخدام التطبيق
-        مجانًا حتى 3 فواتير.
-      </p>
     </section>
 
     <!-- Android -->
     <section class="card" id="androidCard">
-      <div class="section-head">
-        <div class="icon-box"><svg class="ic mark-android"><use href="#ic-android"/></svg></div>
-        <div class="section-head-content">
-          <h2>مستخدمو أندرويد (سامسونج وغيرها)</h2>
-          <div class="pill">مهم: لأندرويد توجد خطوتان</div>
-        </div>
+      <div class="card-title">
+        <svg class="ic title-mark-android"><use href="#ic-android"/></svg>
+        <h2>أندرويد</h2>
       </div>
 
       <!-- state: intro — the two-step flow -->
       <div id="androidIntro">
-        <div class="steps">
+        <div class="steps steps-compact">
           <div class="step">
             <div class="step-number">1</div>
-            <div>
-              <svg class="ic gp-mark"><use href="#ic-play-color"/></svg>
-              <h3>حمّل التطبيق من<br>Google Play</h3>
-            </div>
             <button class="button button-green" onclick="openPlayStore()">
               <svg class="ic btn-logo"><use href="#ic-play"/></svg>
               <span>حمّل من Google Play</span>
@@ -589,20 +552,12 @@
 
           <div class="step">
             <div class="step-number">2</div>
-            <div>
-              <div class="step-icon">🎟️</div>
-              <h3>بعد التحميل، احصل<br>على كود العرض</h3>
-            </div>
             <button class="button button-green" id="getBtn" onclick="requestCode()">
               <span>احصل على كود العرض</span>
               <span>›</span>
             </button>
           </div>
         </div>
-
-        <p class="note">
-          بعد تثبيت التطبيق، استخدم كود العرض لتفعيل النسخة الكاملة.
-        </p>
       </div>
 
       <!-- state: success (one code) -->
@@ -611,14 +566,9 @@
         <div id="codeBox" class="code-box"></div>
         <button class="button button-green" onclick="redeemOnPlay()">
           <svg class="ic btn-logo"><use href="#ic-play"/></svg>
-          <span>فعِّل الكود في جوجل بلاي</span>
+          <span>فعِّل الكود في Google Play</span>
           <span>›</span>
         </button>
-        <div class="howto">
-          <b>الطريقة:</b> اضغط «فعِّل الكود في جوجل بلاي» وسيفتح المتجر والكود مُعبّأ تلقائيًا — أكِّد التفعيل لتحصل على النسخة الكاملة.
-          <br>لم يفتح المتجر؟ انسخ الكود، ثم من تطبيق جوجل بلاي: صورة حسابك ← <b>الدفع والاشتراكات</b> ← <b>تفعيل رمز</b>.
-          <br>لم تحمّل التطبيق بعد؟ <a href="#" onclick="openPlayStore(); return false;">حمّله من Google Play أولاً</a>.
-        </div>
         <button class="button button-outline" onclick="copyCode()">
           <span>نسخ الكود</span>
         </button>
