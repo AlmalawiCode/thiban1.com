@@ -662,7 +662,8 @@ APPS = {
         # its privacy policy in more languages than its other content.
         "overview_langs": ["en", "ar"],
         "privacy_langs": ["en", "ar", "de", "fr", "es", "tr", "ja", "ko",
-                          "id", "ms", "zh", "pt", "it", "ru", "nl", "ur", "bn"],
+                          "id", "ms", "zh", "pt", "it", "ru", "nl", "ur", "bn",
+                          "hi"],
         "tutorial_langs": ["en", "ar"],
         "support_langs": ["en", "ar"],
         "screens": [
@@ -720,6 +721,7 @@ LANG_META = {
     "nl": ("Nederlands", "ltr"),
     "ur": ("اردو",     "rtl"),
     "bn": ("বাংলা",    "ltr"),
+    "hi": ("हिन्दी",    "ltr"),
 }
 
 NAV = [
