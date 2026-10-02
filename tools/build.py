@@ -658,7 +658,8 @@ APPS = {
         # Language availability is tracked per CONTENT TYPE — an app may ship
         # its privacy policy in more languages than its other content.
         "overview_langs": ["en", "ar"],
-        "privacy_langs": ["en", "ar"],
+        "privacy_langs": ["en", "ar", "de", "fr", "es", "tr", "ja", "ko",
+                          "id", "ms", "zh", "pt", "it", "ru", "nl", "ur", "bn"],
         "tutorial_langs": ["en", "ar"],
         "support_langs": ["en", "ar"],
         "screens": [
@@ -707,6 +708,15 @@ LANG_META = {
     "tr": ("Türkçe",   "ltr"),
     "ja": ("日本語",    "ltr"),
     "ko": ("한국어",    "ltr"),
+    "id": ("Bahasa Indonesia", "ltr"),
+    "ms": ("Bahasa Melayu", "ltr"),
+    "zh": ("简体中文",  "ltr"),
+    "pt": ("Português (Brasil)", "ltr"),
+    "it": ("Italiano", "ltr"),
+    "ru": ("Русский",  "ltr"),
+    "nl": ("Nederlands", "ltr"),
+    "ur": ("اردو",     "rtl"),
+    "bn": ("বাংলা",    "ltr"),
 }
 
 NAV = [

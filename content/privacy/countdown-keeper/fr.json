@@ -1,0 +1,101 @@
+{
+ "lang": "fr",
+ "lang_name": "Français",
+ "dir": "ltr",
+ "title": "Politique de confidentialité de Countdown Keeper",
+ "effective": "Dernière mise à jour : septembre 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Countdown Keeper (« l’application ») est une application mobile publiée par Thiban Tech Solutions. La présente politique explique comment l’application traite vos informations. Nous respectons votre vie privée : l’application ne nécessite aucune connexion, et nous ne collectons, ne vendons ni ne partageons vos informations personnelles."
+  },
+  {
+   "t": "h2",
+   "html": "Informations traitées par l’application"
+  },
+  {
+   "t": "p",
+   "html": "L’application enregistre le contenu que vous créez : titres, dates et heures des événements, notes, couleurs, un emoji ou une photo facultative que vous joignez, ainsi que vos réglages de l’application. Ces informations sont stockées sur votre appareil et servent uniquement à afficher vos compteurs et vos rappels."
+  },
+  {
+   "t": "h2",
+   "html": "Autorisations de l’appareil"
+  },
+  {
+   "t": "html",
+   "html": "<ul><li><strong>Notifications</strong> — utilisées uniquement si vous activez les rappels, afin de vous alerter avant un événement.</li><li><strong>Appareil photo</strong> — facultatif, pour vous permettre de prendre une photo à joindre à un événement.</li><li><strong>Photos</strong> — facultatif, pour vous permettre de choisir une photo pour un événement ou d’enregistrer l’image d’un événement dans votre galerie.</li><li><strong>Biométrie / Face ID</strong> — facultatif, uniquement pour déverrouiller l’application si vous activez le verrouillage de l’application.</li><li><strong>Exécution après redémarrage (Android)</strong> — afin que les rappels programmés soient conservés après un redémarrage de l’appareil.</li></ul><p>Chaque autorisation n’est demandée que lorsque vous utilisez la fonctionnalité correspondante.</p>"
+  },
+  {
+   "t": "h2",
+   "html": "Stockage des données"
+  },
+  {
+   "t": "p",
+   "html": "L’ensemble de vos événements et réglages est stocké localement sur votre appareil. L’application peut exporter vos événements dans un fichier JSON et les réimporter ; vous choisissez où ce fichier est enregistré et avec qui, le cas échéant, vous le partagez."
+  },
+  {
+   "t": "h2",
+   "html": "Partage des données"
+  },
+  {
+   "t": "p",
+   "html": "Nous ne vendons ni ne partageons vos données. L’application ne comporte aucun compte utilisateur ni aucun serveur Countdown Keeper ; rien de ce que vous saisissez ne nous est envoyé."
+  },
+  {
+   "t": "h2",
+   "html": "Services tiers"
+  },
+  {
+   "t": "p",
+   "html": "L’application n’utilise aucun service d’analyse, de publicité ou de rapport de plantage. La seule requête réseau qu’elle peut effectuer est adressée à Google Fonts afin de télécharger la police d’affichage la première fois qu’elle est nécessaire ; comme toute requête web, celle-ci inclut l’adresse IP de votre appareil, mais aucune donnée personnelle ni aucun contenu de l’application n’est transmis. Pour le reste, l’application fonctionne entièrement hors ligne."
+  },
+  {
+   "t": "h2",
+   "html": "Conservation des données"
+  },
+  {
+   "t": "p",
+   "html": "Vos données restent sur votre appareil jusqu’à ce que vous les supprimiez. La suppression d’un événement le déplace vers la corbeille, d’où il est ensuite définitivement supprimé. La désinstallation de l’application supprime toutes ses données locales."
+  },
+  {
+   "t": "h2",
+   "html": "Confidentialité des enfants"
+  },
+  {
+   "t": "p",
+   "html": "L’application ne s’adresse pas aux enfants et ne collecte pas sciemment d’informations auprès d’enfants."
+  },
+  {
+   "t": "h2",
+   "html": "Sécurité"
+  },
+  {
+   "t": "p",
+   "html": "Vos données sont protégées par la sécurité propre à votre appareil et par l’environnement isolé (sandbox) de l’application. Vous pouvez ajouter une protection supplémentaire grâce au verrouillage biométrique facultatif de l’application."
+  },
+  {
+   "t": "h2",
+   "html": "Vos choix"
+  },
+  {
+   "t": "p",
+   "html": "Vous contrôlez les autorisations de l’application depuis les réglages de votre appareil, et vous pouvez exporter ou supprimer vos données à tout moment depuis l’application."
+  },
+  {
+   "t": "h2",
+   "html": "Modifications de cette politique de confidentialité"
+  },
+  {
+   "t": "p",
+   "html": "Nous pouvons mettre à jour cette politique de temps à autre. Toute modification sera publiée sur cette page avec une nouvelle date."
+  },
+  {
+   "t": "h2",
+   "html": "Contact"
+  },
+  {
+   "t": "p",
+   "html": "Si vous avez des questions concernant cette politique, vous pouvez nous contacter à <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>."
+  }
+ ]
+}

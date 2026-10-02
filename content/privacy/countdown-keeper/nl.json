@@ -1,0 +1,101 @@
+{
+ "lang": "nl",
+ "lang_name": "Nederlands",
+ "dir": "ltr",
+ "title": "Privacybeleid van Countdown Keeper",
+ "effective": "Laatst bijgewerkt: september 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Countdown Keeper (‘de app’) is een mobiele app die wordt uitgegeven door Thiban Tech Solutions. Dit beleid legt uit hoe de app met je gegevens omgaat. Wij respecteren je privacy: de app vereist geen aanmelding en wij verzamelen, verkopen of delen je persoonsgegevens niet."
+  },
+  {
+   "t": "h2",
+   "html": "Gegevens die de app verwerkt"
+  },
+  {
+   "t": "p",
+   "html": "De app slaat de inhoud op die je zelf aanmaakt: titels, datums en tijden van gebeurtenissen, notities, kleuren, een emoji of een optionele foto die je toevoegt, en je app-instellingen. Deze gegevens worden op je apparaat opgeslagen en uitsluitend gebruikt om je tellers en herinneringen te tonen."
+  },
+  {
+   "t": "h2",
+   "html": "Apparaatmachtigingen"
+  },
+  {
+   "t": "html",
+   "html": "<ul><li><strong>Meldingen</strong> — alleen gebruikt als je herinneringen inschakelt, om je vóór een gebeurtenis te waarschuwen.</li><li><strong>Camera</strong> — optioneel, zodat je een foto kunt maken om aan een gebeurtenis toe te voegen.</li><li><strong>Foto's</strong> — optioneel, zodat je een foto voor een gebeurtenis kunt kiezen of een afbeelding van een gebeurtenis in je galerij kunt opslaan.</li><li><strong>Biometrie / Face ID</strong> — optioneel, alleen om de app te ontgrendelen als je de app-vergrendeling inschakelt.</li><li><strong>Uitvoeren na herstart (Android)</strong> — zodat geplande herinneringen behouden blijven na het opnieuw opstarten van het apparaat.</li></ul><p>Elke machtiging wordt pas gevraagd wanneer je de bijbehorende functie gebruikt.</p>"
+  },
+  {
+   "t": "h2",
+   "html": "Gegevensopslag"
+  },
+  {
+   "t": "p",
+   "html": "Al je gebeurtenissen en instellingen worden lokaal op je apparaat opgeslagen. De app kan je gebeurtenissen exporteren naar een JSON-bestand en ze weer importeren; jij bepaalt waar dat bestand wordt opgeslagen en met wie je het eventueel deelt."
+  },
+  {
+   "t": "h2",
+   "html": "Delen van gegevens"
+  },
+  {
+   "t": "p",
+   "html": "Wij verkopen of delen je gegevens niet. De app heeft geen gebruikersaccounts en geen Countdown Keeper-server; niets van wat je invoert, wordt naar ons verzonden."
+  },
+  {
+   "t": "h2",
+   "html": "Diensten van derden"
+  },
+  {
+   "t": "p",
+   "html": "De app gebruikt geen analyse-, advertentie- of crashrapportagediensten. Het enige netwerkverzoek dat de app kan doen, is aan Google Fonts om het weergavelettertype te downloaden wanneer dat voor het eerst nodig is; zoals elk webverzoek bevat dit het IP-adres van je apparaat, maar er worden geen persoonsgegevens of app-inhoud verzonden. Verder werkt de app volledig offline."
+  },
+  {
+   "t": "h2",
+   "html": "Bewaartermijn"
+  },
+  {
+   "t": "p",
+   "html": "Je gegevens blijven op je apparaat totdat je ze verwijdert. Een verwijderde gebeurtenis wordt naar de prullenbak verplaatst en daar later definitief uit verwijderd. Als je de app verwijdert, worden alle lokale gegevens van de app verwijderd."
+  },
+  {
+   "t": "h2",
+   "html": "Privacy van kinderen"
+  },
+  {
+   "t": "p",
+   "html": "De app is niet gericht op kinderen en verzamelt niet bewust gegevens van kinderen."
+  },
+  {
+   "t": "h2",
+   "html": "Beveiliging"
+  },
+  {
+   "t": "p",
+   "html": "Je gegevens worden beschermd door de eigen beveiliging van je apparaat en de sandbox van de app. Je kunt een extra beveiligingslaag toevoegen met de optionele biometrische app-vergrendeling."
+  },
+  {
+   "t": "h2",
+   "html": "Jouw keuzes"
+  },
+  {
+   "t": "p",
+   "html": "Je beheert de machtigingen van de app via de instellingen van je apparaat, en je kunt je gegevens op elk moment vanuit de app exporteren of verwijderen."
+  },
+  {
+   "t": "h2",
+   "html": "Wijzigingen in dit beleid"
+  },
+  {
+   "t": "p",
+   "html": "Wij kunnen dit beleid van tijd tot tijd bijwerken. Eventuele wijzigingen worden op deze pagina gepubliceerd met een nieuwe datum."
+  },
+  {
+   "t": "h2",
+   "html": "Contact"
+  },
+  {
+   "t": "p",
+   "html": "Als je vragen hebt over dit beleid, neem dan contact met ons op via <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>."
+  }
+ ]
+}

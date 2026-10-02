@@ -1,0 +1,101 @@
+{
+ "lang": "pt",
+ "lang_name": "Português (Brasil)",
+ "dir": "ltr",
+ "title": "Política de Privacidade do Countdown Keeper",
+ "effective": "Última atualização: setembro de 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "O Countdown Keeper (“o aplicativo”) é um aplicativo para dispositivos móveis publicado pela Thiban Tech Solutions. Esta política explica como o aplicativo trata as suas informações. Respeitamos a sua privacidade: o aplicativo não exige login, e não coletamos, vendemos nem compartilhamos as suas informações pessoais."
+  },
+  {
+   "t": "h2",
+   "html": "Informações tratadas pelo aplicativo"
+  },
+  {
+   "t": "p",
+   "html": "O aplicativo armazena o conteúdo que você cria: títulos de eventos, datas e horários, anotações, cores, um emoji ou uma foto opcional que você anexar, além das configurações do aplicativo. Essas informações ficam armazenadas no seu dispositivo e são usadas apenas para exibir seus contadores e lembretes."
+  },
+  {
+   "t": "h2",
+   "html": "Permissões do dispositivo"
+  },
+  {
+   "t": "html",
+   "html": "<ul><li><strong>Notificações</strong> — usadas somente se você ativar os lembretes, para avisá-lo antes de um evento.</li><li><strong>Câmera</strong> — opcional, para que você possa tirar uma foto e anexá-la a um evento.</li><li><strong>Fotos</strong> — opcional, para que você possa escolher uma foto para um evento ou salvar a imagem de um evento na sua galeria.</li><li><strong>Biometria / Face ID</strong> — opcional, apenas para desbloquear o aplicativo se você ativar o bloqueio do aplicativo.</li><li><strong>Executar após reinicialização (Android)</strong> — para que os lembretes agendados continuem válidos após a reinicialização do dispositivo.</li></ul><p>Cada permissão é solicitada somente quando você usa o recurso relacionado.</p>"
+  },
+  {
+   "t": "h2",
+   "html": "Armazenamento de dados"
+  },
+  {
+   "t": "p",
+   "html": "Todos os seus eventos e configurações são armazenados localmente no seu dispositivo. O aplicativo pode exportar seus eventos para um arquivo JSON e importá-los de volta; você escolhe onde esse arquivo será salvo e com quem, se for o caso, irá compartilhá-lo."
+  },
+  {
+   "t": "h2",
+   "html": "Compartilhamento de dados"
+  },
+  {
+   "t": "p",
+   "html": "Não vendemos nem compartilhamos os seus dados. O aplicativo não possui contas de usuário nem servidor do Countdown Keeper; nada do que você digita é enviado para nós."
+  },
+  {
+   "t": "h2",
+   "html": "Serviços de terceiros"
+  },
+  {
+   "t": "p",
+   "html": "O aplicativo não utiliza serviços de análise, publicidade ou relatórios de falhas. A única solicitação de rede que ele pode fazer é ao Google Fonts, para baixar a fonte de exibição na primeira vez em que ela for necessária; como qualquer solicitação na web, ela inclui o endereço IP do seu dispositivo, mas nenhum dado pessoal ou conteúdo do aplicativo é enviado. Fora isso, o aplicativo funciona totalmente offline."
+  },
+  {
+   "t": "h2",
+   "html": "Retenção de dados"
+  },
+  {
+   "t": "p",
+   "html": "Seus dados permanecem no seu dispositivo até que você os exclua. Ao excluir um evento, ele é movido para a lixeira, de onde é removido permanentemente mais tarde. Desinstalar o aplicativo remove todos os seus dados locais."
+  },
+  {
+   "t": "h2",
+   "html": "Privacidade de crianças"
+  },
+  {
+   "t": "p",
+   "html": "O aplicativo não é direcionado a crianças e não coleta intencionalmente informações de crianças."
+  },
+  {
+   "t": "h2",
+   "html": "Segurança"
+  },
+  {
+   "t": "p",
+   "html": "Seus dados são protegidos pela segurança do próprio dispositivo e pelo isolamento (sandbox) do aplicativo. Você pode adicionar uma camada extra de proteção com o bloqueio biométrico opcional do aplicativo."
+  },
+  {
+   "t": "h2",
+   "html": "Suas escolhas"
+  },
+  {
+   "t": "p",
+   "html": "Você controla as permissões do aplicativo nas configurações do seu dispositivo e pode exportar ou excluir seus dados a qualquer momento dentro do aplicativo."
+  },
+  {
+   "t": "h2",
+   "html": "Alterações nesta política"
+  },
+  {
+   "t": "p",
+   "html": "Podemos atualizar esta política periodicamente. Quaisquer alterações serão publicadas nesta página com uma nova data."
+  },
+  {
+   "t": "h2",
+   "html": "Contato"
+  },
+  {
+   "t": "p",
+   "html": "Se tiver dúvidas sobre esta política, entre em contato conosco pelo e-mail <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>."
+  }
+ ]
+}

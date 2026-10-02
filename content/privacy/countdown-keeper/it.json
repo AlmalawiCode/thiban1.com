@@ -1,0 +1,101 @@
+{
+ "lang": "it",
+ "lang_name": "Italiano",
+ "dir": "ltr",
+ "title": "Informativa sulla privacy di Countdown Keeper",
+ "effective": "Ultimo aggiornamento: settembre 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Countdown Keeper («l'app») è un'app per dispositivi mobili pubblicata da Thiban Tech Solutions. La presente informativa spiega come l'app tratta le tue informazioni. Rispettiamo la tua privacy: l'app non richiede l'accesso con un account e non raccogliamo, vendiamo né condividiamo le tue informazioni personali."
+  },
+  {
+   "t": "h2",
+   "html": "Informazioni trattate dall'app"
+  },
+  {
+   "t": "p",
+   "html": "L'app memorizza i contenuti che crei: titoli, date e orari degli eventi, note, colori, un'emoji o una foto facoltativa che alleghi, nonché le impostazioni dell'app. Queste informazioni sono memorizzate sul tuo dispositivo e vengono utilizzate esclusivamente per mostrare i tuoi contatori e promemoria."
+  },
+  {
+   "t": "h2",
+   "html": "Autorizzazioni del dispositivo"
+  },
+  {
+   "t": "html",
+   "html": "<ul><li><strong>Notifiche</strong> — utilizzate solo se attivi i promemoria, per avvisarti prima di un evento.</li><li><strong>Fotocamera</strong> — facoltativa, per consentirti di scattare una foto da allegare a un evento.</li><li><strong>Foto</strong> — facoltativa, per consentirti di scegliere una foto per un evento o di salvare l'immagine di un evento nella tua galleria.</li><li><strong>Biometria / Face ID</strong> — facoltativa, solo per sbloccare l'app se attivi il blocco dell'app.</li><li><strong>Esecuzione dopo il riavvio (Android)</strong> — affinché i promemoria programmati restino attivi dopo il riavvio del dispositivo.</li></ul><p>Ogni autorizzazione viene richiesta solo quando utilizzi la funzione corrispondente.</p>"
+  },
+  {
+   "t": "h2",
+   "html": "Archiviazione dei dati"
+  },
+  {
+   "t": "p",
+   "html": "Tutti i tuoi eventi e le tue impostazioni sono memorizzati localmente sul tuo dispositivo. L'app può esportare i tuoi eventi in un file JSON e reimportarli; sei tu a scegliere dove salvare il file e con chi condividerlo, se con qualcuno."
+  },
+  {
+   "t": "h2",
+   "html": "Condivisione dei dati"
+  },
+  {
+   "t": "p",
+   "html": "Non vendiamo né condividiamo i tuoi dati. L'app non prevede account utente né un server di Countdown Keeper; nulla di ciò che digiti ci viene inviato."
+  },
+  {
+   "t": "h2",
+   "html": "Servizi di terze parti"
+  },
+  {
+   "t": "p",
+   "html": "L'app non utilizza servizi di analisi, pubblicità o segnalazione degli arresti anomali. L'unica richiesta di rete che può effettuare è verso Google Fonts, per scaricare il carattere tipografico di visualizzazione la prima volta che serve; come qualsiasi richiesta web, questa include l'indirizzo IP del tuo dispositivo, ma non vengono inviati dati personali né contenuti dell'app. Per il resto, l'app funziona completamente offline."
+  },
+  {
+   "t": "h2",
+   "html": "Conservazione dei dati"
+  },
+  {
+   "t": "p",
+   "html": "I tuoi dati restano sul tuo dispositivo finché non li elimini. L'eliminazione di un evento lo sposta nel cestino, da cui viene rimosso definitivamente in un secondo momento. La disinstallazione dell'app rimuove tutti i suoi dati locali."
+  },
+  {
+   "t": "h2",
+   "html": "Privacy dei minori"
+  },
+  {
+   "t": "p",
+   "html": "L'app non è destinata ai minori e non raccoglie consapevolmente informazioni da minori."
+  },
+  {
+   "t": "h2",
+   "html": "Sicurezza"
+  },
+  {
+   "t": "p",
+   "html": "I tuoi dati sono protetti dalla sicurezza del tuo dispositivo e dalla sandbox dell'app. Puoi aggiungere un ulteriore livello di protezione con il blocco biometrico facoltativo dell'app."
+  },
+  {
+   "t": "h2",
+   "html": "Le tue scelte"
+  },
+  {
+   "t": "p",
+   "html": "Puoi gestire le autorizzazioni dell'app dalle impostazioni del tuo dispositivo ed esportare o eliminare i tuoi dati in qualsiasi momento dall'interno dell'app."
+  },
+  {
+   "t": "h2",
+   "html": "Modifiche alla presente informativa"
+  },
+  {
+   "t": "p",
+   "html": "Potremmo aggiornare periodicamente la presente informativa. Eventuali modifiche saranno pubblicate in questa pagina con una nuova data."
+  },
+  {
+   "t": "h2",
+   "html": "Contatti"
+  },
+  {
+   "t": "p",
+   "html": "Per domande sulla presente informativa, contattaci all'indirizzo <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>."
+  }
+ ]
+}

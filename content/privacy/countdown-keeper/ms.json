@@ -1,0 +1,101 @@
+{
+ "lang": "ms",
+ "lang_name": "Bahasa Melayu",
+ "dir": "ltr",
+ "title": "Dasar Privasi Countdown Keeper",
+ "effective": "Kemas kini terakhir: September 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Countdown Keeper (“aplikasi”) ialah aplikasi mudah alih yang diterbitkan oleh Thiban Tech Solutions. Dasar ini menerangkan cara aplikasi mengendalikan maklumat anda. Kami menghormati privasi anda: aplikasi tidak memerlukan log masuk, dan kami tidak mengumpul, menjual atau berkongsi maklumat peribadi anda."
+  },
+  {
+   "t": "h2",
+   "html": "Maklumat yang dikendalikan oleh aplikasi"
+  },
+  {
+   "t": "p",
+   "html": "Aplikasi menyimpan kandungan yang anda cipta: tajuk acara, tarikh dan masa, nota, warna, emoji atau foto pilihan yang anda lampirkan, serta tetapan aplikasi anda. Maklumat ini disimpan pada peranti anda dan digunakan hanya untuk memaparkan pembilang dan peringatan anda."
+  },
+  {
+   "t": "h2",
+   "html": "Kebenaran peranti"
+  },
+  {
+   "t": "html",
+   "html": "<ul><li><strong>Pemberitahuan</strong> — digunakan hanya jika anda mendayakan peringatan, untuk memaklumkan anda sebelum sesuatu acara.</li><li><strong>Kamera</strong> — pilihan, supaya anda boleh mengambil foto untuk dilampirkan pada acara.</li><li><strong>Foto</strong> — pilihan, supaya anda boleh memilih foto untuk acara atau menyimpan imej acara ke galeri anda.</li><li><strong>Biometrik / Face ID</strong> — pilihan, hanya untuk membuka kunci aplikasi jika anda menghidupkan kunci aplikasi.</li><li><strong>Berjalan selepas dimulakan semula (Android)</strong> — supaya peringatan berjadual kekal selepas peranti dimulakan semula.</li></ul><p>Setiap kebenaran diminta hanya apabila anda menggunakan ciri berkaitan.</p>"
+  },
+  {
+   "t": "h2",
+   "html": "Penyimpanan data"
+  },
+  {
+   "t": "p",
+   "html": "Semua acara dan tetapan anda disimpan secara setempat pada peranti anda. Aplikasi boleh mengeksport acara anda ke fail JSON dan mengimportnya semula; anda yang menentukan di mana fail tersebut disimpan dan dengan siapa, jika ada, anda berkongsinya."
+  },
+  {
+   "t": "h2",
+   "html": "Perkongsian data"
+  },
+  {
+   "t": "p",
+   "html": "Kami tidak menjual atau berkongsi data anda. Aplikasi tidak mempunyai akaun pengguna dan tiada pelayan Countdown Keeper; apa-apa yang anda taip tidak dihantar kepada kami."
+  },
+  {
+   "t": "h2",
+   "html": "Perkhidmatan pihak ketiga"
+  },
+  {
+   "t": "p",
+   "html": "Aplikasi tidak menggunakan perkhidmatan analitik, pengiklanan atau pelaporan ranap. Satu-satunya permintaan rangkaian yang mungkin dibuat oleh aplikasi adalah kepada Google Fonts untuk memuat turun muka taip paparan kali pertama ia diperlukan; seperti mana-mana permintaan web, permintaan ini mengandungi alamat IP peranti anda, tetapi tiada data peribadi atau kandungan aplikasi dihantar. Selain itu, aplikasi berfungsi sepenuhnya di luar talian."
+  },
+  {
+   "t": "h2",
+   "html": "Pengekalan data"
+  },
+  {
+   "t": "p",
+   "html": "Data anda kekal pada peranti anda sehingga anda memadamkannya. Memadamkan acara akan memindahkannya ke tong kitar semula, dan ia akan dialih keluar secara kekal dari situ kemudian. Menyahpasang aplikasi akan mengalih keluar semua data setempatnya."
+  },
+  {
+   "t": "h2",
+   "html": "Privasi kanak-kanak"
+  },
+  {
+   "t": "p",
+   "html": "Aplikasi ini tidak ditujukan kepada kanak-kanak dan tidak dengan sengaja mengumpul maklumat daripada kanak-kanak."
+  },
+  {
+   "t": "h2",
+   "html": "Keselamatan"
+  },
+  {
+   "t": "p",
+   "html": "Data anda dilindungi oleh keselamatan peranti anda sendiri dan kotak pasir (sandbox) aplikasi. Anda boleh menambah lapisan perlindungan tambahan dengan kunci aplikasi biometrik pilihan."
+  },
+  {
+   "t": "h2",
+   "html": "Pilihan anda"
+  },
+  {
+   "t": "p",
+   "html": "Anda mengawal kebenaran aplikasi melalui tetapan peranti anda, dan anda boleh mengeksport atau memadamkan data anda pada bila-bila masa dari dalam aplikasi."
+  },
+  {
+   "t": "h2",
+   "html": "Perubahan pada dasar ini"
+  },
+  {
+   "t": "p",
+   "html": "Kami mungkin mengemas kini dasar ini dari semasa ke semasa. Sebarang perubahan akan disiarkan di halaman ini bersama tarikh baharu."
+  },
+  {
+   "t": "h2",
+   "html": "Hubungi kami"
+  },
+  {
+   "t": "p",
+   "html": "Jika anda mempunyai sebarang pertanyaan tentang dasar ini, hubungi kami di <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>."
+  }
+ ]
+}

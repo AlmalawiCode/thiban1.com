@@ -1,0 +1,101 @@
+{
+ "lang": "tr",
+ "lang_name": "Türkçe",
+ "dir": "ltr",
+ "title": "Countdown Keeper Gizlilik Politikası",
+ "effective": "Son güncelleme: Eylül 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Countdown Keeper (“uygulama”), Thiban Tech Solutions tarafından yayımlanan bir mobil uygulamadır. Bu politika, uygulamanın bilgilerinizi nasıl işlediğini açıklar. Gizliliğinize saygı duyuyoruz: Uygulama oturum açmayı gerektirmez; kişisel bilgilerinizi toplamayız, satmayız veya paylaşmayız."
+  },
+  {
+   "t": "h2",
+   "html": "Uygulamanın İşlediği Bilgiler"
+  },
+  {
+   "t": "p",
+   "html": "Uygulama oluşturduğunuz içeriği saklar: etkinlik başlıkları, tarihleri ve saatleri, notlar, renkler, eklediğiniz bir emoji veya isteğe bağlı bir fotoğraf ve uygulama ayarlarınız. Bu bilgiler cihazınızda saklanır ve yalnızca sayaçlarınızı ve hatırlatıcılarınızı göstermek için kullanılır."
+  },
+  {
+   "t": "h2",
+   "html": "Cihaz İzinleri"
+  },
+  {
+   "t": "html",
+   "html": "<ul><li><strong>Bildirimler</strong> — yalnızca hatırlatıcıları etkinleştirirseniz, sizi bir etkinlikten önce uyarmak için kullanılır.</li><li><strong>Kamera</strong> — isteğe bağlıdır; bir etkinliğe eklemek üzere fotoğraf çekebilmeniz içindir.</li><li><strong>Fotoğraflar</strong> — isteğe bağlıdır; bir etkinlik için fotoğraf seçebilmeniz veya bir etkinlik görselini galerinize kaydedebilmeniz içindir.</li><li><strong>Biyometri / Face ID</strong> — isteğe bağlıdır; yalnızca uygulama kilidini açarsanız uygulamanın kilidini açmak için kullanılır.</li><li><strong>Yeniden başlatma sonrası çalışma (Android)</strong> — planlanmış hatırlatıcıların cihaz yeniden başlatıldıktan sonra da korunması içindir.</li></ul><p>Her izin yalnızca ilgili özelliği kullandığınızda istenir.</p>"
+  },
+  {
+   "t": "h2",
+   "html": "Veri Depolama"
+  },
+  {
+   "t": "p",
+   "html": "Tüm etkinlikleriniz ve ayarlarınız cihazınızda yerel olarak saklanır. Uygulama etkinliklerinizi bir JSON dosyasına aktarabilir ve yeniden içe aktarabilir; bu dosyanın nereye kaydedileceğini ve varsa kiminle paylaşılacağını siz seçersiniz."
+  },
+  {
+   "t": "h2",
+   "html": "Veri Paylaşımı"
+  },
+  {
+   "t": "p",
+   "html": "Verilerinizi satmayız veya paylaşmayız. Uygulamanın kullanıcı hesapları ve bir Countdown Keeper sunucusu yoktur; yazdığınız hiçbir şey bize gönderilmez."
+  },
+  {
+   "t": "h2",
+   "html": "Üçüncü Taraf Hizmetler"
+  },
+  {
+   "t": "p",
+   "html": "Uygulama analiz, reklam veya çökme raporlama hizmetleri kullanmaz. Uygulamanın yapabileceği tek ağ isteği, görüntüleme yazı tipini ilk kez gerektiğinde indirmek için Google Fonts'a yapılan istektir; her web isteği gibi bu istek de cihazınızın IP adresini içerir, ancak hiçbir kişisel veri veya uygulama içeriği gönderilmez. Bunun dışında uygulama tamamen çevrimdışı çalışır."
+  },
+  {
+   "t": "h2",
+   "html": "Veri Saklama"
+  },
+  {
+   "t": "p",
+   "html": "Verileriniz, siz silene kadar cihazınızda kalır. Bir etkinliği silmek onu geri dönüşüm kutusuna taşır ve daha sonra oradan kalıcı olarak kaldırılır. Uygulamayı kaldırmak, uygulamanın tüm yerel verilerini siler."
+  },
+  {
+   "t": "h2",
+   "html": "Çocukların Gizliliği"
+  },
+  {
+   "t": "p",
+   "html": "Uygulama çocuklara yönelik değildir ve çocuklardan bilerek bilgi toplamaz."
+  },
+  {
+   "t": "h2",
+   "html": "Güvenlik"
+  },
+  {
+   "t": "p",
+   "html": "Verileriniz cihazınızın kendi güvenlik önlemleri ve uygulamanın korumalı alanı (sandbox) ile korunur. İsteğe bağlı biyometrik uygulama kilidiyle ek bir koruma katmanı ekleyebilirsiniz."
+  },
+  {
+   "t": "h2",
+   "html": "Seçimleriniz"
+  },
+  {
+   "t": "p",
+   "html": "Uygulamanın izinlerini cihaz ayarlarınızdan kontrol edersiniz ve verilerinizi istediğiniz zaman uygulama içinden dışa aktarabilir veya silebilirsiniz."
+  },
+  {
+   "t": "h2",
+   "html": "Bu Gizlilik Politikasındaki Değişiklikler"
+  },
+  {
+   "t": "p",
+   "html": "Bu politikayı zaman zaman güncelleyebiliriz. Tüm değişiklikler yeni bir tarihle bu sayfada yayımlanacaktır."
+  },
+  {
+   "t": "h2",
+   "html": "İletişim"
+  },
+  {
+   "t": "p",
+   "html": "Bu politika hakkında sorularınız varsa bize şu adresten ulaşabilirsiniz: <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>."
+  }
+ ]
+}

@@ -1,0 +1,101 @@
+{
+ "lang": "id",
+ "lang_name": "Bahasa Indonesia",
+ "dir": "ltr",
+ "title": "Kebijakan Privasi Countdown Keeper",
+ "effective": "Terakhir diperbarui: September 2026",
+ "blocks": [
+  {
+   "t": "p",
+   "html": "Countdown Keeper (“aplikasi”) adalah aplikasi seluler yang diterbitkan oleh Thiban Tech Solutions. Kebijakan ini menjelaskan cara aplikasi menangani informasi Anda. Kami menghormati privasi Anda: aplikasi tidak memerlukan proses masuk (login), dan kami tidak mengumpulkan, menjual, atau membagikan informasi pribadi Anda."
+  },
+  {
+   "t": "h2",
+   "html": "Informasi yang ditangani aplikasi"
+  },
+  {
+   "t": "p",
+   "html": "Aplikasi menyimpan konten yang Anda buat: judul acara, tanggal dan waktu, catatan, warna, emoji atau foto opsional yang Anda lampirkan, serta pengaturan aplikasi Anda. Informasi ini disimpan di perangkat Anda dan hanya digunakan untuk menampilkan penghitung dan pengingat Anda."
+  },
+  {
+   "t": "h2",
+   "html": "Izin perangkat"
+  },
+  {
+   "t": "html",
+   "html": "<ul><li><strong>Notifikasi</strong> — hanya digunakan jika Anda mengaktifkan pengingat, untuk memberi tahu Anda sebelum suatu acara.</li><li><strong>Kamera</strong> — opsional, agar Anda dapat mengambil foto untuk dilampirkan pada acara.</li><li><strong>Foto</strong> — opsional, agar Anda dapat memilih foto untuk acara atau menyimpan gambar acara ke galeri Anda.</li><li><strong>Biometrik / Face ID</strong> — opsional, hanya untuk membuka aplikasi jika Anda mengaktifkan kunci aplikasi.</li><li><strong>Berjalan setelah mulai ulang (Android)</strong> — agar pengingat terjadwal tetap berlaku setelah perangkat dinyalakan ulang.</li></ul><p>Setiap izin hanya diminta saat Anda menggunakan fitur terkait.</p>"
+  },
+  {
+   "t": "h2",
+   "html": "Penyimpanan data"
+  },
+  {
+   "t": "p",
+   "html": "Semua acara dan pengaturan Anda disimpan secara lokal di perangkat Anda. Aplikasi dapat mengekspor acara Anda ke file JSON dan mengimpornya kembali; Anda yang menentukan di mana file tersebut disimpan dan dengan siapa, jika ada, Anda membagikannya."
+  },
+  {
+   "t": "h2",
+   "html": "Berbagi data"
+  },
+  {
+   "t": "p",
+   "html": "Kami tidak menjual atau membagikan data Anda. Aplikasi tidak memiliki akun pengguna dan tidak memiliki server Countdown Keeper; apa pun yang Anda ketik tidak dikirimkan kepada kami."
+  },
+  {
+   "t": "h2",
+   "html": "Layanan pihak ketiga"
+  },
+  {
+   "t": "p",
+   "html": "Aplikasi tidak menggunakan layanan analitik, iklan, atau pelaporan kerusakan (crash). Satu-satunya permintaan jaringan yang mungkin dilakukan aplikasi adalah ke Google Fonts untuk mengunduh jenis huruf tampilan saat pertama kali dibutuhkan; seperti permintaan web lainnya, permintaan ini mencakup alamat IP perangkat Anda, tetapi tidak ada data pribadi atau konten aplikasi yang dikirimkan. Selain itu, aplikasi berfungsi sepenuhnya secara offline."
+  },
+  {
+   "t": "h2",
+   "html": "Retensi data"
+  },
+  {
+   "t": "p",
+   "html": "Data Anda tetap berada di perangkat Anda sampai Anda menghapusnya. Menghapus acara akan memindahkannya ke tempat sampah, dan acara tersebut akan dihapus secara permanen dari sana di kemudian hari. Mencopot pemasangan aplikasi akan menghapus semua data lokalnya."
+  },
+  {
+   "t": "h2",
+   "html": "Privasi anak"
+  },
+  {
+   "t": "p",
+   "html": "Aplikasi ini tidak ditujukan untuk anak-anak dan tidak dengan sengaja mengumpulkan informasi dari anak-anak."
+  },
+  {
+   "t": "h2",
+   "html": "Keamanan"
+  },
+  {
+   "t": "p",
+   "html": "Data Anda dilindungi oleh sistem keamanan perangkat Anda sendiri dan sandbox aplikasi. Anda dapat menambahkan lapisan perlindungan ekstra dengan kunci aplikasi biometrik opsional."
+  },
+  {
+   "t": "h2",
+   "html": "Pilihan Anda"
+  },
+  {
+   "t": "p",
+   "html": "Anda mengendalikan izin aplikasi melalui pengaturan perangkat Anda, dan Anda dapat mengekspor atau menghapus data Anda kapan saja dari dalam aplikasi."
+  },
+  {
+   "t": "h2",
+   "html": "Perubahan atas kebijakan ini"
+  },
+  {
+   "t": "p",
+   "html": "Kami dapat memperbarui kebijakan ini dari waktu ke waktu. Setiap perubahan akan dipublikasikan di halaman ini dengan tanggal baru."
+  },
+  {
+   "t": "h2",
+   "html": "Kontak"
+  },
+  {
+   "t": "p",
+   "html": "Jika Anda memiliki pertanyaan tentang kebijakan ini, hubungi kami di <a href=\"mailto:thibantechsolutions@gmail.com\">thibantechsolutions@gmail.com</a>."
+  }
+ ]
+}
