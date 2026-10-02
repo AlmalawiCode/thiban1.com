@@ -651,6 +651,9 @@ APPS = {
         "slug": "countdown-keeper",
         "name_en": "Countdown Keeper",
         "name_ar": "العدّاد",
+        # App Store Arabic name — used on the Arabic privacy page (the
+        # store-linked document); the rest of the site keeps name_ar.
+        "privacy_name_ar": "كم مضى وكم بقي",
         "icon": "/assets/img/apps/countdown/icon.png",
         "tagline_en": "Count down to what matters — and count up from what already happened.",
         "tagline_ar": "عُدّ تنازليًا لما يهمّك، وتصاعديًا لما مضى من أحداثك.",
@@ -1437,7 +1440,8 @@ def privacy_doc(app, lang, data, canonical):
     Works with zero JavaScript."""
     slug = app["slug"]
     d = data["dir"]
-    app_name = app["name_ar"] if lang == "ar" else app["name_en"]
+    app_name = (app.get("privacy_name_ar", app["name_ar"]) if lang == "ar"
+                else app["name_en"])
     parts = []
     for b in data["blocks"]:
         if b["t"] == "h2":
